@@ -6,6 +6,8 @@ TagManager:
   tags:
   - ShotArea
   - Bullet
+  - Wall
+  - Enemy
   layers:
   - Default
   - TransparentFX

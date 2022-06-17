@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 public class ShotArea : MonoBehaviour
 {
-    [SerializeField] private GameObject shotPos;
+    [SerializeField] private Transform shotPos;
     [SerializeField] private Bullet[] bullets;
     public int dmg;
     public float bulletSpd;
@@ -14,7 +14,7 @@ public class ShotArea : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (cnt>=shotSpd)
+        if (Enemys != null && cnt >= shotSpd)
         {
             cnt = 0;
             Shot();
@@ -23,8 +23,26 @@ public class ShotArea : MonoBehaviour
     }
     private void Shot()
     {
-        Bullet bullet = Instantiate(bullets[0]);
-        bullet.transform.position = shotPos.transform.position;
-        bullet.SetBullet(dmg,bulletSpd,Vector3.up);
+        if (Enemys.FirstOrDefault() != null)
+        {
+            shotPos.LookAt(Enemys[0].transform.position);
+            Bullet bullet = Instantiate(bullets[0]);
+            bullet.transform.position = shotPos.position;
+            bullet.SetBullet(dmg, bulletSpd, shotPos.forward);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            Enemys.Add(collision.gameObject);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            Enemys.Remove(collision.gameObject);
+        }
     }
 }

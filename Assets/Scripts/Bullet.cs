@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    int dmg;
+    [SerializeField] private ParticleSystem deadPc;
+    public int dmg;
     float spd;
     Vector3 dir;
     Rigidbody2D rb=>GetComponent<Rigidbody2D>();
@@ -17,5 +18,20 @@ public class Bullet : MonoBehaviour
         dmg = _dmg;
         spd = _spd;
         dir = _dir;
+    }
+    private void OnDestroy()
+    {
+        Instantiate(deadPc).transform.position = transform.position;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        switch (collision.tag)
+        {
+            case "Wall": Destroy(gameObject);
+                break;
+            case "Enemy":
+                Destroy(gameObject);
+                break;
+        }
     }
 }
