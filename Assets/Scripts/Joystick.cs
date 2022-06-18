@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
+public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     public GameObject character; // 캐릭터 오브젝트.
     public RectTransform touchArea; // Joystick Touch Area 이미지의 RectTransform.
@@ -19,7 +19,6 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     private Coroutine runningCoroutine; // 부드러운 회전 코루틴
 
     int istouch =0;
-    //아니 준호야 뭐해
 
     void Update()
     {
@@ -55,6 +54,7 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        
         istouch = 1;
         OnDrag(eventData); // 터치가 시작되면 OnDrag 처리.
     }
@@ -99,8 +99,4 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
         character.transform.Rotate(0, 0, sign * mod); // 남은 각도 회전
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        Debug.Log("qkrgustn");
-    }
 }

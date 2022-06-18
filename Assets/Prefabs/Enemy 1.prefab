@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -1237872269312262156}
   m_Layer: 0
   m_Name: Enemy 1
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.9811321, g: 0.21658951, b: 0.21658951, a: 1}
+  m_Color: {r: 0.9150943, g: 0.35826805, b: 0.35826805, a: 0.3137255}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -136,4 +136,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 2
   spd: 1
+  score: 10
   deadPc: {fileID: 3146009235527661145, guid: cff6c719899e0df4fbaacc7e14b05785, type: 3}
+  money: {fileID: 2519277872417871324, guid: be0eddca59751564ca2110ecf2bfe08e, type: 3}
