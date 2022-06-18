@@ -17,7 +17,7 @@ public class Money : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            GameManager.Instance.SetMoney(1);
+            GameManager.Instance.Money = 1;
             Destroy(gameObject);
         }
     }

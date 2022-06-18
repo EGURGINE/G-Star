@@ -25,8 +25,6 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
         character.GetComponent<Rigidbody2D>().velocity = character.transform.up * speed * istouch;
         // 캐릭터는 3의 속도로 계속 전진
     }
-
-
     public void OnDrag(PointerEventData eventData)
     {
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(touchArea,
@@ -54,7 +52,6 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        
         istouch = 1;
         OnDrag(eventData); // 터치가 시작되면 OnDrag 처리.
     }

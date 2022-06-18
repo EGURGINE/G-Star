@@ -12,6 +12,7 @@ public class EnemySpawner : MonoBehaviour
     }
     void Spawn()
     {
+        if (GameManager.Instance.isGameOver) return;
         for (int i = 0; i < 8; i++)
         {
             Instantiate(Enemys[Random.Range(0,2)]).transform.position = new Vector2(Random.Range(-2.03f, 2.03f), Random.Range(-2.7f, 2.7f)); 

@@ -7,7 +7,8 @@ public abstract class BasicEnemy : MonoBehaviour
     [SerializeField] private int hp;
     [SerializeField] protected float spd;
     [SerializeField] private int score;
-    [SerializeField] private ParticleSystem deadPc;
+    [SerializeField] private ParticleSystem enemyDeadPc;
+    [SerializeField] private ParticleSystem playerDeadPc;
     [SerializeField] private GameObject money;
     private bool isHit = false;
     protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
@@ -17,7 +18,7 @@ public abstract class BasicEnemy : MonoBehaviour
     }
     private void Spawn()
     {
-        GetComponent<SpriteRenderer>().DOFade(1,3f).OnComplete(()=> 
+        GetComponent<SpriteRenderer>().DOFade(1,1.5f).OnComplete(()=> 
         {
             isHit = true;
             tag = "Enemy";
@@ -25,6 +26,10 @@ public abstract class BasicEnemy : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (GameManager.Instance.isGameOver)
+        {
+            Die();
+        }
         Move();
         if (hp<=0)
         {
@@ -33,8 +38,10 @@ public abstract class BasicEnemy : MonoBehaviour
     }
     private void Die()
     {
-        Instantiate(deadPc).transform.position = transform.position;
-        GameManager.Instance.SetScore(score);
+        Camera.main.DOShakePosition(1,new Vector3(0.04f,0.01f,0),10).OnComplete(()=>Camera.main.transform.position= new Vector3(0,0,-10));
+
+        Instantiate(enemyDeadPc).transform.position = transform.position;
+        GameManager.Instance.Score = score;
         for (int i = 0; i < Random.Range(0,4); i++)
         {
             Instantiate(money).transform.position = new Vector2(
@@ -52,6 +59,7 @@ public abstract class BasicEnemy : MonoBehaviour
         }
         if (collision.CompareTag("Player"))
         {
+            Instantiate(playerDeadPc).transform.position = collision.transform.position;
             GameManager.Instance.SetDie();
             collision.gameObject.SetActive(false);
         }
