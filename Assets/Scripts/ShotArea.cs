@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 public class ShotArea : MonoBehaviour
 {
+    public static ShotArea Instance { get; set; }
     [SerializeField] private Transform shotPos;
     [SerializeField] private Bullet[] bullets;
     public int dmg;
@@ -12,6 +13,10 @@ public class ShotArea : MonoBehaviour
     private float cnt;
     public List<GameObject> Enemys = new List<GameObject>();
 
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void FixedUpdate()
     {
         if (Enemys != null && cnt >= shotSpd)

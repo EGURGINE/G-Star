@@ -1,0 +1,18 @@
+
+damage
+
+speed
+
+shotSpeed
+
+double bullet
+
+double shot
+
+lazer
+
+Quad Shot
+
+Piercing
+
+Back Shot

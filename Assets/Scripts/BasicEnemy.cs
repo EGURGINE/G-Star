@@ -5,16 +5,23 @@ using DG.Tweening;
 public abstract class BasicEnemy : MonoBehaviour
 {
     [SerializeField] private int hp;
-    [SerializeField] protected float spd;
+    [SerializeField] [Range(0,2000)] protected float spd;
     [SerializeField] private int score;
+    [SerializeField] private ParticleSystem enemySpawnPc;
     [SerializeField] private ParticleSystem enemyDeadPc;
     [SerializeField] private ParticleSystem playerDeadPc;
     [SerializeField] private GameObject money;
-    private bool isHit = false;
+    protected bool isHit = false;
     protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
     protected void Start()
     {
         Spawn();
+        StartCoroutine(SpawnPc());
+    }
+    IEnumerator SpawnPc()
+    {
+        yield return new WaitForSeconds(1);
+        Instantiate(enemySpawnPc).transform.position = transform.position;
     }
     private void Spawn()
     {
@@ -22,15 +29,15 @@ public abstract class BasicEnemy : MonoBehaviour
         {
             isHit = true;
             tag = "Enemy";
-            });
+            Move();
+         });
     }
     private void FixedUpdate()
     {
-        if (GameManager.Instance.isGameOver)
+        if (GameManager.Instance.isGameOver||GameManager.Instance.isUpgrade)
         {
             Die();
         }
-        Move();
         if (hp<=0)
         {
            Die();

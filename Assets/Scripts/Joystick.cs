@@ -13,7 +13,6 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
 
     private Vector2 joystickVector; // 조이스틱의 방향벡터이자 플레이어에게 넘길 방향정보.
 
-    private float speed = 3f; // 캐릭터 스피드
     private float rotateSpeed = 5f; // 회전 속도
 
     private Coroutine runningCoroutine; // 부드러운 회전 코루틴
@@ -22,7 +21,7 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
 
     void Update()
     {
-        character.GetComponent<Rigidbody2D>().velocity = character.transform.up * speed * istouch;
+        character.GetComponent<Rigidbody2D>().velocity = character.transform.up * GameManager.Instance.playerSpd * istouch;
         // 캐릭터는 3의 속도로 계속 전진
     }
     public void OnDrag(PointerEventData eventData)

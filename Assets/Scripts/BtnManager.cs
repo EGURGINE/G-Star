@@ -7,7 +7,6 @@ public class BtnManager : MonoBehaviour
     [SerializeField] private GameObject menuWnd;
     [SerializeField] private GameObject gameWnd;
     [SerializeField] private GameObject gameOverWnd;
-
     public void ReTryBtn()
     {
         gameOverWnd.SetActive(false);

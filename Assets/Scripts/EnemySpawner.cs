@@ -8,14 +8,14 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating("Spawn", 0, 6);
+        InvokeRepeating("Spawn", 0, 3);
     }
     void Spawn()
     {
-        if (GameManager.Instance.isGameOver) return;
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isUpgrade) return;
         for (int i = 0; i < 8; i++)
         {
-            Instantiate(Enemys[Random.Range(0,2)]).transform.position = new Vector2(Random.Range(-2.03f, 2.03f), Random.Range(-2.7f, 2.7f)); 
+            Instantiate(Enemys[Random.Range(0,2)]).transform.position = new Vector2(Random.Range(-2.03f, 2.03f), Random.Range(-2.7f, 3.04f)); 
         }
     }
 }

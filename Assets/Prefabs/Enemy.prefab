@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 926867852509110580}
   - component: {fileID: 926867852509110581}
   - component: {fileID: -2539715821508746794}
+  - component: {fileID: 934649236598227688}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 0, b: 0.45882353, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -117,10 +118,10 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: b92d2eb09f5aa9c40baab07887adb860, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &-2539715821508746794
 MonoBehaviour:
@@ -135,8 +136,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 1
-  spd: 1
+  spd: 100
   score: 5
+  enemySpawnPc: {fileID: 3146009235527661145, guid: 5d924c48f2370c649a501bf812e7d1b5, type: 3}
   enemyDeadPc: {fileID: 3146009235527661145, guid: cff6c719899e0df4fbaacc7e14b05785, type: 3}
   playerDeadPc: {fileID: 3146009235527661145, guid: bcd96ac0168784145833382f663d9f57, type: 3}
   money: {fileID: 2519277872417871324, guid: be0eddca59751564ca2110ecf2bfe08e, type: 3}
+--- !u!58 &934649236598227688
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926867852509110586}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.49999997

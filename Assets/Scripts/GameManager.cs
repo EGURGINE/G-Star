@@ -6,21 +6,62 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; set; }
 
+    [Header("플레이어")]
     [SerializeField] private GameObject player;
+    [SerializeField] private ParticleSystem playerSpawnPc;
+    [SerializeField] public int playerSpd;
 
+    [Header("점수")]
     private int score;
     [SerializeField] private Text scoreTxt;
     private float highScore;
     [SerializeField] private Text highScoreTxt;
+
+    [Header("돈")]
     private int money;
     [SerializeField] private Text moneyTxt;
+
+    [Header("게임오버")]
     [SerializeField] private GameObject gameOverWnd;
     public bool isGameOver = false;
-    [SerializeField] GameObject joystick;
+    
+    [Header("조이스틱")]
+    public GameObject joystick;
     public RectTransform touchArea; 
     public Image outerPad; 
     public Image innerPad;
 
+    [Header("레벨")]
+    [SerializeField] private Text lv;
+    private int level;
+    [SerializeField] private Image expSlider;
+    private float exp;
+    public float maxExp;
+
+    [Header("업그레이드")]
+    [SerializeField] private GameObject upgradeWnd;
+    public bool isUpgrade =false;
+    public float Exp
+    {
+        get { return exp; }
+        set 
+        {
+            exp += value;
+            if (exp>=maxExp)
+            {
+                exp -= maxExp;
+                maxExp += 50;
+                level++;
+                lv.text = level.ToString();
+                expSlider.fillAmount = exp / maxExp;
+                isUpgrade = true;
+                upgradeWnd.SetActive(true);
+                joystick.SetActive(false);
+            }
+            Debug.Log(exp/maxExp);
+            expSlider.fillAmount = exp / maxExp;
+        }
+    }
     public int Money
     {
         get { return money; }
@@ -64,14 +105,23 @@ public class GameManager : MonoBehaviour
     }
     public void StartSet()
     {
-        isGameOver = false;
-        score = 0;
         joystick.SetActive(true);
+
+        isGameOver = false;
+
+        level = 1;
+        exp = 0;
+        expSlider.fillAmount = exp;
+
+        score = 0;
         scoreTxt.text = score.ToString();
         highScore = PlayerPrefs.GetFloat("HighScore");
         highScoreTxt.text = highScore.ToString();
+
         money = PlayerPrefs.GetInt("Money");
         moneyTxt.text = money.ToString();
+
+        Instantiate(playerSpawnPc).transform.position = Vector3.zero;
         player.SetActive(true);
         player.transform.position = Vector3.zero;
     }
