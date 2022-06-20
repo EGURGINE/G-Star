@@ -50,15 +50,17 @@ public class GameManager : MonoBehaviour
             if (exp>=maxExp)
             {
                 exp -= maxExp;
-                maxExp += 50;
+                maxExp += 10;
                 level++;
+                Debug.Log(level);
                 lv.text = level.ToString();
                 expSlider.fillAmount = exp / maxExp;
                 isUpgrade = true;
+                player.SetActive(false);
                 upgradeWnd.SetActive(true);
                 joystick.SetActive(false);
+                player.transform.position = Vector3.zero;
             }
-            Debug.Log(exp/maxExp);
             expSlider.fillAmount = exp / maxExp;
         }
     }
@@ -86,8 +88,12 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         isGameOver = true;
+
+        //게임 시작시 최고점수 가져오기
         highScore = PlayerPrefs.GetFloat("HighScore");
         highScoreTxt.text = highScore.ToString();
+       
+        // 게임 시작시 저장한 돈 가져오기
         money = PlayerPrefs.GetInt("Money");
         moneyTxt.text = money.ToString();
     }
@@ -106,35 +112,41 @@ public class GameManager : MonoBehaviour
     public void StartSet()
     {
         joystick.SetActive(true);
-
         isGameOver = false;
-
+        //경험치 초기화
         level = 1;
         exp = 0;
+        maxExp = 10;
         expSlider.fillAmount = exp;
 
+        //점수 초기화
         score = 0;
         scoreTxt.text = score.ToString();
         highScore = PlayerPrefs.GetFloat("HighScore");
         highScoreTxt.text = highScore.ToString();
+     
 
-        money = PlayerPrefs.GetInt("Money");
-        moneyTxt.text = money.ToString();
-
+        //플레이어 스폰
         Instantiate(playerSpawnPc).transform.position = Vector3.zero;
         player.SetActive(true);
         player.transform.position = Vector3.zero;
+
+        // 스텟 초기화
+        GameObject.Find("ShotArea").GetComponent<ShotArea>().ResetState();
     }
     public void SetDie()
     {
         isGameOver = true;
         joystick.SetActive(false);
+
+        //최고점수 기록
         if (score> PlayerPrefs.GetFloat("HighScore"))
         {
             highScore = score;
             PlayerPrefs.SetFloat("HighScore", highScore);
             highScoreTxt.text = highScore.ToString();
         }
+
         gameOverWnd.SetActive(true);
     }
 }

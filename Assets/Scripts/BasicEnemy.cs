@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System.Linq;
 public abstract class BasicEnemy : MonoBehaviour
 {
     [SerializeField] private int hp;
@@ -11,7 +12,7 @@ public abstract class BasicEnemy : MonoBehaviour
     [SerializeField] private ParticleSystem enemyDeadPc;
     [SerializeField] private ParticleSystem playerDeadPc;
     [SerializeField] private GameObject money;
-    protected bool isHit = false;
+    public bool isHit = false;
     protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
     protected void Start()
     {
@@ -25,10 +26,12 @@ public abstract class BasicEnemy : MonoBehaviour
     }
     private void Spawn()
     {
+        GetComponent<CircleCollider2D>().enabled = false;
         GetComponent<SpriteRenderer>().DOFade(1,1.5f).OnComplete(()=> 
         {
+            GetComponent<CircleCollider2D>().enabled = true;
             isHit = true;
-            tag = "Enemy";
+            //tag = "Enemy";
             Move();
          });
     }

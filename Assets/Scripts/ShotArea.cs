@@ -19,6 +19,10 @@ public class ShotArea : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isUpgrade)
+        {
+             Enemys.Clear();
+        }
         if (Enemys != null && cnt >= shotSpd)
         {
             cnt = 0;
@@ -28,7 +32,7 @@ public class ShotArea : MonoBehaviour
     }
     private void Shot()
     {
-        if (Enemys.FirstOrDefault() != null)
+        if (Enemys.FirstOrDefault() != null&&Enemys[0].GetComponent<BasicEnemy>().isHit)
         {
             shotPos.LookAt(Enemys[0].transform.position);
             Bullet bullet = Instantiate(bullets[0]);
@@ -49,5 +53,11 @@ public class ShotArea : MonoBehaviour
         {
             Enemys.Remove(collision.gameObject);
         }
+    }
+    public void ResetState()
+    {
+        dmg = 1;
+        shotSpd = 0.2f;
+        bulletSpd = 5;
     }
 }

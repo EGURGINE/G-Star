@@ -25,4 +25,8 @@ public class BtnManager : MonoBehaviour
         GameManager.Instance.StartSet();
 
     }
+    public void VideoBtn()
+    {
+        GameManager.Instance.Money = 2000;
+    }
 }
