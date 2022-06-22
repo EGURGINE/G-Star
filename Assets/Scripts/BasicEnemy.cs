@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using System.Linq;
 public abstract class BasicEnemy : MonoBehaviour
 {
     [SerializeField] private int hp;
@@ -31,7 +30,6 @@ public abstract class BasicEnemy : MonoBehaviour
         {
             GetComponent<CircleCollider2D>().enabled = true;
             isHit = true;
-            //tag = "Enemy";
             Move();
          });
     }
@@ -57,7 +55,12 @@ public abstract class BasicEnemy : MonoBehaviour
             Instantiate(money).transform.position = new Vector2(
                 transform.position.x+ Random.Range(-0.2f, 0.2f), transform.position.y+(Random.Range(-0.2f,0.2f)));
         }
+
         Destroy(gameObject);
+    }
+    private void OnDestroy()
+    {
+        DOTween.KillAll(transform);
     }
     protected abstract void Move();
     private void OnTriggerEnter2D(Collider2D collision)

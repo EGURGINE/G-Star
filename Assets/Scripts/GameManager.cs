@@ -52,7 +52,6 @@ public class GameManager : MonoBehaviour
                 exp -= maxExp;
                 maxExp += 10;
                 level++;
-                Debug.Log(level);
                 lv.text = level.ToString();
                 expSlider.fillAmount = exp / maxExp;
                 isUpgrade = true;
@@ -115,6 +114,7 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         //경험치 초기화
         level = 1;
+        lv.text = level.ToString();
         exp = 0;
         maxExp = 10;
         expSlider.fillAmount = exp;
