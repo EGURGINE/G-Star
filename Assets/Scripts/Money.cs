@@ -4,9 +4,22 @@ using UnityEngine;
 using DG.Tweening;
 public class Money : MonoBehaviour
 {
+    float cnt;
     private void Start()
     {
-        GetComponent<SpriteRenderer>().DOFade(0, 4).OnComplete(() => Destroy(gameObject));
+        
+        StartCoroutine( Fade(4f));
+    }
+    IEnumerator Fade(float _time)
+    {
+        while (cnt<1)
+        {
+            cnt+=Time.deltaTime/_time;
+            GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -(Time.deltaTime / _time)); 
+            yield return null;
+        }
+        Destroy(gameObject);
+        yield return null;
     }
     void FixedUpdate()
     {
@@ -16,6 +29,10 @@ public class Money : MonoBehaviour
             GameManager.Instance.Money = 1;
             Destroy(gameObject);
         }
+    }
+    private void OnDestroy()
+    {
+        DOTween.KillAll();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
