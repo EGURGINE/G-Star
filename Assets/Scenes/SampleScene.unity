@@ -668,6 +668,7 @@ MonoBehaviour:
   player: {fileID: 8973259735293285264}
   playerSpawnPc: {fileID: 3146009235527661145, guid: bd3f24599e5d6f84b890c39d3bb4f488, type: 3}
   playerSpd: 3
+  shotArea: {fileID: 8973259734242846751}
   scoreTxt: {fileID: 13784868}
   highScoreTxt: {fileID: 2116317882}
   moneyTxt: {fileID: 1561826053}

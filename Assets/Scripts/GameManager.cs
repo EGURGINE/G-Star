@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; set; }
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private ParticleSystem playerSpawnPc;
     [SerializeField] public int playerSpd;
+    [SerializeField] private ShotArea shotArea;
 
     [Header("점수")]
     private int score;
@@ -132,7 +134,7 @@ public class GameManager : MonoBehaviour
         player.transform.position = Vector3.zero;
 
         // 스텟 초기화
-        GameObject.Find("ShotArea").GetComponent<ShotArea>().ResetState();
+        shotArea.ResetState();
     }
     public void SetDie()
     {
@@ -148,5 +150,6 @@ public class GameManager : MonoBehaviour
         }
 
         gameOverWnd.SetActive(true);
+        
     }
 }

@@ -22,6 +22,7 @@ public class ShotArea : MonoBehaviour
         if (GameManager.Instance.isGameOver || GameManager.Instance.isUpgrade)
         {
              Enemys.Clear();
+            Debug.Log(Enemys[0]);
         }
         if (Enemys != null && cnt >= shotSpd)
         {
@@ -59,5 +60,10 @@ public class ShotArea : MonoBehaviour
         dmg = 1;
         shotSpd = 0.2f;
         bulletSpd = 5;
+        if (Enemys.Count >= 1)
+        {
+            Enemys.Clear();
+            Debug.Log("d");
+        }
     }
 }
