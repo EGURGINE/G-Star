@@ -98,18 +98,18 @@ public class GameManager : MonoBehaviour
         money = PlayerPrefs.GetInt("Money");
         moneyTxt.text = money.ToString();
     }
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            touchArea.transform.position = Camera.main.ScreenToWorldPoint(
-                new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
-            innerPad.transform.position = Camera.main.ScreenToWorldPoint(
-                new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
-            outerPad.transform.position = Camera.main.ScreenToWorldPoint(
-                new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetMouseButtonDown(0))
+    //    {
+    //        touchArea.transform.position = Camera.main.ScreenToWorldPoint(
+    //            new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
+    //        innerPad.transform.position = Camera.main.ScreenToWorldPoint(
+    //            new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
+    //        outerPad.transform.position = Camera.main.ScreenToWorldPoint(
+    //            new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
+    //    }
+    //}
     public void StartSet()
     {
         joystick.SetActive(true);

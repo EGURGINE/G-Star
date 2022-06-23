@@ -12,6 +12,8 @@ public abstract class BasicEnemy : MonoBehaviour
     [SerializeField] private ParticleSystem playerDeadPc;
     [SerializeField] private GameObject money;
     public bool isHit = false;
+    float cnt = 0;
+
     protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
     protected void Start()
     {
@@ -26,12 +28,20 @@ public abstract class BasicEnemy : MonoBehaviour
     private void Spawn()
     {
         GetComponent<CircleCollider2D>().enabled = false;
-        GetComponent<SpriteRenderer>().DOFade(1,1.5f).OnComplete(()=> 
+        StartCoroutine(Fade(1.5f));
+    }
+    IEnumerator Fade(float _time)
+    {
+        while (cnt < 1)
         {
-            GetComponent<CircleCollider2D>().enabled = true;
-            isHit = true;
-            Move();
-         });
+            cnt += Time.deltaTime / _time;
+            GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, (Time.deltaTime / _time));
+            yield return null;
+        }
+        GetComponent<CircleCollider2D>().enabled = true;
+        isHit = true;
+        Move();
+        yield return null;
     }
     private void FixedUpdate()
     {
