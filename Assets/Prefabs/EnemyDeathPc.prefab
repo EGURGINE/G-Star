@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2241921985900751622}
   - component: {fileID: 3146009235527661145}
   - component: {fileID: 5124133462491434818}
-  - component: {fileID: 5786794914531601598}
+  - component: {fileID: -1530250980040007855}
   m_Layer: 0
   m_Name: EnemyDeathPc
   m_TagString: Untagged
@@ -4866,7 +4866,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &5786794914531601598
+--- !u!114 &-1530250980040007855
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
