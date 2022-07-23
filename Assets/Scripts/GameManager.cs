@@ -59,8 +59,8 @@ public class GameManager : MonoBehaviour
                 isUpgrade = true;
                 player.SetActive(false);
                 upgradeWnd.SetActive(true);
+                upgradeWnd.GetComponent<UpgradeSelect>().Choice();
                 joystick.SetActive(false);
-                player.transform.position = Vector3.zero;
             }
             expSlider.fillAmount = exp / maxExp;
         }
@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
         scoreTxt.text = score.ToString();
         highScore = PlayerPrefs.GetFloat("HighScore");
         highScoreTxt.text = highScore.ToString();
-     
+        
 
         //플레이어 스폰
         Instantiate(playerSpawnPc).transform.position = Vector3.zero;
@@ -135,6 +135,12 @@ public class GameManager : MonoBehaviour
 
         // 스텟 초기화
         shotArea.ResetState();
+        for (int i = 0; i < PlayerData.Instance.PlayerSkill.Count; i++)
+        {
+            PlayerData.Instance.PlayerSkill[i] = 0;
+        }
+        upgradeWnd.GetComponent<UpgradeSelect>().ResetChoice();
+        
     }
     public void SetDie()
     {

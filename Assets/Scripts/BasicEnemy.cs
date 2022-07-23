@@ -7,8 +7,8 @@ public abstract class BasicEnemy : Poolable
     [SerializeField] private int hp;
     [SerializeField] [Range(0,2000)] protected float spd;
     [SerializeField] private int score;
-    [SerializeField] private GameObject enemySpawnPc;
-    [SerializeField] private GameObject enemyDeadPc;
+    [SerializeField] private ParticleSystem enemySpawnPc;
+    [SerializeField] private ParticleSystem enemyDeadPc;
     [SerializeField] private GameObject playerDeadPc;
     [SerializeField] private GameObject money;
 
@@ -20,20 +20,21 @@ public abstract class BasicEnemy : Poolable
     public void SpawnSet()
     {
         Spawn();
-      //  StartCoroutine(SpawnPc());
+        StartCoroutine(SpawnPc());
     }
     IEnumerator SpawnPc()
     {
         yield return new WaitForSeconds(1);
-       // enemySpawnPc.SetActive(true);
+        enemySpawnPc.Play();
     }
     private void Spawn()
     {
         hp = 1;
         cnt = 0;
-        GetComponent<SpriteRenderer>().color.a = new Color(0,0,0,0);
+        GetComponent<SpriteRenderer>().color = new Color(255,0,117,0);
         GetComponent<CircleCollider2D>().enabled = false;
         StartCoroutine(Fade(1.5f));
+        //StartCoroutine(SpawnPc());
     }
     IEnumerator Fade(float _time)
     {
@@ -63,7 +64,7 @@ public abstract class BasicEnemy : Poolable
     {
         Camera.main.DOShakePosition(1,new Vector3(0.04f,0.01f,0),10).OnComplete(()=>Camera.main.transform.position= new Vector3(0,0,-10));
 
-        //enemyDeadPc.SetActive(true);
+        Instantiate(enemyDeadPc).transform.position = transform.position;
         GameManager.Instance.Score = score;
         for (int i = 0; i < Random.Range(0,4); i++)
         {

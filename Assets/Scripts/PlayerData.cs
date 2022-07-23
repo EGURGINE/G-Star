@@ -13,7 +13,6 @@ public class PlayerData : MonoBehaviour
 
     public float dmg;
 
-    public GameObject PlayerBolt;
     public List<int> PlayerSkill = new List<int>();
     
 }

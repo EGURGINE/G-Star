@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2241921985900751622}
   - component: {fileID: 3146009235527661145}
   - component: {fileID: 5124133462491434818}
-  - component: {fileID: 5786794914531601598}
+  - component: {fileID: 7944121799647214060}
   m_Layer: 0
   m_Name: EnemySpawnPc
   m_TagString: Untagged
@@ -49,7 +49,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -4866,7 +4866,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &5786794914531601598
+--- !u!114 &7944121799647214060
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
