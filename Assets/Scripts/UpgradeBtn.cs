@@ -13,12 +13,14 @@ public enum BtnType
     lazer,
     QuadShot,
     Piercing,
-    BackShot
+    BackShot,
+    Score,
+    Money
 }
 
 public class UpgradeBtn : MonoBehaviour
 {
-    [SerializeField] private BtnType type;
+    public BtnType type;
     [SerializeField] GameObject player;
     [SerializeField] GameObject upgradeWnd;
     [SerializeField] GameObject playerData;
@@ -69,6 +71,12 @@ public class UpgradeBtn : MonoBehaviour
             case BtnType.Piercing:
                 break;
             case BtnType.BackShot:
+                break;
+            case BtnType.Score:
+                GameManager.Instance.Score = 50;
+                break;
+            case BtnType.Money:
+                GameManager.Instance.Money = 10;
                 break;
         }
     }

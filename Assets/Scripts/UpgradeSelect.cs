@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 public class UpgradeSelect : MonoBehaviour
 {
     [SerializeField] List<GameObject> UPGRADE;
+    [SerializeField] List<GameObject> lastBtn;
     [SerializeField] List<GameObject> upgrade;
     [SerializeField] List<GameObject> choice;
 
@@ -14,9 +15,9 @@ public class UpgradeSelect : MonoBehaviour
     public void ResetChoice()
     {
         upgrade.Clear();
-        foreach (var item in UPGRADE)
+        for (int i = 0; i < UPGRADE.Count; i++)
         {
-            upgrade.Add(item);
+            upgrade.Add(UPGRADE[i]);
         }
     }
     public void Choice()
@@ -39,6 +40,17 @@ public class UpgradeSelect : MonoBehaviour
     {
         if (_this == choiceCheck[0]) { upgrade.Add(choiceCheck[1]); print("1"); }
         else if (_this == choiceCheck[1]) { upgrade.Add(choiceCheck[0]); print("2"); }
+
+        if (_this.GetComponent<UpgradeBtn>().type == BtnType.Score ||
+            _this.GetComponent<UpgradeBtn>().type == BtnType.Money) return;
+
         choice.Clear();
+        if (upgrade.Count < 2)
+        {
+            foreach (var item in lastBtn)
+            {
+                upgrade.Add(item);
+            }
+        }
     }
 }
