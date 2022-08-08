@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-public abstract class BasicEnemy : Poolable
+public abstract class BasicEnemy : MonoBehaviour
 {
     [SerializeField] private int hp;
     [SerializeField] [Range(0,2000)] protected float spd;
@@ -12,7 +12,7 @@ public abstract class BasicEnemy : Poolable
     [SerializeField] private GameObject playerDeadPc;
     [SerializeField] private GameObject money;
 
-    private Color startColor;
+    [SerializeField] private Color startColor;
     public bool isHit = false;
     float cnt = 0;
 
@@ -31,7 +31,7 @@ public abstract class BasicEnemy : Poolable
     {
         hp = 1;
         cnt = 0;
-        GetComponent<SpriteRenderer>().color = new Color(255,0,117,0);
+        GetComponent<SpriteRenderer>().color = startColor;
         GetComponent<CircleCollider2D>().enabled = false;
         StartCoroutine(Fade(1.5f));
         //StartCoroutine(SpawnPc());
@@ -72,7 +72,7 @@ public abstract class BasicEnemy : Poolable
                 transform.position.x+ Random.Range(-0.2f, 0.2f), transform.position.y+(Random.Range(-0.2f,0.2f)));
         }
         //DOTween.KillAll(transform);
-        Push();
+        EnemySpawner.Instance.Push(gameObject);
     }
     protected abstract void Move();
     private void OnTriggerEnter2D(Collider2D collision)

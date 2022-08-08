@@ -11,8 +11,6 @@ double shot
 
 lazer
 
-Quad Shot
-
 Piercing
 
 Back Shot

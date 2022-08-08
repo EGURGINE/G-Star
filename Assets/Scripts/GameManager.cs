@@ -135,9 +135,9 @@ public class GameManager : MonoBehaviour
 
         // Ω∫≈› √ ±‚»≠
         shotArea.ResetState();
-        for (int i = 0; i < PlayerData.Instance.PlayerSkill.Count; i++)
+        for (int i = 0; i < (int)PlayerSkills.End; i++)
         {
-            PlayerData.Instance.PlayerSkill[i] = 0;
+            PlayerData.Instance.data[(PlayerSkills)i] = false;
         }
         upgradeWnd.GetComponent<UpgradeSelect>().ResetChoice();
         

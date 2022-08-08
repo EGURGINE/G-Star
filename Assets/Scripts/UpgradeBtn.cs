@@ -10,6 +10,7 @@ public enum BtnType
     doubleBullet,
     doubleShot,
     RadialShot,
+    BulletSpeed,
     lazer,
     QuadShot,
     Piercing,
@@ -55,14 +56,17 @@ public class UpgradeBtn : MonoBehaviour
             case BtnType.shotSpeed:
                 ShotArea.Instance.shotSpd -= 0.1f;
                 break;
-            case BtnType.doubleShot:   
-                playerData.GetComponent<PlayerData>().PlayerSkill[0] = 1;
+            case BtnType.doubleShot:
+                PlayerData.Instance.data[PlayerSkills.doubleShot] = true;
                 break;
             case BtnType.doubleBullet:
-                playerData.GetComponent<PlayerData>().PlayerSkill[1] = 1;
+                PlayerData.Instance.data[PlayerSkills.doubleBullet] = true;
                 break;
             case BtnType.RadialShot:
-                playerData.GetComponent<PlayerData>().PlayerSkill[2] = 1;
+                PlayerData.Instance.data[PlayerSkills.RadialShot] = true;
+                break;
+            case BtnType.BulletSpeed:
+                ShotArea.Instance.bulletSpd = 10;
                 break;
             case BtnType.lazer:
                 break;
@@ -71,6 +75,7 @@ public class UpgradeBtn : MonoBehaviour
             case BtnType.Piercing:
                 break;
             case BtnType.BackShot:
+                PlayerData.Instance.data[PlayerSkills.BackShot] = true;
                 break;
             case BtnType.Score:
                 GameManager.Instance.Score = 50;

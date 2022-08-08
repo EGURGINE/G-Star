@@ -38,11 +38,20 @@ public class UpgradeSelect : MonoBehaviour
 
     public void Check(GameObject _this)
     {
-        if (_this == choiceCheck[0]) { upgrade.Add(choiceCheck[1]); print("1"); }
-        else if (_this == choiceCheck[1]) { upgrade.Add(choiceCheck[0]); print("2"); }
-
         if (_this.GetComponent<UpgradeBtn>().type == BtnType.Score ||
-            _this.GetComponent<UpgradeBtn>().type == BtnType.Money) return;
+            _this.GetComponent<UpgradeBtn>().type == BtnType.Money)
+        {
+            foreach (var item in choiceCheck)
+            {
+                upgrade.Add(item);
+            }
+        }
+        else
+        {
+            if (_this == choiceCheck[0]) upgrade.Add(choiceCheck[1]);
+            else upgrade.Add(choiceCheck[0]);
+        }
+
 
         choice.Clear();
         if (upgrade.Count < 2)

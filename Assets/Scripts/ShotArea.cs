@@ -13,7 +13,7 @@ public class ShotArea : MonoBehaviour
     public float shotSpd;
     private float cnt;
     public List<GameObject> Enemys = new List<GameObject>();
-
+    private GameObject target;
     private void Awake()
     {
         Instance = this;
@@ -23,8 +23,8 @@ public class ShotArea : MonoBehaviour
         if (GameManager.Instance.isGameOver || GameManager.Instance.isUpgrade)
         {
             Enemys.Clear();
-            Debug.Log(Enemys[0]);
         }
+        DistanceEnemy();
         if (Enemys != null && cnt >= shotSpd)
         {
             cnt = 0;
@@ -32,24 +32,39 @@ public class ShotArea : MonoBehaviour
         }
         cnt += Time.deltaTime;
     }
+    private GameObject DistanceEnemy()
+    {
+        var neareastObject = Enemys
+        .OrderBy(obj =>
+        {
+            return Vector3.Distance(transform.position, obj.transform.position);
+        })
+    .FirstOrDefault();
+
+        return neareastObject;
+    }
     private void Shot()
     {
-        if (Enemys.FirstOrDefault() != null&&Enemys[0].GetComponent<BasicEnemy>().isHit)
+        if (Enemys.FirstOrDefault() != null && target.GetComponent<BasicEnemy>().isHit)
         {
-            shotPos.LookAt(Enemys[0].transform.position);
-            leftPos.LookAt(Enemys[0].transform.position + Vector3.left);
-            rightPos.LookAt(Enemys[0].transform.position + Vector3.right);
+            shotPos.LookAt(target.transform.position);
+            leftPos.LookAt(target.transform.position + Vector3.left);
+            rightPos.LookAt(target.transform.position + Vector3.right);
 
             BulletSet();
-            if (PlayerData.Instance.PlayerSkill[0]>0)
+            if (PlayerData.Instance.data[PlayerSkills.doubleShot])
             {
                 Invoke("MultiShot",0.2f);
+            }
+            if (PlayerData.Instance.data[PlayerSkills.BackShot])
+            {
+                BackShot();
             }
         }
     }
     private void BulletSet()
     {
-        if (PlayerData.Instance.PlayerSkill[1]>0)
+        if (PlayerData.Instance.data[PlayerSkills.doubleBullet])
         {
             Bullet bullet_1 = Instantiate(bullets[0]);
             bullet_1.transform.position = shotPos.position+new Vector3(0.2f,0,0);
@@ -67,7 +82,7 @@ public class ShotArea : MonoBehaviour
         }
 
 
-        if (PlayerData.Instance.PlayerSkill[2] > 0)
+        if (PlayerData.Instance.data[PlayerSkills.RadialShot])
         {
             Bullet bullet_1 = Instantiate(bullets[0]);
             bullet_1.transform.position = shotPos.position;
@@ -79,6 +94,13 @@ public class ShotArea : MonoBehaviour
         }
        
     }
+    private void BackShot()
+    {
+        Bullet bullet = Instantiate(bullets[0]);
+        bullet.transform.position = shotPos.position;
+        shotPos.Rotate(0, 180, 0);
+        bullet.SetBullet(dmg, bulletSpd, shotPos.forward);
+    }
     private void MultiShot()
     {
         BulletSet();
@@ -88,6 +110,14 @@ public class ShotArea : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             Enemys.Add(collision.gameObject);
+            if (target == null) target = collision.gameObject;
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            target = DistanceEnemy();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -105,10 +135,6 @@ public class ShotArea : MonoBehaviour
         if (Enemys.Count >= 1)
         {
             Enemys.Clear();
-        }
-        for (int i = 0; i < PlayerData.Instance.PlayerSkill.Count; i++)
-        {
-            PlayerData.Instance.PlayerSkill[i] = 0;
         }
     }
 }
