@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2519277872417871323}
   - component: {fileID: 1193555766470030835}
-  - component: {fileID: 8845915859130985012}
   - component: {fileID: 2492792878942301031}
   - component: {fileID: -570467393083769130}
+  - component: {fileID: 2954986793482755962}
   m_Layer: 0
   m_Name: Money
   m_TagString: Money
@@ -85,88 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &8845915859130985012
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2519277872417871324}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 10.9, y: 7.08}
-    newSize: {x: 10.9, y: 7.08}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 2.24, y: -1.63}
-      - {x: 1.8499999, y: -0.94}
-      - {x: 1.81, y: -0.87}
-      - {x: 1.66, y: -0.59999996}
-      - {x: 1.5799999, y: -0.45999998}
-      - {x: 1.49, y: -0.29999998}
-      - {x: 1.41, y: -0.16}
-      - {x: 1.35, y: -0.049999997}
-      - {x: 1.26, y: 0.11}
-      - {x: 1.18, y: 0.25}
-      - {x: 1.09, y: 0.41}
-      - {x: 1.01, y: 0.55}
-      - {x: 0.87, y: 0.79999995}
-      - {x: 0.69, y: 1.12}
-      - {x: 0.56, y: 1.35}
-      - {x: 0.52, y: 1.42}
-      - {x: 0.45999998, y: 1.53}
-      - {x: 0.42, y: 1.5999999}
-      - {x: 0.32999998, y: 1.76}
-      - {x: 0.25, y: 1.9}
-      - {x: 0.12, y: 2.1299999}
-      - {x: 0.06, y: 2.24}
-      - {x: -0.02, y: 2.3799999}
-      - {x: -0.08, y: 2.47}
-      - {x: -0.11, y: 2.47}
-      - {x: -0.19999999, y: 2.36}
-      - {x: -0.32, y: 2.1399999}
-      - {x: -0.48, y: 1.87}
-      - {x: -0.58, y: 1.6999999}
-      - {x: -0.87, y: 1.2099999}
-      - {x: -0.96999997, y: 1.04}
-      - {x: -1.42, y: 0.28}
-      - {x: -1.52, y: 0.11}
-      - {x: -1.74, y: -0.26}
-      - {x: -1.8399999, y: -0.42999998}
-      - {x: -2.1299999, y: -0.91999996}
-      - {x: -2.23, y: -1.09}
-      - {x: -2.52, y: -1.5799999}
-      - {x: -2.62, y: -1.75}
-      - {x: -2.74, y: -1.9599999}
-      - {x: -2.79, y: -2.07}
-      - {x: -2.77, y: -2.09}
-      - {x: -2.71, y: -2.1}
-      - {x: -2.05, y: -2.1}
-      - {x: -2.04, y: -2.11}
-      - {x: -1.09, y: -2.11}
-      - {x: -1.0799999, y: -2.12}
-      - {x: -0.13, y: -2.12}
-      - {x: -0.12, y: -2.1299999}
-      - {x: 0.79999995, y: -2.1299999}
-      - {x: 0.81, y: -2.1399999}
-      - {x: 1.76, y: -2.1399999}
-      - {x: 1.77, y: -2.1499999}
-      - {x: 2.48, y: -2.1499999}
-      - {x: 2.5, y: -2.1299999}
-      - {x: 2.4299998, y: -1.9699999}
-      - {x: 2.3799999, y: -1.88}
 --- !u!50 &2492792878942301031
 Rigidbody2D:
   serializedVersion: 4
@@ -200,4 +118,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96177628ba13ec64e826d5b521e613e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asd: {fileID: 0}
+--- !u!58 &2954986793482755962
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2519277872417871324}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 15

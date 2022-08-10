@@ -25,7 +25,7 @@ public class ShotArea : MonoBehaviour
             Enemys.Clear();
         }
         DistanceEnemy();
-        if (Enemys != null && cnt >= shotSpd)
+        if ( cnt >= shotSpd)
         {
             cnt = 0;
             Shot();
@@ -38,8 +38,7 @@ public class ShotArea : MonoBehaviour
         .OrderBy(obj =>
         {
             return Vector3.Distance(transform.position, obj.transform.position);
-        })
-    .FirstOrDefault();
+        }).FirstOrDefault();
 
         return neareastObject;
     }
@@ -63,16 +62,41 @@ public class ShotArea : MonoBehaviour
         }
     }
     private void BulletSet()
-    {
-        if (PlayerData.Instance.data[PlayerSkills.doubleBullet])
+    {   
+        if (PlayerData.Instance.data[PlayerSkills.QuadShot] && PlayerData.Instance.data[PlayerSkills.doubleBullet])
         {
-            Bullet bullet_1 = Instantiate(bullets[0]);
-            bullet_1.transform.position = shotPos.position+new Vector3(0.2f,0,0);
-            bullet_1.SetBullet(dmg, bulletSpd, shotPos.forward);
+            for (int i = 1; i <= 3; i++)
+            {
+                Bullet RightBullet = Instantiate(bullets[0]);
+                RightBullet.transform.position = shotPos.position + new Vector3(0.2f * i,0);
+                RightBullet.SetBullet(dmg, bulletSpd, shotPos.forward);
 
-            Bullet bullet_2 = Instantiate(bullets[0]);
-            bullet_2.transform.position = shotPos.position + new Vector3(-0.2f, 0, 0);
-            bullet_2.SetBullet(dmg, bulletSpd, shotPos.forward);
+                Bullet LeftBullet = Instantiate(bullets[0]);
+                LeftBullet.transform.position = shotPos.position + new Vector3(-0.2f * i, 0);
+                LeftBullet.SetBullet(dmg, bulletSpd, shotPos.forward);
+            }
+        }
+        else if (PlayerData.Instance.data[PlayerSkills.QuadShot])
+        {
+            for (int i = 1; i <= 2; i++)
+            {
+                Bullet RightBullet = Instantiate(bullets[0]);
+                RightBullet.transform.position = shotPos.position + new Vector3(0.2f * i, 0);
+                RightBullet.SetBullet(dmg, bulletSpd, shotPos.forward);
+
+                Bullet LeftBullet = Instantiate(bullets[0]);
+                LeftBullet.transform.position = shotPos.position + new Vector3(-0.2f * i, 0);
+                LeftBullet.SetBullet(dmg, bulletSpd, shotPos.forward);
+            }
+        }
+        else if (PlayerData.Instance.data[PlayerSkills.doubleBullet])
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                Bullet bullet = Instantiate(bullets[0]);
+                bullet.transform.position = shotPos.position + new Vector3(-0.2f + i * 0.4f, 0, 0);
+                bullet.SetBullet(dmg, bulletSpd, shotPos.forward);
+            }
         }
         else
         {
@@ -80,7 +104,6 @@ public class ShotArea : MonoBehaviour
             bullet.transform.position = shotPos.position;
             bullet.SetBullet(dmg, bulletSpd, shotPos.forward);
         }
-
 
         if (PlayerData.Instance.data[PlayerSkills.RadialShot])
         {
@@ -98,12 +121,16 @@ public class ShotArea : MonoBehaviour
     {
         Bullet bullet = Instantiate(bullets[0]);
         bullet.transform.position = shotPos.position;
-        shotPos.Rotate(0, 180, 0);
+        shotPos.Rotate(0, shotPos.localRotation.y+180, 0);
         bullet.SetBullet(dmg, bulletSpd, shotPos.forward);
     }
     private void MultiShot()
     {
         BulletSet();
+    }
+    public void ShotRangeUp()
+    {
+        transform.localScale = new Vector3(70,70,1);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -129,6 +156,7 @@ public class ShotArea : MonoBehaviour
     }
     public void ResetState()
     {
+        transform.localScale = new Vector3(60,60,1);
         dmg = 1;
         shotSpd = 0.2f;
         bulletSpd = 5;

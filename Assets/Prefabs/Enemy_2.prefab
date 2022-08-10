@@ -135,13 +135,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6670539668a2e5942860c1b0d3a99b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 2
+  maxHp: 1
+  hp: 1
   spd: 120
   score: 10
   enemySpawnPc: {fileID: 3146009235527661145, guid: 5d924c48f2370c649a501bf812e7d1b5, type: 3}
-  enemyDeadPc: {fileID: 3146009235527661145, guid: cff6c719899e0df4fbaacc7e14b05785, type: 3}
+  enemyDeadPc: {fileID: 3146009235527661145, guid: 3a07fcb7890ec944ea049aa631ac9136, type: 3}
   playerDeadPc: {fileID: 1641648458358345791, guid: bcd96ac0168784145833382f663d9f57, type: 3}
-  money: {fileID: 2519277872417871324, guid: be0eddca59751564ca2110ecf2bfe08e, type: 3}
   startColor: {r: 0.5660378, g: 0, b: 0, a: 0}
   isHit: 0
 --- !u!1 &4453744579324412178

@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     [Header("플레이어")]
     [SerializeField] private GameObject player;
     [SerializeField] private ParticleSystem playerSpawnPc;
-    [SerializeField] public int playerSpd;
+    [SerializeField] public float playerSpd;
     [SerializeField] private ShotArea shotArea;
 
     [Header("점수")]
@@ -60,7 +60,8 @@ public class GameManager : MonoBehaviour
                 player.SetActive(false);
                 upgradeWnd.SetActive(true);
                 upgradeWnd.GetComponent<UpgradeSelect>().Choice();
-                joystick.SetActive(false);
+                joystick.GetComponent<Joystick>().Stop();
+                //joystick.SetActive(false);
             }
             expSlider.fillAmount = exp / maxExp;
         }
@@ -112,7 +113,6 @@ public class GameManager : MonoBehaviour
     //}
     public void StartSet()
     {
-        joystick.SetActive(true);
         isGameOver = false;
         //경험치 초기화
         level = 1;
@@ -132,7 +132,10 @@ public class GameManager : MonoBehaviour
         Instantiate(playerSpawnPc).transform.position = Vector3.zero;
         player.SetActive(true);
         player.transform.position = Vector3.zero;
+        player.transform.Rotate(Vector3.zero);
 
+        joystick.SetActive(true);
+        playerSpd = 3;
         // 스텟 초기화
         shotArea.ResetState();
         for (int i = 0; i < (int)PlayerSkills.End; i++)
@@ -145,8 +148,9 @@ public class GameManager : MonoBehaviour
     public void SetDie()
     {
         isGameOver = true;
-        joystick.SetActive(false);
-
+        joystick.GetComponent<Joystick>().Stop();
+       // joystick.SetActive(false);
+        player.SetActive(false);
         //최고점수 기록
         if (score> PlayerPrefs.GetFloat("HighScore"))
         {

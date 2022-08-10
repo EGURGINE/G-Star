@@ -4,13 +4,14 @@ using UnityEngine;
 using DG.Tweening;
 public abstract class BasicEnemy : MonoBehaviour
 {
+    [SerializeField] private int maxHp;
     [SerializeField] private int hp;
     [SerializeField] [Range(0,2000)] protected float spd;
     [SerializeField] private int score;
     [SerializeField] private ParticleSystem enemySpawnPc;
     [SerializeField] private ParticleSystem enemyDeadPc;
     [SerializeField] private GameObject playerDeadPc;
-    [SerializeField] private GameObject money;
+    private string money = "Money";
 
     [SerializeField] private Color startColor;
     public bool isHit = false;
@@ -25,16 +26,17 @@ public abstract class BasicEnemy : MonoBehaviour
     IEnumerator SpawnPc()
     {
         yield return new WaitForSeconds(1);
-        enemySpawnPc.Play();
+        ParticleSystem pc = Instantiate(enemySpawnPc);
+        pc.transform.position = transform.position;
+        pc.Play();
     }
     private void Spawn()
     {
-        hp = 1;
+        hp = maxHp;
         cnt = 0;
         GetComponent<SpriteRenderer>().color = startColor;
         GetComponent<CircleCollider2D>().enabled = false;
         StartCoroutine(Fade(1.5f));
-        //StartCoroutine(SpawnPc());
     }
     IEnumerator Fade(float _time)
     {
@@ -68,11 +70,10 @@ public abstract class BasicEnemy : MonoBehaviour
         GameManager.Instance.Score = score;
         for (int i = 0; i < Random.Range(0,4); i++)
         {
-            Instantiate(money).transform.position = new Vector2(
-                transform.position.x+ Random.Range(-0.2f, 0.2f), transform.position.y+(Random.Range(-0.2f,0.2f)));
+            Spawner.Instance.Pop(money,new Vector2(transform.position.x , transform.position.y));
         }
         //DOTween.KillAll(transform);
-        EnemySpawner.Instance.Push(gameObject);
+        Spawner.Instance.Push(gameObject);
     }
     protected abstract void Move();
     private void OnTriggerEnter2D(Collider2D collision)
@@ -86,7 +87,6 @@ public abstract class BasicEnemy : MonoBehaviour
         {
             //playerDeadPc.SetActive(true);
             GameManager.Instance.SetDie();
-            collision.gameObject.SetActive(false);
         }
     }
 }

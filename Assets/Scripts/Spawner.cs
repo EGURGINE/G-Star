@@ -8,11 +8,11 @@ public enum EEnemyType
     Enemy_3,
     End
 }
-public class EnemySpawner : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
     #region ΩÃ±€≈Ê
-    private static EnemySpawner instance;
-    public static EnemySpawner Instance
+    private static Spawner instance;
+    public static Spawner Instance
     {
         get { return instance; }
     }
@@ -27,12 +27,14 @@ public class EnemySpawner : MonoBehaviour
         instance = this;
     }
     #endregion
-
+    readonly string moneyName = "Money";
+    [SerializeField] private GameObject moneyObj;
     [SerializeField] private GameObject[] poolEnemys;
     [SerializeField] private int poolCnt;
     Dictionary<object, Stack<GameObject>> poolObjs = new Dictionary<object, Stack<GameObject>>();
     [SerializeField] Transform spawnPos;
-    [SerializeField] GameObject Objs;
+    [SerializeField] GameObject EnemyObjs;
+    [SerializeField] GameObject MoneyObjs;
 
     private void Start()
     {
@@ -48,7 +50,15 @@ public class EnemySpawner : MonoBehaviour
                 CreateObj(poolEnemys[i]);
             }
         }
-
+        for (int i = 0; i < poolCnt; i++)
+        {
+            if (!poolObjs.ContainsKey(moneyObj.name))
+            {
+                Stack<GameObject> NewList = new Stack<GameObject>();
+                poolObjs.Add(moneyObj.name, NewList);
+            }
+            CreateObj(moneyObj);
+        }
 
 
         InvokeRepeating("Spawn", 0, 3);
@@ -60,35 +70,48 @@ public class EnemySpawner : MonoBehaviour
         if (index > 0) newDoll.name = newDoll.name.Substring(0, index);
         newDoll.SetActive(false);
         poolObjs[_obj.name].Push(newDoll);
-        newDoll.transform.parent = Objs.transform;
+        if(_obj == moneyObj) newDoll.transform.parent = MoneyObjs.transform;
+        else newDoll.transform.parent = EnemyObjs.transform;
+
     }
-    private void Pop(string _name)
+    public void Pop(string _name , Vector2 _EnemyPos)
     {
-        if (poolObjs[_name].Count == 0)
-        {
-            print("null");
-            foreach (var item in poolEnemys)
-            {
-                if (item.name == _name)
-                {
-                    CreateObj(item);
-                }
-            }
-        }
         if (poolObjs.ContainsKey(_name))
         {
-            GameObject enemy = poolObjs[_name].Pop();
-            enemy.gameObject.SetActive(true);
-            enemy.transform.parent = null;
-            enemy.transform.transform.position = spawnPos.position;
-            enemy.GetComponent<BasicEnemy>().SpawnSet();
+            if (poolObjs[_name].Count == 0)
+            {
+                if (_name == moneyName)
+                {
+                    CreateObj(moneyObj);
+                }
+                else
+                {
+                    foreach (var item in poolEnemys)
+                    {
+                        if (item.name == _name)
+                        {
+                            CreateObj(item);
+                        }
+                    }
+                }
+            }
+            GameObject obj = poolObjs[_name].Pop();
+            obj.gameObject.SetActive(true);
+            obj.transform.parent = null;
+            obj.TryGetComponent(out BasicEnemy isEnemy);
+            if (isEnemy)
+            {
+                obj.transform.transform.position = spawnPos.position;
+                obj.GetComponent<BasicEnemy>().SpawnSet();
+            }
+            else obj.transform.position = _EnemyPos;
         }
     }
 
     public void Push(GameObject _this)
     {
         poolObjs[_this.name].Push(_this);
-        _this.transform.parent = Objs.transform;
+        _this.transform.parent = EnemyObjs.transform;
         _this.SetActive(false);
     }
     void Spawn()
@@ -98,7 +121,7 @@ public class EnemySpawner : MonoBehaviour
         {
             spawnPos.position = new Vector2(Random.Range(-2.03f, 2.03f), Random.Range(-2.7f, 3.04f));
             EEnemyType _name = (EEnemyType)Random.Range(0, (int)EEnemyType.End);
-            Pop(_name.ToString());
+            Pop(_name.ToString(),Vector2.zero);
         }
     }
 }

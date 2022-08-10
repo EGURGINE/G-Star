@@ -11,8 +11,9 @@ public enum BtnType
     doubleShot,
     RadialShot,
     BulletSpeed,
+    ShotRange,
     lazer,
-    QuadShot,
+    QuadBullet,
     Piercing,
     BackShot,
     Score,
@@ -36,10 +37,10 @@ public class UpgradeBtn : MonoBehaviour
         Ability();
         GameManager.Instance.joystick.SetActive(true);
         upgradeWnd.GetComponent<UpgradeSelect>().Check(this.gameObject);
-        print("gelgel");
         upgradeWnd.SetActive(false);
         player.SetActive(true);
         player.transform.position = Vector3.zero;
+        player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         gameObject.SetActive(false);
     }
 
@@ -51,7 +52,7 @@ public class UpgradeBtn : MonoBehaviour
                 ShotArea.Instance.dmg++;
                 break;
             case BtnType.speed:
-                GameManager.Instance.playerSpd += 1;
+                GameManager.Instance.playerSpd += 0.5f;
                 break;
             case BtnType.shotSpeed:
                 ShotArea.Instance.shotSpd -= 0.1f;
@@ -66,11 +67,15 @@ public class UpgradeBtn : MonoBehaviour
                 PlayerData.Instance.data[PlayerSkills.RadialShot] = true;
                 break;
             case BtnType.BulletSpeed:
-                ShotArea.Instance.bulletSpd = 10;
+                ShotArea.Instance.bulletSpd = 8;
+                break;
+            case BtnType.ShotRange:
+                ShotArea.Instance.ShotRangeUp();
                 break;
             case BtnType.lazer:
                 break;
-            case BtnType.QuadShot:
+            case BtnType.QuadBullet:
+                PlayerData.Instance.data[PlayerSkills.QuadShot] = true;
                 break;
             case BtnType.Piercing:
                 break;

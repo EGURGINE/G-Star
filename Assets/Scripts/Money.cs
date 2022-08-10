@@ -29,6 +29,7 @@ public class Money : MonoBehaviour
             GameManager.Instance.Money = 1;
             Destroy(gameObject);
         }
+            
     }
     private void OnDestroy()
     {
@@ -38,9 +39,12 @@ public class Money : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            GameManager.Instance.Money = 1;
-            GameManager.Instance.Exp = 5;
-            Destroy(gameObject);
+            transform.DOMove(collision.transform.position, 0.1f).OnComplete(() =>
+            {
+                GameManager.Instance.Money = 1;
+                GameManager.Instance.Exp = 5;
+                Destroy(gameObject);
+            });
         }
     }
 }
