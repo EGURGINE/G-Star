@@ -64,6 +64,8 @@ public abstract class BasicEnemy : MonoBehaviour
     }
     private void Die()
     {
+        if (GameManager.Instance.isTutorial && GameManager.Instance.tutorialNum == 1)
+            GameManager.Instance.tutorialNextBtn.gameObject.SetActive(true);
         Camera.main.DOShakePosition(1,new Vector3(0.04f,0.01f,0),10).OnComplete(()=>Camera.main.transform.position= new Vector3(0,0,-10));
 
         Instantiate(enemyDeadPc).transform.position = transform.position;

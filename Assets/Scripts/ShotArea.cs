@@ -121,7 +121,7 @@ public class ShotArea : MonoBehaviour
     {
         Bullet bullet = Instantiate(bullets[0]);
         bullet.transform.position = shotPos.position;
-        shotPos.Rotate(0, shotPos.localRotation.y+180, 0);
+        shotPos.Rotate(0, 180, 0);
         bullet.SetBullet(dmg, bulletSpd, shotPos.forward);
     }
     private void MultiShot()

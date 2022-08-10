@@ -25,8 +25,22 @@ public class BtnManager : MonoBehaviour
         GameManager.Instance.StartSet();
 
     }
+    public void Tutorial()
+    {
+        menuWnd.SetActive(false);
+        gameWnd.SetActive(true);
+        GameManager.Instance.tutorialWnd.SetActive(true);
+        GameManager.Instance.tutorialNum = -1;
+        GameManager.Instance.isTutorial = true;
+        GameManager.Instance.Tutorial();
+    }
+    public void TutorialNext()
+    {
+        GameManager.Instance.Tutorial();
+    }
     public void VideoBtn()
     {
+        // ±¤°í ³Ö±â
         GameManager.Instance.Money = 2000;
     }
 }

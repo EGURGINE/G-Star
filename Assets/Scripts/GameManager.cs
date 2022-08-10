@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
+using TMPro;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; set; }
@@ -43,11 +43,21 @@ public class GameManager : MonoBehaviour
     [Header("업그레이드")]
     [SerializeField] private GameObject upgradeWnd;
     public bool isUpgrade =false;
+
+    [Header("튜토리얼")]
+    public bool isTutorial;
+    private bool isLevelupTrue;
+    public GameObject tutorialWnd;
+    [SerializeField] private TextMeshProUGUI tutorialTxt;
+    public int tutorialNum;
+    public Button tutorialNextBtn;
+    [SerializeField] GameObject btnManager;
     public float Exp
     {
         get { return exp; }
         set 
         {
+            if (isLevelupTrue == false) return;
             exp += value;
             if (exp>=maxExp)
             {
@@ -61,6 +71,7 @@ public class GameManager : MonoBehaviour
                 upgradeWnd.SetActive(true);
                 upgradeWnd.GetComponent<UpgradeSelect>().Choice();
                 joystick.GetComponent<Joystick>().Stop();
+                if (isTutorial&& tutorialNum == 2) tutorialNextBtn.gameObject.SetActive(true);
                 //joystick.SetActive(false);
             }
             expSlider.fillAmount = exp / maxExp;
@@ -83,7 +94,6 @@ public class GameManager : MonoBehaviour
         {
             score += value;
             scoreTxt.text = score.ToString();
-
         }
     }
     private void Awake()
@@ -99,20 +109,9 @@ public class GameManager : MonoBehaviour
         money = PlayerPrefs.GetInt("Money");
         moneyTxt.text = money.ToString();
     }
-    //private void Update()
-    //{
-    //    if (Input.GetMouseButtonDown(0))
-    //    {
-    //        touchArea.transform.position = Camera.main.ScreenToWorldPoint(
-    //            new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
-    //        innerPad.transform.position = Camera.main.ScreenToWorldPoint(
-    //            new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
-    //        outerPad.transform.position = Camera.main.ScreenToWorldPoint(
-    //            new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
-    //    }
-    //}
     public void StartSet()
     {
+
         isGameOver = false;
         //경험치 초기화
         level = 1;
@@ -135,8 +134,8 @@ public class GameManager : MonoBehaviour
         player.transform.Rotate(Vector3.zero);
 
         joystick.SetActive(true);
-        playerSpd = 3;
         // 스텟 초기화
+        playerSpd = 3;
         shotArea.ResetState();
         for (int i = 0; i < (int)PlayerSkills.End; i++)
         {
@@ -144,22 +143,87 @@ public class GameManager : MonoBehaviour
         }
         upgradeWnd.GetComponent<UpgradeSelect>().ResetChoice();
         
+        Spawner.Instance.spawnEnemyNum = 4;
+    }
+    public void Tutorial()
+    {
+        tutorialNum++;
+        switch (tutorialNum)
+        {
+            case 0:
+                tutorialNextBtn.gameObject.SetActive(false);
+                tutorialTxt.text = "Drag screen to move.";
+                //플레이어 스폰
+                Instantiate(playerSpawnPc).transform.position = Vector3.zero;
+                player.SetActive(true);
+                player.transform.position = Vector3.zero;
+                player.transform.Rotate(Vector3.zero);
+
+                joystick.SetActive(true);
+                // 스텟 초기화
+                playerSpd = 3;
+                shotArea.ResetState();
+                for (int i = 0; i < (int)PlayerSkills.End; i++)
+                {
+                    PlayerData.Instance.data[(PlayerSkills)i] = false;
+                }
+                upgradeWnd.GetComponent<UpgradeSelect>().ResetChoice();
+                //튜토리얼 조건
+                isLevelupTrue = false;
+                Spawner.Instance.spawnEnemyNum = 2;
+                break;
+            case 1:
+                tutorialNextBtn.gameObject.SetActive(false);
+                tutorialTxt.text = "Approach the enemy and shoot.";
+                isGameOver = false;
+                break;
+            case 2:
+                tutorialNextBtn.gameObject.SetActive(false);
+                tutorialTxt.text = "Collet gems and level up.";
+                isLevelupTrue = true;
+                break;
+            case 3:
+                tutorialTxt.text = "This concludes the tutorial";
+                break;
+            default:
+                tutorialWnd.SetActive(false);
+                isGameOver = true;
+                isTutorial = false;
+                btnManager.GetComponent<BtnManager>().MenuBtn();
+                player.SetActive(false);
+                joystick.SetActive(false);
+                break;
+        }
     }
     public void SetDie()
     {
-        isGameOver = true;
-        joystick.GetComponent<Joystick>().Stop();
-       // joystick.SetActive(false);
-        player.SetActive(false);
-        //최고점수 기록
-        if (score> PlayerPrefs.GetFloat("HighScore"))
+        if (isTutorial) // 튜토리얼 일때
         {
-            highScore = score;
-            PlayerPrefs.SetFloat("HighScore", highScore);
-            highScoreTxt.text = highScore.ToString();
+            isGameOver = true;
+            isGameOver = false;
+            player.SetActive(false);
+            Instantiate(playerSpawnPc).transform.position = Vector3.zero;
+            player.SetActive(true);
+            player.transform.position = Vector3.zero;
+            player.transform.Rotate(Vector3.zero);
         }
+        else // 인게임 일때
+        {
+            isGameOver = true;
+            joystick.GetComponent<Joystick>().Stop();
+            // joystick.SetActive(false);
+            player.SetActive(false);
+            //최고점수 기록
+            if (score > PlayerPrefs.GetFloat("HighScore"))
+            {
+                highScore = score;
+                PlayerPrefs.SetFloat("HighScore", highScore);
+                highScoreTxt.text = highScore.ToString();
+            }
 
-        gameOverWnd.SetActive(true);
+            gameOverWnd.SetActive(true);
+
+        }
         
     }
 }

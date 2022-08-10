@@ -35,6 +35,8 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(touchArea,
             eventData.position, eventData.pressEventCamera, out Vector2 localPoint))
         {
+
+            if(GameManager.Instance.tutorialNum == 0) GameManager.Instance.tutorialNextBtn.gameObject.SetActive(true);
             localPoint.x = (localPoint.x / touchArea.sizeDelta.x);
             localPoint.y = (localPoint.y / touchArea.sizeDelta.y);
             // Joystick Touch Area의 비율 구하기 ( -0.5 ~ 0.5 )

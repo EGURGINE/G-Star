@@ -35,7 +35,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] Transform spawnPos;
     [SerializeField] GameObject EnemyObjs;
     [SerializeField] GameObject MoneyObjs;
-
+    public int spawnEnemyNum;
     private void Start()
     {
         for (int i = 0; i < poolEnemys.Length; i++)
@@ -61,7 +61,7 @@ public class Spawner : MonoBehaviour
         }
 
 
-        InvokeRepeating("Spawn", 0, 3);
+        InvokeRepeating(nameof(Spawn), 0, 3);
     }
     private void CreateObj(GameObject _obj)
     {
@@ -117,7 +117,7 @@ public class Spawner : MonoBehaviour
     void Spawn()
     {
         if (GameManager.Instance.isGameOver || GameManager.Instance.isUpgrade) return;
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < spawnEnemyNum; i++)
         {
             spawnPos.position = new Vector2(Random.Range(-2.03f, 2.03f), Random.Range(-2.7f, 3.04f));
             EEnemyType _name = (EEnemyType)Random.Range(0, (int)EEnemyType.End);
