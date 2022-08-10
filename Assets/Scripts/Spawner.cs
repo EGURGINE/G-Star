@@ -61,7 +61,6 @@ public class Spawner : MonoBehaviour
         }
 
 
-        InvokeRepeating(nameof(Spawn), 0, 3);
     }
     private void CreateObj(GameObject _obj)
     {
@@ -114,14 +113,17 @@ public class Spawner : MonoBehaviour
         _this.transform.parent = EnemyObjs.transform;
         _this.SetActive(false);
     }
-    void Spawn()
+    public IEnumerator Spawn()
     {
-        if (GameManager.Instance.isGameOver || GameManager.Instance.isUpgrade) return;
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isUpgrade) StartCoroutine(Spawn());
         for (int i = 0; i < spawnEnemyNum; i++)
         {
             spawnPos.position = new Vector2(Random.Range(-2.03f, 2.03f), Random.Range(-2.7f, 3.04f));
             EEnemyType _name = (EEnemyType)Random.Range(0, (int)EEnemyType.End);
-            Pop(_name.ToString(),Vector2.zero);
+            Pop(_name.ToString(), Vector2.zero);
         }
+        yield return new WaitForSeconds(3);
+        StartCoroutine(Spawn());
     }
+    
 }

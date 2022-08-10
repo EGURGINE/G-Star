@@ -113,6 +113,7 @@ public class GameManager : MonoBehaviour
     {
 
         isGameOver = false;
+        StartCoroutine(Spawner.Instance.Spawn());
         //경험치 초기화
         level = 1;
         lv.text = level.ToString();
@@ -176,6 +177,7 @@ public class GameManager : MonoBehaviour
                 tutorialNextBtn.gameObject.SetActive(false);
                 tutorialTxt.text = "Approach the enemy and shoot.";
                 isGameOver = false;
+                StartCoroutine(Spawner.Instance.Spawn());
                 break;
             case 2:
                 tutorialNextBtn.gameObject.SetActive(false);
@@ -192,6 +194,7 @@ public class GameManager : MonoBehaviour
                 btnManager.GetComponent<BtnManager>().MenuBtn();
                 player.SetActive(false);
                 joystick.SetActive(false);
+                StopCoroutine(Spawner.Instance.Spawn());
                 break;
         }
     }
