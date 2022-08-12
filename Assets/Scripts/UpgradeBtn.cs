@@ -41,6 +41,7 @@ public class UpgradeBtn : MonoBehaviour
         player.SetActive(true);
         player.transform.position = Vector3.zero;
         player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        Spawner.Instance.Spawn();
         gameObject.SetActive(false);
     }
 

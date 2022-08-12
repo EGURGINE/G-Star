@@ -70,9 +70,12 @@ public abstract class BasicEnemy : MonoBehaviour
 
         Instantiate(enemyDeadPc).transform.position = transform.position;
         GameManager.Instance.Score = score;
-        for (int i = 0; i < Random.Range(0,4); i++)
+        if(GameManager.Instance.tutorialNum != 1)
         {
-            Spawner.Instance.Pop(money,new Vector2(transform.position.x , transform.position.y));
+            for (int i = 0; i < Random.Range(0, 4); i++)
+            {
+                Spawner.Instance.Pop(money, new Vector2(transform.position.x, transform.position.y));
+            }
         }
         //DOTween.KillAll(transform);
         Spawner.Instance.Push(gameObject);

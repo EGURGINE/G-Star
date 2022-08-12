@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         get { return exp; }
         set 
         {
-            if (isLevelupTrue == false) return;
+            if (isTutorial&&isLevelupTrue == false) return;
             exp += value;
             if (exp>=maxExp)
             {
@@ -111,9 +111,8 @@ public class GameManager : MonoBehaviour
     }
     public void StartSet()
     {
-
-        isGameOver = false;
-        StartCoroutine(Spawner.Instance.Spawn());
+        isGameOver = isTutorial == true ? true : false;
+        Spawner.Instance.Spawn();
         //경험치 초기화
         level = 1;
         lv.text = level.ToString();
@@ -154,21 +153,8 @@ public class GameManager : MonoBehaviour
             case 0:
                 tutorialNextBtn.gameObject.SetActive(false);
                 tutorialTxt.text = "Drag screen to move.";
-                //플레이어 스폰
-                Instantiate(playerSpawnPc).transform.position = Vector3.zero;
-                player.SetActive(true);
-                player.transform.position = Vector3.zero;
-                player.transform.Rotate(Vector3.zero);
-
-                joystick.SetActive(true);
-                // 스텟 초기화
-                playerSpd = 3;
-                shotArea.ResetState();
-                for (int i = 0; i < (int)PlayerSkills.End; i++)
-                {
-                    PlayerData.Instance.data[(PlayerSkills)i] = false;
-                }
-                upgradeWnd.GetComponent<UpgradeSelect>().ResetChoice();
+                StartSet();
+                
                 //튜토리얼 조건
                 isLevelupTrue = false;
                 Spawner.Instance.spawnEnemyNum = 2;
@@ -177,7 +163,7 @@ public class GameManager : MonoBehaviour
                 tutorialNextBtn.gameObject.SetActive(false);
                 tutorialTxt.text = "Approach the enemy and shoot.";
                 isGameOver = false;
-                StartCoroutine(Spawner.Instance.Spawn());
+                Spawner.Instance.Spawn();
                 break;
             case 2:
                 tutorialNextBtn.gameObject.SetActive(false);
@@ -194,7 +180,6 @@ public class GameManager : MonoBehaviour
                 btnManager.GetComponent<BtnManager>().MenuBtn();
                 player.SetActive(false);
                 joystick.SetActive(false);
-                StopCoroutine(Spawner.Instance.Spawn());
                 break;
         }
     }

@@ -103,7 +103,7 @@ public class Spawner : MonoBehaviour
                 obj.transform.transform.position = spawnPos.position;
                 obj.GetComponent<BasicEnemy>().SpawnSet();
             }
-            else obj.transform.position = _EnemyPos;
+            else obj.transform.position = _EnemyPos + new Vector2(Random.Range(-0.15f,0.15f), Random.Range(-0.15f, 0.15f));
         }
     }
 
@@ -113,17 +113,26 @@ public class Spawner : MonoBehaviour
         _this.transform.parent = EnemyObjs.transform;
         _this.SetActive(false);
     }
-    public IEnumerator Spawn()
+    public void Spawn()
     {
-        if (GameManager.Instance.isGameOver || GameManager.Instance.isUpgrade) StartCoroutine(Spawn());
-        for (int i = 0; i < spawnEnemyNum; i++)
+        if (!GameManager.Instance.isGameOver || !GameManager.Instance.isUpgrade)
         {
-            spawnPos.position = new Vector2(Random.Range(-2.03f, 2.03f), Random.Range(-2.7f, 3.04f));
-            EEnemyType _name = (EEnemyType)Random.Range(0, (int)EEnemyType.End);
-            Pop(_name.ToString(), Vector2.zero);
+            for (int i = 0; i < spawnEnemyNum; i++)
+            {
+                spawnPos.position = new Vector2(Random.Range(-2.03f, 2.03f), Random.Range(-2.7f, 3.04f));
+                EEnemyType _name = (EEnemyType)Random.Range(0, (int)EEnemyType.End);
+                Pop(_name.ToString(), Vector2.zero);
+            }
+            StartCoroutine(NextSpawn());
+
         }
-        yield return new WaitForSeconds(3);
-        StartCoroutine(Spawn());
+        else return;
+    }
+    IEnumerator NextSpawn()
+    {
+        yield return new WaitForSeconds(3f);
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isUpgrade) yield return null;
+        else Spawn();
     }
     
 }
