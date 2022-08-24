@@ -47,8 +47,8 @@ public class ShotArea : MonoBehaviour
         if (Enemys.FirstOrDefault() != null && target.GetComponent<BasicEnemy>().isHit)
         {
             shotPos.LookAt(target.transform.position);
-            leftPos.LookAt(target.transform.position + Vector3.left);
-            rightPos.LookAt(target.transform.position + Vector3.right);
+            leftPos.Rotate(new Vector3(30, 0, 0));
+            rightPos.Rotate(new Vector3(-30, 0, 0));
 
             BulletSet();
             if (PlayerData.Instance.data[PlayerSkills.doubleShot])
