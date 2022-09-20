@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private ParticleSystem playerSpawnPc;
     [SerializeField] public float playerSpd;
     [SerializeField] private ShotArea shotArea;
+    [SerializeField] private SkinCheker SC;
 
     [Header("점수")]
     private int score;
@@ -130,6 +131,7 @@ public class GameManager : MonoBehaviour
         //플레이어 스폰
         Instantiate(playerSpawnPc).transform.position = Vector3.zero;
         player.SetActive(true);
+        player.GetComponent<SpriteRenderer>().sprite = SC.isSkin.image;
         player.transform.position = Vector3.zero;
         player.transform.Rotate(Vector3.zero);
 
