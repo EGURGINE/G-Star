@@ -21,6 +21,7 @@ public class BtnManager : MonoBehaviour
         gameOverWnd.SetActive(false);
         gameWnd.SetActive(false);
         menuWnd.SetActive(true);
+        GameManager.Instance.joystick.SetActive(false);
     }
     public void StartBtn()
     {
