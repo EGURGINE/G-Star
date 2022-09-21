@@ -32,8 +32,8 @@ public class SkinCheker : MonoBehaviour
     private void Start()
     {
         selectSkin = skins[0];
+        isSkin = skins[PlayerPrefs.GetInt("PlayerSkinIndex")];
         SkinDisplay();
-        GameManager.Instance.Money += 50000;
     }
 
     public void LeftBtn()
@@ -70,5 +70,10 @@ public class SkinCheker : MonoBehaviour
         if(selectSkin.isBuy) isSkin = selectSkin;
 
         SkinDisplay();
+    }
+
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.SetInt("PlayerSkinIndex", isSkin.index);
     }
 }

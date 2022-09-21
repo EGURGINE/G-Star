@@ -1563,7 +1563,7 @@ MonoBehaviour:
   playerSpawnPc: {fileID: 3146009235527661145, guid: bd3f24599e5d6f84b890c39d3bb4f488, type: 3}
   playerSpd: 3
   shotArea: {fileID: 8973259734242846751}
-  SC: {fileID: 0}
+  SC: {fileID: 212764124}
   scoreTxt: {fileID: 13784868}
   highScoreTxt: {fileID: 2116317882}
   moneyTxt: {fileID: 1561826053}
@@ -2153,7 +2153,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 533797861}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 969902126}
+        m_TargetAssemblyTypeName: BtnManager, Assembly-CSharp
+        m_MethodName: WndBtnSet
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &533797861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5047,7 +5059,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1053864527}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 969902126}
+        m_TargetAssemblyTypeName: BtnManager, Assembly-CSharp
+        m_MethodName: WndBtnSet
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1053864527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5308,7 +5332,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1088609360
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6127,7 +6151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1215636706
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9925,7 +9949,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2053199891}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 969902126}
+        m_TargetAssemblyTypeName: BtnManager, Assembly-CSharp
+        m_MethodName: WndBtnSet
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2053199891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10046,7 +10082,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2058234323}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 969902126}
+        m_TargetAssemblyTypeName: BtnManager, Assembly-CSharp
+        m_MethodName: WndBtnSet
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2058234323
 MonoBehaviour:
   m_ObjectHideFlags: 0
