@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class BtnManager : MonoBehaviour
 {
+    [Header("창들")]
     [SerializeField] private GameObject menuWnd;
+    [Space(10f)]
+    [SerializeField] private GameObject[] wnds; 
+    [Space(10f)]
     [SerializeField] private GameObject gameWnd;
     [SerializeField] private GameObject gameOverWnd;
     public void ReTryBtn()
@@ -23,7 +27,6 @@ public class BtnManager : MonoBehaviour
         menuWnd.SetActive(false);
         gameWnd.SetActive(true);
         GameManager.Instance.StartSet();
-
     }
     public void Tutorial()
     {
@@ -41,6 +44,18 @@ public class BtnManager : MonoBehaviour
     public void VideoBtn()
     {
         // 광고 넣기
-        GameManager.Instance.Money = 2000;
+        GameManager.Instance.Money += 2000;
+    }
+     
+    public void WndBtnSet(int num)
+    {
+        foreach (var item in wnds)
+        {
+            if (item == wnds[num])
+            {
+                item.SetActive(true);
+            }
+            else item.SetActive(false);
+        }
     }
 }

@@ -26,7 +26,7 @@ public class Money : MonoBehaviour
         transform.Rotate(0, 0, 0.1f);
         if (GameManager.Instance.isGameOver||GameManager.Instance.isUpgrade)
         {
-            GameManager.Instance.Money = 1;
+            GameManager.Instance.Money += 1;
             Destroy(gameObject);
         }
             
@@ -41,8 +41,8 @@ public class Money : MonoBehaviour
         {
             transform.DOMove(collision.transform.position, 0.1f).OnComplete(() =>
             {
-                GameManager.Instance.Money = 1;
-                GameManager.Instance.Exp = 5;
+                GameManager.Instance.Money += 1;
+                GameManager.Instance.Exp += 5;
                 Destroy(gameObject);
             });
         }

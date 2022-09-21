@@ -84,10 +84,10 @@ public class UpgradeBtn : MonoBehaviour
                 PlayerData.Instance.data[PlayerSkills.BackShot] = true;
                 break;
             case BtnType.Score:
-                GameManager.Instance.Score = 50;
+                GameManager.Instance.Score += 50;
                 break;
             case BtnType.Money:
-                GameManager.Instance.Money = 10;
+                GameManager.Instance.Money += 10;
                 break;
         }
     }

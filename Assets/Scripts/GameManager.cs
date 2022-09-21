@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         set 
         {
             if (isTutorial&&isLevelupTrue == false) return;
-            exp += value;
+            exp = value;
             if (exp>=maxExp)
             {
                 exp -= maxExp;
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
         get { return money; }
         set 
         {
-            money += value;
+            money = value;
             PlayerPrefs.SetInt("Money", money);
             moneyTxt.text = money.ToString();
         }
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         get { return score; }
         set 
         {
-            score += value;
+            score = value;
             scoreTxt.text = score.ToString();
         }
     }

@@ -10,10 +10,12 @@ public class SkinData
     public int index;
     public string name;
     public Sprite image;
+    public bool isBuy;
 }
 
 public class SkinCheker : MonoBehaviour
 {
+    private readonly int price = 20000;
     public SkinData isSkin;
 
     [SerializeField] 
@@ -24,10 +26,14 @@ public class SkinCheker : MonoBehaviour
     private Image exSkinImage;
     [SerializeField]
     private TextMeshProUGUI skinName;
+    [SerializeField]
+    private TextMeshProUGUI selectBtnTxt;
 
     private void Start()
     {
         selectSkin = skins[0];
+        SkinDisplay();
+        GameManager.Instance.Money += 50000;
     }
 
     public void LeftBtn()
@@ -49,9 +55,20 @@ public class SkinCheker : MonoBehaviour
     {
         exSkinImage.sprite = selectSkin.image;
         skinName.text = selectSkin.name;
+
+        if (selectSkin.isBuy) selectBtnTxt.text = "SELECET";
+        else selectBtnTxt.text = price.ToString();
     }
     public void SelectBtn()
     {
-        isSkin = selectSkin;
+        if (selectSkin.isBuy == false && GameManager.Instance.Money >= price)
+        {
+            GameManager.Instance.Money -= price;
+            selectSkin.isBuy = true;
+        }
+
+        if(selectSkin.isBuy) isSkin = selectSkin;
+
+        SkinDisplay();
     }
 }
