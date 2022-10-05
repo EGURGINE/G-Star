@@ -4,15 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
-[Serializable]
-public class SkinData
-{
-    public int index;
-    public string name;
-    public Sprite image;
-    public bool isBuy;
-}
-
 public class SkinCheker : MonoBehaviour
 {
     private readonly int price = 20000;
