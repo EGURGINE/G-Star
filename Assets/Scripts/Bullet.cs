@@ -30,6 +30,7 @@ public class Bullet : MonoBehaviour
             case "Wall": Destroy(gameObject);
                 break;
             case "Enemy":
+                if (PlayerData.Instance.data[PlayerSkills.Piercing] == true) return;
                 Destroy(gameObject);
                 break;
         }
