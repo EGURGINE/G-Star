@@ -79,6 +79,7 @@ public class UpgradeBtn : MonoBehaviour
                 PlayerData.Instance.data[PlayerSkills.QuadShot] = true;
                 break;
             case BtnType.Piercing:
+                PlayerData.Instance.data[PlayerSkills.Piercing] = true;
                 break;
             case BtnType.BackShot:
                 PlayerData.Instance.data[PlayerSkills.BackShot] = true;
