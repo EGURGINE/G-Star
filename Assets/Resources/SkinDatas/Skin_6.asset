@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17cdbf2ad0fd7e943a4a7338f44ab43a, type: 3}
-  m_Name: Skin_5
+  m_Name: Skin_6
   m_EditorClassIdentifier: 
-  index: 5
-  name: Monster
-  image: {fileID: 21300000, guid: 68339ddfe48777b4481ba5ac0a336c4d, type: 3}
+  index: 6
+  name: Twisted
+  image: {fileID: 21300000, guid: 546feec71fe09ef4f81f19e030ce4f76, type: 3}
   isBuy: 0

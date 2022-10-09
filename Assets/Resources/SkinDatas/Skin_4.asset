@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Skin_4
   m_EditorClassIdentifier: 
   index: 4
-  name: Monster
-  image: {fileID: 21300000, guid: 68339ddfe48777b4481ba5ac0a336c4d, type: 3}
+  name: Goofy
+  image: {fileID: 21300000, guid: 2cb604cc1fdc5224ca729649e7bfd9e2, type: 3}
   isBuy: 0
