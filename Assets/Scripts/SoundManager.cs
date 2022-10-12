@@ -54,6 +54,8 @@ public class SoundManager : MonoBehaviour
         }
         else audio.volume = SFXVolum;
         audio.Play();
+
+        if(source != ESoundSources.BGM)
         Destroy(go, audio.clip.length);
     }
 
