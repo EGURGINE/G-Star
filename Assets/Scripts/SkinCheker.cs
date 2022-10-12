@@ -29,6 +29,8 @@ public class SkinCheker : MonoBehaviour
 
     public void LeftBtn()
     {
+        SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
+
         if (selectSkin.index <= 0) selectSkin = skins[(skins.Count - 1)];
         else selectSkin = skins[(selectSkin.index -1)];
         SkinDisplay();
@@ -36,6 +38,8 @@ public class SkinCheker : MonoBehaviour
     }
     public void RightBtn()
     {
+        SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
+        
         if (selectSkin.index >= (skins.Count - 1)) selectSkin = skins[0];
         else selectSkin = skins[(selectSkin.index + 1)];
 
@@ -52,6 +56,8 @@ public class SkinCheker : MonoBehaviour
     }
     public void SelectBtn()
     {
+        SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
+
         if (selectSkin.isBuy == false && GameManager.Instance.Money >= price)
         {
             GameManager.Instance.Money -= price;

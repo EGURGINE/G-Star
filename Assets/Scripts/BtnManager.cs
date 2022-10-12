@@ -13,11 +13,15 @@ public class BtnManager : MonoBehaviour
     [SerializeField] private GameObject gameOverWnd;
     public void ReTryBtn()
     {
+        SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
+
         gameOverWnd.SetActive(false);
         GameManager.Instance.StartSet();
     }
     public void MenuBtn()
     {
+        SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
+
         gameOverWnd.SetActive(false);
         gameWnd.SetActive(false);
         menuWnd.SetActive(true);
@@ -25,12 +29,17 @@ public class BtnManager : MonoBehaviour
     }
     public void StartBtn()
     {
+        SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
+
         menuWnd.SetActive(false);
         gameWnd.SetActive(true);
         GameManager.Instance.StartSet();
     }
     public void Tutorial()
     {
+        SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
+
+
         menuWnd.SetActive(false);
         gameWnd.SetActive(true);
         GameManager.Instance.tutorialWnd.SetActive(true);
@@ -40,16 +49,22 @@ public class BtnManager : MonoBehaviour
     }
     public void TutorialNext()
     {
+        SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
+
         GameManager.Instance.Tutorial();
     }
     public void VideoBtn()
     {
+        SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
+
         // ±¤°í ³Ö±â
         GameManager.Instance.Money += 2000;
     }
      
     public void WndBtnSet(int num)
     {
+        SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
+
         foreach (var item in wnds)
         {
             if (item == wnds[num])

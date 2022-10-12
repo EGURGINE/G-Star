@@ -46,6 +46,8 @@ public class ShotArea : MonoBehaviour
     {
         if (Enemys.FirstOrDefault() != null && target.GetComponent<BasicEnemy>().isHit)
         {
+
+
             shotPos.LookAt(target.transform.position);
             leftPos.Rotate(new Vector3(30, 0, 0));
             rightPos.Rotate(new Vector3(-30, 0, 0));
@@ -62,7 +64,9 @@ public class ShotArea : MonoBehaviour
         }
     }
     private void BulletSet()
-    {   
+    {
+        SoundManager.Instance.PlaySound(ESoundSources.SHOT);
+
         if (PlayerData.Instance.data[PlayerSkills.QuadShot] && PlayerData.Instance.data[PlayerSkills.doubleBullet])
         {
             for (int i = 1; i <= 3; i++)

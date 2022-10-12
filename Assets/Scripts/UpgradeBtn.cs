@@ -33,6 +33,8 @@ public class UpgradeBtn : MonoBehaviour
     }
     public void UPBtn()
     {
+        SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
+
         GameManager.Instance.isUpgrade = false;
         Ability();
         GameManager.Instance.joystick.SetActive(true);

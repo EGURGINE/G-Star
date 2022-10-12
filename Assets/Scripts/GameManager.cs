@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
             exp = value;
             if (exp>=maxExp)
             {
+                SoundManager.Instance.PlaySound(ESoundSources.LEVEL);
                 exp -= maxExp;
                 maxExp += 10;
                 level++;
@@ -187,6 +188,8 @@ public class GameManager : MonoBehaviour
     }
     public void SetDie()
     {
+        SoundManager.Instance.PlaySound(ESoundSources.DIE);
+
         if (isTutorial) // 튜토리얼 일때
         {
             isGameOver = true;

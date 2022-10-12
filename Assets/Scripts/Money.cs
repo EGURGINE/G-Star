@@ -41,6 +41,7 @@ public class Money : MonoBehaviour
         {
             transform.DOMove(collision.transform.position, 0.1f).OnComplete(() =>
             {
+                SoundManager.Instance.PlaySound(ESoundSources.MONEY);
                 GameManager.Instance.Money += 1;
                 GameManager.Instance.Exp += 5;
                 Destroy(gameObject);

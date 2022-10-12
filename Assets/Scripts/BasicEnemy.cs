@@ -59,7 +59,8 @@ public abstract class BasicEnemy : MonoBehaviour
         }
         if (hp<=0)
         {
-           Die();
+            SoundManager.Instance.PlaySound(ESoundSources.DIE);
+            Die();
         }
     }
     private void Die()
