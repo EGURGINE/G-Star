@@ -19,7 +19,10 @@ public class SkinCheker : MonoBehaviour
     private TextMeshProUGUI skinName;
     [SerializeField]
     private TextMeshProUGUI selectBtnTxt;
-
+    [SerializeField]
+    private TextMeshProUGUI priceBtnTxt;
+    [SerializeField]
+    private Image moneyImage;
     private void Start()
     {
         selectSkin = skins[0];
@@ -51,8 +54,19 @@ public class SkinCheker : MonoBehaviour
         exSkinImage.sprite = selectSkin.image;
         skinName.text = selectSkin.name;
 
-        if (selectSkin.isBuy) selectBtnTxt.text = "SELECET";
-        else selectBtnTxt.text = price.ToString();
+        if (selectSkin.isBuy)
+        {
+            moneyImage.gameObject.SetActive(false);
+            priceBtnTxt.gameObject.SetActive(false);
+            selectBtnTxt.gameObject.SetActive(selectSkin.isBuy);
+        }
+        else
+        {
+            moneyImage.gameObject.SetActive(true);
+            priceBtnTxt.gameObject.SetActive(true);
+            priceBtnTxt.text = price.ToString();
+            selectBtnTxt.gameObject.SetActive(selectSkin.isBuy);
+        }
     }
     public void SelectBtn()
     {
