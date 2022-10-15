@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; set; }
 
     [Header("플레이어")]
-    [SerializeField] private GameObject player;
+    public GameObject player;
     [SerializeField] private ParticleSystem playerSpawnPc;
     [SerializeField] public float playerSpd;
     [SerializeField] private ShotArea shotArea;
