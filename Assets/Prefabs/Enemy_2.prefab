@@ -140,7 +140,7 @@ MonoBehaviour:
   spd: 120
   score: 10
   enemySpawnPc: {fileID: 3146009235527661145, guid: 5d924c48f2370c649a501bf812e7d1b5, type: 3}
-  enemyDeadPc: {fileID: 3146009235527661145, guid: 3a07fcb7890ec944ea049aa631ac9136, type: 3}
+  enemyDeadPc: {fileID: 5585671604984661011, guid: c8024b1c8dba5ac45ac354c95aaf3221, type: 3}
   playerDeadPc: {fileID: 1641648458358345791, guid: bcd96ac0168784145833382f663d9f57, type: 3}
   startColor: {r: 0.5660378, g: 0, b: 0, a: 0}
   isHit: 0
