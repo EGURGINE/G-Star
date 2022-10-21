@@ -22,7 +22,7 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     void Update()
     {
 
-        character.GetComponent<Rigidbody2D>().velocity = character.transform.up * GameManager.Instance.playerSpd * istouch;
+        character.GetComponent<Rigidbody2D>().velocity = character.transform.up * GameManager.Instance.player.playerSpd * istouch;
         // 캐릭터는 3의 속도로 계속 전진
     }
     public void Stop()

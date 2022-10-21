@@ -123,6 +123,85 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &12413620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 12413621}
+  - component: {fileID: 12413623}
+  - component: {fileID: 12413622}
+  m_Layer: 5
+  m_Name: ScoreTxt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &12413621
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12413620}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 318349066}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: -354.00095, y: 1230}
+  m_SizeDelta: {x: 400, y: 150}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &12413622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12413620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 80
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 114
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Score
+--- !u!222 &12413623
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12413620}
+  m_CullTransparentMesh: 1
 --- !u!1 &13784866
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -354.00095, y: 1230}
+  m_AnchoredPosition: {x: -95, y: 1230}
   m_SizeDelta: {x: 400, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &13784868
@@ -1668,6 +1747,7 @@ RectTransform:
   - {fileID: 13784867}
   - {fileID: 1401860280}
   - {fileID: 662207808}
+  - {fileID: 12413621}
   m_Father: {fileID: 2038610614}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2009,11 +2089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3663093f2ab1a6745b5ca941984b9783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 8973259735293285264}
-  playerSpawnPc: {fileID: 3146009235527661145, guid: bd3f24599e5d6f84b890c39d3bb4f488, type: 3}
-  playerSpd: 3
-  shotArea: {fileID: 8973259734242846751}
-  SC: {fileID: 212764124}
+  player: {fileID: 8973259735293285265}
   scoreTxt: {fileID: 13784868}
   highScoreTxt: {fileID: 2116317882}
   moneyTxt: {fileID: 1561826053}
@@ -13675,6 +13751,7 @@ GameObject:
   - component: {fileID: 8973259735293285269}
   - component: {fileID: 8973259735293285270}
   - component: {fileID: 8973259735293285257}
+  - component: {fileID: 8973259735293285265}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -13682,6 +13759,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &8973259735293285265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8973259735293285264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a08a812faf34aa34c9cea491560c3d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpawnPc: {fileID: 3146009235527661145, guid: bd3f24599e5d6f84b890c39d3bb4f488, type: 3}
+  playerSpd: 3
+  shotArea: {fileID: 8973259734242846751}
+  SC: {fileID: 212764124}
 --- !u!4 &8973259735293285266
 Transform:
   m_ObjectHideFlags: 0

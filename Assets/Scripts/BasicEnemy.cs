@@ -72,7 +72,7 @@ public abstract class BasicEnemy : MonoBehaviour
         Camera.main.DOShakePosition(1,new Vector3(0.04f,0.01f,0),10).OnComplete(()=>Camera.main.transform.position= new Vector3(0,0,-10));
 
         Instantiate(enemyDeadPc).transform.position = transform.position;
-        GameManager.Instance.Score = score;
+        GameManager.Instance.Score += score;
         if(GameManager.Instance.tutorialNum != 1)
         {
             for (int i = 0; i < Random.Range(0, 4); i++)
@@ -97,5 +97,8 @@ public abstract class BasicEnemy : MonoBehaviour
             //playerDeadPc.SetActive(true);
             GameManager.Instance.SetDie();
         }
+    }
+    private void OnDisable()
+    {
     }
 }

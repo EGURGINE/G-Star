@@ -33,7 +33,7 @@ public class Money : MonoBehaviour
     }
     private void OnDestroy()
     {
-        DOTween.KillAll();
+        DOTween.Kill(transform);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

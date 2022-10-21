@@ -6,7 +6,7 @@ using UnityEngine;
 public class SkinData : ScriptableObject
 {
     public int index;
-    public string name;
+    public new string name;
     public Sprite image;
     public bool isBuy;
 }
