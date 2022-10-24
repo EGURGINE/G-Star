@@ -17,7 +17,7 @@ public abstract class BasicEnemy : MonoBehaviour
     public bool isHit = false;
     float cnt = 0;
 
-    protected bool isdead;
+    protected bool isDead;
     protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
     public void SpawnSet()
     {
@@ -33,7 +33,6 @@ public abstract class BasicEnemy : MonoBehaviour
     }
     private void Spawn()
     {
-        isdead = true;
         hp = maxHp;
         cnt = 0;
         GetComponent<SpriteRenderer>().color = startColor;
@@ -51,6 +50,7 @@ public abstract class BasicEnemy : MonoBehaviour
         GetComponent<CircleCollider2D>().enabled = true;
         isHit = true;
         Move();
+        isDead = false;
         yield return null;
     }
     private void FixedUpdate()
@@ -80,8 +80,9 @@ public abstract class BasicEnemy : MonoBehaviour
                 Spawner.Instance.Pop(money, new Vector2(transform.position.x, transform.position.y));
             }
         }
-        isdead = true;
         //DOTween.KillAll(transform);
+        isDead = true;
+        print(isDead);
         Spawner.Instance.Push(gameObject);
     }
     protected abstract void Move();
@@ -97,8 +98,5 @@ public abstract class BasicEnemy : MonoBehaviour
             //playerDeadPc.SetActive(true);
             GameManager.Instance.SetDie();
         }
-    }
-    private void OnDisable()
-    {
     }
 }

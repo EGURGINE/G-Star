@@ -6,6 +6,7 @@ public enum EEnemyType
     Enemy_1,
     Enemy_2,
     Enemy_3,
+    Enemy_4,
     End
 }
 public class Spawner : MonoBehaviour
@@ -131,7 +132,7 @@ public class Spawner : MonoBehaviour
     IEnumerator NextSpawn()
     {
         yield return new WaitForSeconds(3f);
-        if (GameManager.Instance.isGameOver || GameManager.Instance.isUpgrade) yield return null;
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isUpgrade) yield break;
         else Spawn();
     }
     

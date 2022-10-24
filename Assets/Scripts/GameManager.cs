@@ -111,7 +111,6 @@ public class GameManager : MonoBehaviour
     public void StartSet()
     {
         isGameOver = isTutorial == true ? true : false;
-        Spawner.Instance.Spawn();
         //경험치 초기화
         level = 1;
         lv.text = level.ToString();
@@ -143,7 +142,9 @@ public class GameManager : MonoBehaviour
         }
         upgradeWnd.GetComponent<UpgradeSelect>().ResetChoice();
 
+        //스포너 초기화
         Spawner.Instance.spawnEnemyNum = 4;
+        Spawner.Instance.Spawn();
     }//시작 셋팅
     public void Tutorial()
     {
