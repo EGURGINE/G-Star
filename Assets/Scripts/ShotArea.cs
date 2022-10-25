@@ -134,7 +134,7 @@ public class ShotArea : MonoBehaviour
     }
     public void ShotRangeUp()
     {
-        transform.localScale = new Vector3(70,70,1);
+        transform.localScale = new Vector3(1.5f, 1.5f, 1);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

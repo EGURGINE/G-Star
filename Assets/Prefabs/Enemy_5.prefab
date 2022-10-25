@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 926867852509110581}
   - component: {fileID: -1237872269312262156}
   m_Layer: 0
-  m_Name: Enemy_4
+  m_Name: Enemy_5
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,14 +135,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6670539668a2e5942860c1b0d3a99b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 2
-  hp: 2
-  spd: 100
+  maxHp: 1
+  hp: 1
+  spd: 250
   score: 10
   enemySpawnPc: {fileID: 3146009235527661145, guid: 5d924c48f2370c649a501bf812e7d1b5, type: 3}
   enemyDeadPc: {fileID: 5585671604984661011, guid: c8024b1c8dba5ac45ac354c95aaf3221, type: 3}
   playerDeadPc: {fileID: 1641648458358345791, guid: bcd96ac0168784145833382f663d9f57, type: 3}
-  startColor: {r: 0.9433962, g: 0.6664537, b: 0.32395867, a: 0}
+  startColor: {r: 0.8392157, g: 0.3215687, b: 0.6300689, a: 0}
   isHit: 0
 --- !u!1 &4453744579324412178
 GameObject:

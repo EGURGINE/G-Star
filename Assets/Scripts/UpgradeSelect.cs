@@ -60,5 +60,10 @@ public class UpgradeSelect : MonoBehaviour
                 upgrade.Add(item);
             }
         }
+
+        foreach (var item in upgrade)
+        {
+            item.SetActive(false);
+        }
     }
 }
