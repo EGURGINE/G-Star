@@ -58,7 +58,7 @@ public class UpgradeBtn : MonoBehaviour
                 GameManager.Instance.player.playerSpd += 0.5f;
                 break;
             case BtnType.shotSpeed:
-                ShotArea.Instance.shotSpd -= 0.1f;
+                ShotArea.Instance.shotSpd -= 0.005f;
                 break;
             case BtnType.doubleShot:
                 PlayerData.Instance.data[PlayerSkills.doubleShot] = true;
