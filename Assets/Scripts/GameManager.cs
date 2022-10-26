@@ -144,7 +144,6 @@ public class GameManager : MonoBehaviour
 
         //스포너 초기화
         Spawner.Instance.spawnEnemyNum = 4;
-        StopCoroutine(Spawner.Instance.NextSpawn());
         Spawner.Instance.Spawn();
     }//시작 셋팅
     public void Tutorial()
@@ -213,7 +212,7 @@ public class GameManager : MonoBehaviour
             }
 
             gameOverWnd.SetActive(true);
-
+            StopCoroutine(Spawner.Instance.NextSpawn());
         }
 
     }//게임 오버 셋팅

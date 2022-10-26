@@ -82,7 +82,6 @@ public abstract class BasicEnemy : MonoBehaviour
         }
         //DOTween.KillAll(transform);
         isDead = true;
-        print(isDead);
         Spawner.Instance.Push(gameObject);
     }
     protected abstract void Move();

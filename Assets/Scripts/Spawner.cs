@@ -128,12 +128,14 @@ public class Spawner : MonoBehaviour
             StartCoroutine(NextSpawn());
 
         }
-        else return;
     }
     public IEnumerator NextSpawn()
     {
         yield return new WaitForSeconds(3f);
-        if (GameManager.Instance.isGameOver || GameManager.Instance.isUpgrade) yield break;
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isUpgrade) {
+            print("ddddddddd");
+            yield break;
+        }
         else Spawn();
     }
     
