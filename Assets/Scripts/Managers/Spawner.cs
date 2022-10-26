@@ -30,6 +30,7 @@ public class Spawner : MonoBehaviour
     }
     #endregion
     readonly string moneyName = "Money";
+    //Pool Objs
     [SerializeField] private GameObject moneyObj;
     [SerializeField] private GameObject[] poolEnemys;
     [SerializeField] private int poolCnt;
@@ -37,7 +38,9 @@ public class Spawner : MonoBehaviour
     [SerializeField] Transform spawnPos;
     [SerializeField] GameObject EnemyObjs;
     [SerializeField] GameObject MoneyObjs;
-    public int spawnEnemyNum;
+    public int enemySpawnNum { private get; set; }
+    public float enemySpawnTime { private get; set; }
+    public float spawnDelay { private get; set; }
     private void Start()
     {
         for (int i = 0; i < poolEnemys.Length; i++)
@@ -115,28 +118,27 @@ public class Spawner : MonoBehaviour
         _this.transform.parent = EnemyObjs.transform;
         _this.SetActive(false);
     }
-    public void Spawn()
+
+    
+    private void Update()
     {
-        if (!GameManager.Instance.isGameOver || !GameManager.Instance.isUpgrade)
+        if (GameManager.Instance.isGameOver == false || GameManager.Instance.isUpgrade == false)
         {
-            for (int i = 0; i < spawnEnemyNum; i++)
+            enemySpawnTime += Time.deltaTime;
+
+            if (enemySpawnTime > spawnDelay)
             {
-                spawnPos.position = new Vector2(Random.Range(-2.03f, 2.03f), Random.Range(-2.7f, 3.04f));
-                EEnemyType _name = (EEnemyType)Random.Range(0, (int)EEnemyType.End);
-                Pop(_name.ToString(), Vector2.zero);
+                for (int i = 0; i < enemySpawnNum; i++)
+                {
+                    spawnPos.position = new Vector2(Random.Range(-2.03f, 2.03f), Random.Range(-2.7f, 3.04f));
+                    EEnemyType _name = (EEnemyType)Random.Range(0, (int)EEnemyType.End);
+                    Pop(_name.ToString(), Vector2.zero);
+
+                }
+                enemySpawnTime = 0;
             }
-            StartCoroutine(NextSpawn());
 
         }
+
     }
-    public IEnumerator NextSpawn()
-    {
-        yield return new WaitForSeconds(3f);
-        if (GameManager.Instance.isGameOver || GameManager.Instance.isUpgrade) {
-            print("ddddddddd");
-            yield break;
-        }
-        else Spawn();
-    }
-    
 }

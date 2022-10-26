@@ -143,8 +143,9 @@ public class GameManager : MonoBehaviour
         upgradeWnd.GetComponent<UpgradeSelect>().ResetChoice();
 
         //스포너 초기화
-        Spawner.Instance.spawnEnemyNum = 4;
-        Spawner.Instance.Spawn();
+        Spawner.Instance.enemySpawnNum = 4;
+        Spawner.Instance.enemySpawnTime = 0;
+        Spawner.Instance.spawnDelay = 3;
     }//시작 셋팅
     public void Tutorial()
     {
@@ -158,13 +159,13 @@ public class GameManager : MonoBehaviour
 
                 //튜토리얼 조건
                 isLevelupTrue = false;
-                Spawner.Instance.spawnEnemyNum = 2;
+                Spawner.Instance.enemySpawnNum = 2;
                 break;
             case 1:
                 tutorialNextBtn.gameObject.SetActive(false);
                 tutorialTxt.text = "Approach the enemy and shoot.";
+                Spawner.Instance.enemySpawnTime = 2;
                 isGameOver = false;
-                Spawner.Instance.Spawn();
                 break;
             case 2:
                 tutorialNextBtn.gameObject.SetActive(false);
@@ -212,7 +213,6 @@ public class GameManager : MonoBehaviour
             }
 
             gameOverWnd.SetActive(true);
-            StopCoroutine(Spawner.Instance.NextSpawn());
         }
 
     }//게임 오버 셋팅
