@@ -64,6 +64,22 @@ public class GameManager : MonoBehaviour
                 maxExp += 10;
                 level++;
                 lv.text = level.ToString();
+
+                if (level > 16)
+                {
+                    Spawner.Instance.enemySpawnNum = 6;
+                    Spawner.Instance.spawnDelay = 2f;
+                }
+                else if (level > 11)
+                {
+                    Spawner.Instance.enemySpawnNum = 5;
+                    Spawner.Instance.spawnDelay = 2.5f;
+                }
+                else if (level > 6)
+                {
+                    Spawner.Instance.spawnDelay = 2.8f;
+                }
+
                 expSlider.fillAmount = exp / maxExp;
                 isUpgrade = true;
                 player.gameObject.SetActive(false);
