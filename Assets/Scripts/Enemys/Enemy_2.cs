@@ -5,16 +5,25 @@ using UnityEngine;
 public class Enemy_2 : BasicEnemy
 {
     Transform target => GameManager.Instance.player.transform;
-    private void FixedUpdate()
+
+    public override void Die()
     {
-        if (isDead == false)
-        {
-            Move();
-            print("dd");
-        }
+        print("Die");
+        StopCoroutine(TargetMove());
+        base.Die();
     }
     protected override void Move()
     {
-        transform.position = Vector2.MoveTowards(transform.position, target.position, Time.deltaTime);
+        StartCoroutine(TargetMove());
+    }
+
+    private IEnumerator TargetMove()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.001f);
+
+            transform.position = Vector2.MoveTowards(transform.position, target.position, Time.deltaTime);
+        }
     }
 }

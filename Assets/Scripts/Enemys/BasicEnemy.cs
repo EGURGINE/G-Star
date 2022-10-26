@@ -65,7 +65,7 @@ public abstract class BasicEnemy : MonoBehaviour
             Die();
         }
     }
-    private void Die()
+    public virtual void Die()
     {
         if (GameManager.Instance.isTutorial && GameManager.Instance.tutorialNum == 1)
             GameManager.Instance.tutorialNextBtn.gameObject.SetActive(true);

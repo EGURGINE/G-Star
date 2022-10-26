@@ -822,6 +822,7 @@ MonoBehaviour:
   - {fileID: 926867852509110586, guid: f361bbcb4f17b8c49ae6a9542c4b0034, type: 3}
   - {fileID: 926867852509110586, guid: 5d391e7356c0aeb4eb0dacf258a4aa31, type: 3}
   - {fileID: 926867852509110586, guid: 904546d0981c0e0468480af4b830765e, type: 3}
+  - {fileID: 926867852509110586, guid: dcbf6b6eba69d484dad2f36c07d9bebb, type: 3}
   poolCnt: 10
   spawnPos: {fileID: 745322225}
   EnemyObjs: {fileID: 1470543407}

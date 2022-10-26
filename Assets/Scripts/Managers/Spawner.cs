@@ -8,6 +8,7 @@ public enum EEnemyType
     Enemy_3,
     Enemy_4,
     Enemy_5,
+    Enemy_6,
     End
 }
 public class Spawner : MonoBehaviour
