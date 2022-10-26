@@ -69,15 +69,21 @@ public class GameManager : MonoBehaviour
                 {
                     Spawner.Instance.enemySpawnNum = 6;
                     Spawner.Instance.spawnDelay = 2f;
+                    Spawner.Instance.spawnEnemyTypeNum = 5;
+
                 }
                 else if (level > 11)
                 {
                     Spawner.Instance.enemySpawnNum = 5;
                     Spawner.Instance.spawnDelay = 2.5f;
+                    Spawner.Instance.spawnEnemyTypeNum = 4;
+
                 }
                 else if (level > 6)
                 {
                     Spawner.Instance.spawnDelay = 2.8f;
+                    Spawner.Instance.spawnEnemyTypeNum = 3;
+
                 }
 
                 expSlider.fillAmount = exp / maxExp;
@@ -159,6 +165,7 @@ public class GameManager : MonoBehaviour
         upgradeWnd.GetComponent<UpgradeSelect>().ResetChoice();
 
         //스포너 초기화
+        Spawner.Instance.spawnEnemyTypeNum = 1;
         Spawner.Instance.enemySpawnNum = 4;
         Spawner.Instance.enemySpawnTime = 0;
         Spawner.Instance.spawnDelay = 3;
@@ -180,6 +187,8 @@ public class GameManager : MonoBehaviour
             case 1:
                 tutorialNextBtn.gameObject.SetActive(false);
                 tutorialTxt.text = "Approach the enemy and shoot.";
+                Spawner.Instance.spawnEnemyTypeNum = 1;
+                Spawner.Instance.spawnDelay = 3;
                 Spawner.Instance.enemySpawnTime = 2;
                 isGameOver = false;
                 break;

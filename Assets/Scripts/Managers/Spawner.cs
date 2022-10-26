@@ -1,3 +1,4 @@
+using DG.Tweening.CustomPlugins;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,6 +43,9 @@ public class Spawner : MonoBehaviour
     public int enemySpawnNum { private get; set; }
     public float enemySpawnTime { private get; set; }
     public float spawnDelay { private get; set; }
+    public float spawnEnemyTypeNum{ private get; set; }
+    
+
     private void Start()
     {
         for (int i = 0; i < poolEnemys.Length; i++)
@@ -132,7 +136,7 @@ public class Spawner : MonoBehaviour
                 for (int i = 0; i < enemySpawnNum; i++)
                 {
                     spawnPos.position = new Vector2(Random.Range(-2.03f, 2.03f), Random.Range(-2.7f, 3.04f));
-                    EEnemyType _name = (EEnemyType)Random.Range(0, (int)EEnemyType.End);
+                    EEnemyType _name = (EEnemyType)Random.Range(0, spawnEnemyTypeNum);
                     Pop(_name.ToString(), Vector2.zero);
 
                 }
