@@ -122,7 +122,7 @@ public class Spawner : MonoBehaviour
     
     private void Update()
     {
-        if (GameManager.Instance.isGameOver == false || GameManager.Instance.isUpgrade == false)
+        if (GameManager.Instance.isGameOver == false && GameManager.Instance.isUpgrade == false)
         {
             enemySpawnTime += Time.deltaTime;
 
