@@ -37,8 +37,6 @@ public class UpgradeBtn : MonoBehaviour
         GameManager.Instance.isUpgrade = false;
 
         Ability();
-        upgradeWnd.GetComponent<UpgradeSelect>().Check(this.gameObject);
-        upgradeWnd.SetActive(false);
 
         player.SetActive(true);
         player.transform.position = Vector3.zero;
@@ -51,6 +49,9 @@ public class UpgradeBtn : MonoBehaviour
         Spawner.Instance.enemySpawnTime = 0;
         
         UpgradeBottomUI.Instance.OnUI(type);
+        
+        upgradeWnd.GetComponent<UpgradeSelect>().Check(this.gameObject);
+        upgradeWnd.SetActive(false);
         
         gameObject.SetActive(false);
     }

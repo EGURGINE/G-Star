@@ -4790,7 +4790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe25160bc139d648bfb606f363dd52b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 11
+  type: 10
   upgradeWnd: {fileID: 662207807}
   playerData: {fileID: 212764121}
 --- !u!114 &730859959

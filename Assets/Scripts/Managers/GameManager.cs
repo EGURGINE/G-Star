@@ -83,8 +83,10 @@ public class GameManager : Singleton<GameManager>
                 expSlider.fillAmount = exp / maxExp;
                 isUpgrade = true;
                 player.gameObject.SetActive(false);
+
                 upgradeWnd.SetActive(true);
                 upgradeWnd.GetComponent<UpgradeSelect>().Choice();
+
                 if (isTutorial && tutorialNum == 2) tutorialNextBtn.gameObject.SetActive(true);
                 //joystick.SetActive(false);
             }
