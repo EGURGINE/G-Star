@@ -170,6 +170,9 @@ public class GameManager : Singleton<GameManager>
         Spawner.Instance.enemySpawnNum = 4;
         Spawner.Instance.enemySpawnTime = 0;
         Spawner.Instance.spawnDelay = 3;
+
+        //하단 UI 초기화
+        UpgradeBottomUI.Instance.StartSet();
     }//시작 셋팅
     public void Tutorial()
     {

@@ -10,9 +10,8 @@ public class UpgradeBottomUI : Singleton<UpgradeBottomUI>
 
     public void StartSet()
     {
-        int numOfChild = this.transform.childCount;
-        for (int i = 0; i < numOfChild; i++)
-            Destroy(transform.GetChild(i));
+        for (int i = 0; i < this.transform.childCount; i++)
+            Destroy(transform.GetChild(i).gameObject);
     }
     public void OnUI(BtnType type)
     {
