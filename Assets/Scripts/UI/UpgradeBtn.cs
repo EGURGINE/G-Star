@@ -13,7 +13,6 @@ public enum BtnType
     RadialShot,
     BulletSpeed,
     ShotRange,
-    lazer,
     QuadBullet,
     Piercing,
     BackShot,
@@ -24,7 +23,7 @@ public enum BtnType
 public class UpgradeBtn : MonoBehaviour
 {
     public BtnType type;
-    [SerializeField] GameObject player;
+    private GameObject player => GameManager.Instance.player.gameObject;
     [SerializeField] GameObject upgradeWnd;
     [SerializeField] GameObject playerData;
 
@@ -35,18 +34,24 @@ public class UpgradeBtn : MonoBehaviour
     public void UPBtn()
     {
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
-
         GameManager.Instance.isUpgrade = false;
+
         Ability();
         upgradeWnd.GetComponent<UpgradeSelect>().Check(this.gameObject);
         upgradeWnd.SetActive(false);
+
         player.SetActive(true);
         player.transform.position = Vector3.zero;
-        player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-        Spawner.Instance.enemySpawnTime = 0;
+        player.transform.localEulerAngles = Vector3.zero;
+
         GameManager.Instance.NextLevel();
         GameManager.Instance.expSlider.DOKill();
         GameManager.Instance.expSlider.DOFade(1, 0.1f);
+       
+        Spawner.Instance.enemySpawnTime = 0;
+        
+        UpgradeBottomUI.Instance.OnUI(type);
+        
         gameObject.SetActive(false);
     }
 
@@ -77,8 +82,6 @@ public class UpgradeBtn : MonoBehaviour
                 break;
             case BtnType.ShotRange:
                 ShotArea.Instance.ShotRangeUp();
-                break;
-            case BtnType.lazer:
                 break;
             case BtnType.QuadBullet:
                 PlayerData.Instance.data[PlayerSkills.QuadShot] = true;
