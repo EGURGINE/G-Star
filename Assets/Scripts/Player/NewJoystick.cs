@@ -1,44 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
+public class NewJoystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
-    public GameObject character; // 캐릭터 오브젝트.
-    public RectTransform touchArea; // Joystick Touch Area 이미지의 RectTransform.
-    public Image outerPad; // OuterPad 이미지.
-    public Image innerPad; // InnerPad 이미지.
 
-    private Vector2 joystickVector; // 조이스틱의 방향벡터이자 플레이어에게 넘길 방향정보.
+    GameObject character => GameManager.Instance.player.gameObject;
+    RectTransform touchArea => this.GetComponent<RectTransform>();
+    int isTouch = 0;
+    Vector2 joystickVector;
+    private Coroutine runningCoroutine;
+    private float rotateSpeed = 300f;
 
-    private float rotateSpeed = 50f; // 회전 속도
-
-    private Coroutine runningCoroutine; // 부드러운 회전 코루틴
-
-    int istouch =0;
-
-    void Update()
+    private void FixedUpdate()
     {
+        character.GetComponent<Rigidbody2D>().velocity = character.transform.up * GameManager.Instance.player.playerSpd * isTouch;
+    }
 
-        character.GetComponent<Rigidbody2D>().velocity = character.transform.up * GameManager.Instance.player.playerSpd * istouch;
-        // 캐릭터는 3의 속도로 계속 전진
-    }
-    public void Stop()
-    {
-        innerPad.rectTransform.anchoredPosition = Vector2.zero;
-        character.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-    }
     public void OnDrag(PointerEventData eventData)
     {
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(touchArea,
             eventData.position, eventData.pressEventCamera, out Vector2 localPoint))
         {
+            //localPoint.x = (localPoint.x / touchArea.sizeDelta.x);
+            //localPoint.y = (localPoint.y / touchArea.sizeDelta.y);
 
-            if(GameManager.Instance.tutorialNum == 0) GameManager.Instance.tutorialNextBtn.gameObject.SetActive(true);
-            localPoint.x = (localPoint.x / touchArea.sizeDelta.x);
-            localPoint.y = (localPoint.y / touchArea.sizeDelta.y);
+            print(localPoint.x+"  "+ localPoint.y);
             // Joystick Touch Area의 비율 구하기 ( -0.5 ~ 0.5 )
 
             joystickVector = new Vector2(localPoint.x * 2.6f, localPoint.y * 2);
@@ -47,29 +35,19 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
             TurnAngle(joystickVector);
             // Character에게 조이스틱 방향 넘기기
 
-            joystickVector = (joystickVector.magnitude > 0.35f) ? joystickVector.normalized * 0.35f : joystickVector;
-            // innerPad 이미지가 outerPad를 넘어간다면 위치 조절해주기
 
-            innerPad.rectTransform.anchoredPosition = new Vector2(joystickVector.x * (outerPad.rectTransform.sizeDelta.x),
-                joystickVector.y * (outerPad.rectTransform.sizeDelta.y));
-            // innerPad 이미지 터치한 곳으로 옮기기
         }
     }
 
-
     public void OnPointerDown(PointerEventData eventData)
     {
-        istouch = 1;
-        OnDrag(eventData); // 터치가 시작되면 OnDrag 처리.
+        isTouch = 1;
     }
-
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        istouch = 0;
-        innerPad.rectTransform.anchoredPosition = Vector2.zero;
+        isTouch = 0;
     }
-
 
     private void TurnAngle(Vector3 currentJoystickVec)
     {
@@ -91,7 +69,6 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
         // => 회전 중에 새로운 회전이 들어왔을 경우, 회전 중이던 것을 멈추고 새로운 회전을 함.
     }
 
-
     IEnumerator RotateAngle(float angle, int sign)
     {
         float mod = angle % rotateSpeed; // 남은 각도 계산
@@ -102,5 +79,4 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
         }
         character.transform.Rotate(0, 0, sign * mod); // 남은 각도 회전
     }
-
 }

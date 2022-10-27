@@ -38,7 +38,6 @@ public class UpgradeBtn : MonoBehaviour
 
         GameManager.Instance.isUpgrade = false;
         Ability();
-        GameManager.Instance.joystick.SetActive(true);
         upgradeWnd.GetComponent<UpgradeSelect>().Check(this.gameObject);
         upgradeWnd.SetActive(false);
         player.SetActive(true);

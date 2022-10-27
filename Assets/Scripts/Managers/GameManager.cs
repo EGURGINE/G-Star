@@ -26,12 +26,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverWnd;
     public bool isGameOver = false;
 
-    [Header("조이스틱")]
-    public GameObject joystick;
-    public RectTransform touchArea;
-    public Image outerPad;
-    public Image innerPad;
-
     [Header("레벨")]
     [SerializeField] private Text lv;
     private int level;
@@ -92,7 +86,6 @@ public class GameManager : MonoBehaviour
                 player.gameObject.SetActive(false);
                 upgradeWnd.SetActive(true);
                 upgradeWnd.GetComponent<UpgradeSelect>().Choice();
-                joystick.GetComponent<Joystick>().Stop();
                 if (isTutorial && tutorialNum == 2) tutorialNextBtn.gameObject.SetActive(true);
                 //joystick.SetActive(false);
             }
@@ -165,7 +158,6 @@ public class GameManager : MonoBehaviour
         player.transform.position = Vector3.zero;
         player.transform.Rotate(Vector3.zero);
 
-        joystick.SetActive(true);
         // 스텟 초기화
         player.playerSpd = 3;
         player.shotArea.ResetState();
@@ -217,7 +209,6 @@ public class GameManager : MonoBehaviour
                 isTutorial = false;
                 btnManager.GetComponent<BtnManager>().MenuBtn();
                 player.gameObject.SetActive(false);
-                joystick.SetActive(false);
                 break;
         }
     }//튜토리얼
@@ -237,8 +228,6 @@ public class GameManager : MonoBehaviour
         else // 인게임 일때
         {
             isGameOver = true;
-            joystick.GetComponent<Joystick>().Stop();
-            // joystick.SetActive(false);
             player.gameObject.SetActive(false);
             //최고점수 기록
             if (score > PlayerPrefs.GetFloat("HighScore"))
