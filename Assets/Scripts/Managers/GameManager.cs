@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; set; }
@@ -34,7 +35,7 @@ public class GameManager : MonoBehaviour
     [Header("레벨")]
     [SerializeField] private Text lv;
     private int level;
-    [SerializeField] private Image expSlider;
+    public Image expSlider;
     private float exp;
     public float maxExp;
 
@@ -60,10 +61,10 @@ public class GameManager : MonoBehaviour
             if (exp >= maxExp)
             {
                 SoundManager.Instance.PlaySound(ESoundSources.LEVEL);
-                exp -= maxExp;
-                maxExp += 10;
+                
                 level++;
                 lv.text = level.ToString();
+                LevelProduction();
 
                 if (level > 16)
                 {
@@ -130,6 +131,16 @@ public class GameManager : MonoBehaviour
         money = PlayerPrefs.GetInt("Money");
         moneyTxt.text = money.ToString();
     }
+    public void NextLevel()
+    {
+        exp -= maxExp;
+        maxExp += 10;
+        expSlider.fillAmount = 0;
+    } //레벨 셋팅
+    private void LevelProduction()
+    {
+        expSlider.DOFade(0.5f,0.5f).SetLoops(-1,LoopType.Yoyo);
+    }// 레벨 연출
     public void StartSet()
     {
         isGameOver = isTutorial == true ? true : false;

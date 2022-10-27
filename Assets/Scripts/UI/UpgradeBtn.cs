@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 public enum BtnType
 {
     damage,
@@ -44,6 +45,9 @@ public class UpgradeBtn : MonoBehaviour
         player.transform.position = Vector3.zero;
         player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         Spawner.Instance.enemySpawnTime = 0;
+        GameManager.Instance.NextLevel();
+        GameManager.Instance.expSlider.DOKill();
+        GameManager.Instance.expSlider.DOFade(1, 0.1f);
         gameObject.SetActive(false);
     }
 
