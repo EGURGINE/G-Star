@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class NewJoystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
+public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
 
     GameObject character => GameManager.Instance.player.gameObject;
@@ -23,12 +23,6 @@ public class NewJoystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPo
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(touchArea,
             eventData.position, eventData.pressEventCamera, out Vector2 localPoint))
         {
-            //localPoint.x = (localPoint.x / touchArea.sizeDelta.x);
-            //localPoint.y = (localPoint.y / touchArea.sizeDelta.y);
-
-            print(localPoint.x+"  "+ localPoint.y);
-            // Joystick Touch Area의 비율 구하기 ( -0.5 ~ 0.5 )
-
             joystickVector = new Vector2(localPoint.x * 2.6f, localPoint.y * 2);
             // 조이스틱 벡터 조절 (2.6과 2를 곱해준 것은 TouchArea의 비율 때문임)
 

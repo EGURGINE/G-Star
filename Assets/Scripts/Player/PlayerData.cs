@@ -13,15 +13,11 @@ public enum PlayerSkills
     BackShot,
     End
 }
-public class PlayerData : MonoBehaviour
+public class PlayerData : Singleton<PlayerData>
 {
-    public static PlayerData Instance { get; set; }
 
     public Dictionary<PlayerSkills, bool> data = new Dictionary<PlayerSkills, bool>();
-    private void Awake()
-    {
-        Instance = this;
-    }
+  
     private void Start()
     {
         for (int i = 0; i < (int)PlayerSkills.End; i++)

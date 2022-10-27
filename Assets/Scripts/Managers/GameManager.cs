@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    public static GameManager Instance { get; set; }
 
     [Header("플레이어")]
     public Player player;
@@ -113,7 +112,6 @@ public class GameManager : MonoBehaviour
     }
     private void Awake()
     {
-        Instance = this;
         isGameOver = true;
 
         //게임 시작시 최고점수 가져오기

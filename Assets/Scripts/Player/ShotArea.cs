@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-public class ShotArea : MonoBehaviour
+public class ShotArea : Singleton<ShotArea>
 {
-    public static ShotArea Instance { get; set; }
     [SerializeField] private Transform shotPos;
     [SerializeField] private Transform leftPos, rightPos;
     [SerializeField] private Bullet[] bullets;
@@ -14,10 +13,6 @@ public class ShotArea : MonoBehaviour
     private float cnt;
     public List<GameObject> Enemys = new List<GameObject>();
     private GameObject target;
-    private void Awake()
-    {
-        Instance = this;
-    }
     private void FixedUpdate()
     {
         if (GameManager.Instance.isGameOver || GameManager.Instance.isUpgrade)
