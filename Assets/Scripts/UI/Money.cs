@@ -43,6 +43,7 @@ public class Money : MonoBehaviour
                 SoundManager.Instance.PlaySound(ESoundSources.MONEY);
                 GameManager.Instance.Money += 1;
                 GameManager.Instance.Exp += 5;
+                transform.DOKill();
                 Destroy(gameObject);
             });
         }
