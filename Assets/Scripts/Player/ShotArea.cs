@@ -155,7 +155,7 @@ public class ShotArea : Singleton<ShotArea>
     }
     public void ResetState()
     {
-        transform.localScale = new Vector3(1,1,1);
+        transform.localScale = new Vector3(1.5f ,1.5f,1);
         dmg = 1;
         shotSpd = 0.2f;
         bulletSpd = 5;
