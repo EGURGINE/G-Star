@@ -175,6 +175,10 @@ public class GameManager : Singleton<GameManager>
 
         //하단 UI 초기화
         UpgradeBottomUI.Instance.StartSet();
+
+        //카메라 셋팅
+        Camera.main.transform.position = new Vector3(0, 0, -10);
+
     }//시작 셋팅
     public void Tutorial()
     {
