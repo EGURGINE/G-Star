@@ -12,18 +12,31 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     Vector2 joystickVector;
     private Coroutine runningCoroutine;
     private float rotateSpeed = 1000f;
+    private bool isDragging;
+    RectTransform panelPos => this.GetComponent<RectTransform>();
 
+    private void Start()
+    {
+        isDragging = true;
+    }
     private void FixedUpdate()
     {
         character.GetComponent<Rigidbody2D>().velocity = character.transform.up * GameManager.Instance.player.playerSpd * isTouch;
     }
+    private void Update()
+    {
+        if (isDragging)
+        {
+            panelPos.anchoredPosition = Input.mousePosition;
 
+        }
+    }
     public void OnDrag(PointerEventData eventData)
     {
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(touchArea,
             eventData.position, eventData.pressEventCamera, out Vector2 localPoint))
         {
-            joystickVector = new Vector2(localPoint.x * 0.1f, localPoint.y * 0.05f);
+            joystickVector = new Vector2(localPoint.x * 2.6f, localPoint.y * 2f);
             // 조이스틱 벡터 조절 (2.6과 2를 곱해준 것은 TouchArea의 비율 때문임)
 
             TurnAngle(joystickVector);
@@ -36,11 +49,14 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     public void OnPointerDown(PointerEventData eventData)
     {
         isTouch = 1;
+        isDragging = false;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         isTouch = 0;
+        isDragging = true;
+
     }
 
     private void TurnAngle(Vector3 currentJoystickVec)
