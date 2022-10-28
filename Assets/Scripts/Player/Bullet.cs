@@ -19,15 +19,13 @@ public class Bullet : MonoBehaviour
         spd = _spd;
         dir = _dir;
     }
-    private void OnDestroy()
-    {
-        Instantiate(deadPc).transform.position = transform.position;
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         switch (collision.tag)
         {
-            case "Wall": Destroy(gameObject);
+            case "Wall": 
+                Instantiate(deadPc).transform.position = transform.position;
+                Destroy(gameObject);
                 break;
             case "Enemy":
                 if (PlayerData.Instance.data[PlayerSkills.Piercing] == true) return;

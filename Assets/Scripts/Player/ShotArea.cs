@@ -129,7 +129,7 @@ public class ShotArea : Singleton<ShotArea>
     }
     public void ShotRangeUp()
     {
-        transform.localScale = new Vector3(1.5f, 1.5f, 1);
+        transform.localScale = new Vector3(2f, 2f, 1);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

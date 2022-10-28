@@ -12,34 +12,19 @@ public enum EEnemyType
     Enemy_6,
     End
 }
-public class Spawner : MonoBehaviour
+public class Spawner : Singleton<Spawner>
 {
-    #region ΩÃ±€≈Ê
-    private static Spawner instance;
-    public static Spawner Instance
-    {
-        get { return instance; }
-    }
-
-    private void Awake()
-    {
-        if (instance)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        instance = this;
-    }
-    #endregion
     readonly string moneyName = "Money";
     //Pool Objs
     [SerializeField] private GameObject moneyObj;
     [SerializeField] private GameObject[] poolEnemys;
     [SerializeField] private int poolCnt;
-    Dictionary<object, Stack<GameObject>> poolObjs = new Dictionary<object, Stack<GameObject>>();
+    Dictionary<string, Stack<GameObject>> poolObjs = new Dictionary<string, Stack<GameObject>>();
     [SerializeField] Transform spawnPos;
     [SerializeField] GameObject EnemyObjs;
     [SerializeField] GameObject MoneyObjs;
+
+
     public int enemySpawnNum { private get; set; }
     public float enemySpawnTime { private get; set; }
     public float spawnDelay { private get; set; }
@@ -72,6 +57,7 @@ public class Spawner : MonoBehaviour
 
 
     }
+
     private void CreateObj(GameObject _obj)
     {
         GameObject newDoll = Instantiate(_obj);
@@ -116,7 +102,6 @@ public class Spawner : MonoBehaviour
             else obj.transform.position = _EnemyPos + new Vector2(Random.Range(-0.15f,0.15f), Random.Range(-0.15f, 0.15f));
         }
     }
-
     public void Push(GameObject _this)
     {
         poolObjs[_this.name].Push(_this);
