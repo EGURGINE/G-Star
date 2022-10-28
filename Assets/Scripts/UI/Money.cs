@@ -7,8 +7,7 @@ public class Money : MonoBehaviour
     float cnt;
     private void Start()
     {
-        
-        StartCoroutine( Fade(4f));
+        StartCoroutine(Fade(4f));
     }
     IEnumerator Fade(float _time)
     {
