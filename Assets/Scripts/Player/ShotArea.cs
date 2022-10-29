@@ -62,9 +62,11 @@ public class ShotArea : Singleton<ShotArea>
 
     private void BoomShot()
     {
+        Vector3 randDir = new Vector3(Random.Range(-180, 180), Random.Range(-180, 180), 0);
+
         Bullet bullet = Instantiate(bullets[1]);
         bullet.transform.position = shotPos.position;
-        bullet.SetBullet(0, boomSpd, shotPos.forward);
+        bullet.SetBullet(0, boomSpd, randDir);
     }
     private void Shot()
     {

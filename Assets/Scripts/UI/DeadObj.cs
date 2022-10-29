@@ -9,4 +9,9 @@ public class DeadObj : MonoBehaviour
     {
         Destroy(gameObject,cnt);
     }
+
+    private void OnApplicationQuit()
+    {
+        Destroy(transform);
+    }
 }
