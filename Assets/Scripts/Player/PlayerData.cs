@@ -7,7 +7,6 @@ public enum PlayerSkills
     doubleBullet,
     doubleShot,
     RadialShot,
-    lazer,
     QuadShot,
     Piercing,
     BackShot,

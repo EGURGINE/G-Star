@@ -14,6 +14,7 @@ public class ShotArea : Singleton<ShotArea>
     private float bulletCnt;
 
     private float boomShotSpd;
+    private float boomSpd;
     private float boomCnt;
 
     public List<GameObject> Enemys = new List<GameObject>();
@@ -22,6 +23,7 @@ public class ShotArea : Singleton<ShotArea>
     private void Start()
     {
         boomShotSpd = 3f;
+        boomSpd = 3f;
     }
     private void FixedUpdate()
     {
@@ -62,7 +64,7 @@ public class ShotArea : Singleton<ShotArea>
     {
         Bullet bullet = Instantiate(bullets[1]);
         bullet.transform.position = shotPos.position;
-        bullet.SetBullet(0, bulletSpd, shotPos.forward);
+        bullet.SetBullet(0, boomSpd, shotPos.forward);
     }
     private void Shot()
     {
