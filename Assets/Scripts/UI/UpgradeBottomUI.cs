@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class UpgradeBottomUI : Singleton<UpgradeBottomUI>
 {
     [SerializeField] private List<Sprite> upUI = new List<Sprite>();
-    [SerializeField] private Sprite etcUI;
     [SerializeField] private GameObject basicUI;
 
     public void StartSet()
@@ -15,17 +14,10 @@ public class UpgradeBottomUI : Singleton<UpgradeBottomUI>
     }
     public void OnUI(BtnType type)
     {
-        int numOfChild = this.transform.childCount;
-        if (numOfChild >= 12)
-        {
-            return;
-        }
+        if (type == BtnType.Score || type == BtnType.Money) return;
+
         GameObject go = Instantiate(basicUI,this.transform);
-        if (numOfChild == 12)
-        {
-            go.transform.GetChild(0).GetComponent<Image>().sprite = etcUI;
-        }
-        else go.transform.GetChild(0).GetComponent<Image>().sprite = upUI[((int)type)];
+        go.transform.GetChild(0).GetComponent<Image>().sprite = upUI[((int)type)];
     }
 
 }

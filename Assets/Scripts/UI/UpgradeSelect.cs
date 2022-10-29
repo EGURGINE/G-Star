@@ -11,6 +11,7 @@ public class UpgradeSelect : MonoBehaviour
     GameObject[] choiceCheck = new GameObject[2];
     [SerializeField] private Transform[] choice_Pos;
 
+    [SerializeField] private GameObject btns;
     public void ResetChoice()
     {
         upgrade.Clear();
@@ -21,6 +22,11 @@ public class UpgradeSelect : MonoBehaviour
     }
     public void Choice()
     {
+        for (int i = 0; i < btns.transform.childCount; i++)
+        {
+            btns.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
         for (int i = 0; i < 2; i++)
         {
             choiceCheck[i] = upgrade[Random.Range(0, upgrade.Count - 1)];
@@ -28,7 +34,7 @@ public class UpgradeSelect : MonoBehaviour
             choice.Add(choiceCheck[i]);
         }
 
-        for (int i = 0; i < choice.Count; i++)
+        for (int i = 0; i < 2; i++)
         {
             choice[i].SetActive(true);
             choice[i].transform.position = choice_Pos[i].transform.position;
@@ -51,7 +57,6 @@ public class UpgradeSelect : MonoBehaviour
             else upgrade.Add(choiceCheck[0]);
         }
 
-
         choice.Clear();
         if (upgrade.Count < 2)
         {
@@ -59,11 +64,6 @@ public class UpgradeSelect : MonoBehaviour
             {
                 upgrade.Add(item);
             }
-        }
-
-        foreach (var item in upgrade)
-        {
-            item.SetActive(false);
         }
     }
 }

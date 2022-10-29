@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     public int dmg;
     float spd;
     Vector3 dir;
-    Rigidbody2D rb=>GetComponent<Rigidbody2D>();
+    Rigidbody2D rb => GetComponent<Rigidbody2D>();
     private void Start()
     {
         rb.velocity = dir * spd;
@@ -19,12 +19,17 @@ public class Bullet : MonoBehaviour
         spd = _spd;
         dir = _dir;
     }
+
+    public virtual void OnDestroy()
+    {
+        Instantiate(deadPc).transform.position = transform.position;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         switch (collision.tag)
         {
-            case "Wall": 
-                Instantiate(deadPc).transform.position = transform.position;
+            case "Wall":
                 Destroy(gameObject);
                 break;
             case "Enemy":

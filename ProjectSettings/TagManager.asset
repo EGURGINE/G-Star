@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - Enemy
   - Money
+  - Boom
   layers:
   - Default
   - TransparentFX

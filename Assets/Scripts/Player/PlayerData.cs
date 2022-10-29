@@ -11,6 +11,7 @@ public enum PlayerSkills
     QuadShot,
     Piercing,
     BackShot,
+    Boom,
     End
 }
 public class PlayerData : Singleton<PlayerData>

@@ -16,6 +16,7 @@ public enum BtnType
     QuadBullet,
     Piercing,
     BackShot,
+    Boom,
     Score,
     Money
 }
@@ -67,7 +68,7 @@ public class UpgradeBtn : MonoBehaviour
                 GameManager.Instance.player.playerSpd += 0.5f;
                 break;
             case BtnType.shotSpeed:
-                ShotArea.Instance.shotSpd -= 0.005f;
+                ShotArea.Instance.bulletShotSpd -= 0.005f;
                 break;
             case BtnType.doubleShot:
                 PlayerData.Instance.data[PlayerSkills.doubleShot] = true;
@@ -92,6 +93,9 @@ public class UpgradeBtn : MonoBehaviour
                 break;
             case BtnType.BackShot:
                 PlayerData.Instance.data[PlayerSkills.BackShot] = true;
+                break;
+            case BtnType.Boom:
+                PlayerData.Instance.data[PlayerSkills.Boom] = true;
                 break;
             case BtnType.Score:
                 GameManager.Instance.Score += 50;

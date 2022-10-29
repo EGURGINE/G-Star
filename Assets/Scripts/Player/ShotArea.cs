@@ -9,10 +9,20 @@ public class ShotArea : Singleton<ShotArea>
     [SerializeField] private Bullet[] bullets;
     public int dmg;
     public float bulletSpd;
-    public float shotSpd;
-    private float cnt;
+
+    public float bulletShotSpd;
+    private float bulletCnt;
+
+    private float boomShotSpd;
+    private float boomCnt;
+
     public List<GameObject> Enemys = new List<GameObject>();
     private GameObject target;
+
+    private void Start()
+    {
+        boomShotSpd = 3f;
+    }
     private void FixedUpdate()
     {
         if (GameManager.Instance.isGameOver || GameManager.Instance.isUpgrade)
@@ -20,12 +30,22 @@ public class ShotArea : Singleton<ShotArea>
             Enemys.Clear();
         }
         DistanceEnemy();
-        if ( cnt >= shotSpd)
+        if ( bulletCnt >= bulletShotSpd)
         {
-            cnt = 0;
+            bulletCnt = 0;
             Shot();
         }
-        cnt += Time.deltaTime;
+        bulletCnt += Time.deltaTime;
+
+        if (PlayerData.Instance.data[PlayerSkills.Boom] == true)  
+        {
+            if (boomCnt >= boomShotSpd)
+            {
+                boomCnt = 0;
+                BoomShot();
+            }
+            boomCnt += Time.deltaTime;
+        }
     }
     private GameObject DistanceEnemy()
     {
@@ -36,6 +56,13 @@ public class ShotArea : Singleton<ShotArea>
         }).FirstOrDefault();
 
         return neareastObject;
+    }
+
+    private void BoomShot()
+    {
+        Bullet bullet = Instantiate(bullets[1]);
+        bullet.transform.position = shotPos.position;
+        bullet.SetBullet(0, bulletSpd, shotPos.forward);
     }
     private void Shot()
     {
@@ -157,7 +184,7 @@ public class ShotArea : Singleton<ShotArea>
     {
         transform.localScale = new Vector3(1.5f ,1.5f,1);
         dmg = 1;
-        shotSpd = 0.2f;
+        bulletShotSpd = 0.2f;
         bulletSpd = 5;
         if (Enemys.Count >= 1)
         {

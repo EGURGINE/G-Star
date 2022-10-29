@@ -27,7 +27,7 @@ public class GameManager : Singleton<GameManager>
 
     [Header("레벨")]
     [SerializeField] private Text lv;
-    private int level;
+    [SerializeField] private int level;
     public Image expSlider;
     private float exp;
     public float maxExp;
@@ -49,7 +49,7 @@ public class GameManager : Singleton<GameManager>
         get { return exp; }
         set
         {
-            if (isTutorial && isLevelupTrue == false) return;
+            if (isTutorial == true && isLevelupTrue == false || isUpgrade == true) return;
             exp = value;
             if (exp >= maxExp)
             {
@@ -177,8 +177,7 @@ public class GameManager : Singleton<GameManager>
         UpgradeBottomUI.Instance.StartSet();
 
         //카메라 셋팅
-        Camera.main.transform.position = new Vector3(0, 0, -10);
-
+        Camera.main.transform.DOMove(new Vector3(0, 0, -10), 0.1f);
     }//시작 셋팅
     public void Tutorial()
     {

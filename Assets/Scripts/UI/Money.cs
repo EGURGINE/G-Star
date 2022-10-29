@@ -28,11 +28,10 @@ public class Money : MonoBehaviour
             GameManager.Instance.Money += 1;
             Destroy(gameObject);
         }
-            
     }
     private void OnDestroy()
     {
-        DOTween.Kill(transform);
+        transform.DOKill();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -43,7 +42,6 @@ public class Money : MonoBehaviour
                 SoundManager.Instance.PlaySound(ESoundSources.MONEY);
                 GameManager.Instance.Money += 1;
                 GameManager.Instance.Exp += 5;
-                transform.DOKill();
                 Destroy(gameObject);
             });
         }
