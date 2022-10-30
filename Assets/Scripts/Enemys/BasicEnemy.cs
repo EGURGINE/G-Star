@@ -6,7 +6,7 @@ public abstract class BasicEnemy : MonoBehaviour
 {
     [SerializeField] private int maxHp;
     [SerializeField] private int hp;
-    [SerializeField] [Range(0,2000)] protected float spd;
+    [SerializeField] [Range(0, 2000)] protected float spd;
     [SerializeField] private int score;
     [SerializeField] private ParticleSystem enemySpawnPc;
     [SerializeField] private ParticleSystem enemyDeadPc;
@@ -55,11 +55,11 @@ public abstract class BasicEnemy : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (GameManager.Instance.isGameOver||GameManager.Instance.isUpgrade)
+        if (GameManager.Instance.isGameOver || GameManager.Instance.isUpgrade)
         {
             Die();
         }
-        if (hp<=0)
+        if (hp <= 0)
         {
             SoundManager.Instance.PlaySound(ESoundSources.DIE);
             Die();
@@ -69,26 +69,32 @@ public abstract class BasicEnemy : MonoBehaviour
     {
         if (GameManager.Instance.isTutorial && GameManager.Instance.tutorialNum == 1)
             GameManager.Instance.tutorialNextBtn.gameObject.SetActive(true);
-        Camera.main.DOShakePosition(1,new Vector3(0.04f,0.01f,0),10).OnComplete(()=>Camera.main.transform.DOMove(new Vector3(0, 0, -10),0.01f));
 
         Instantiate(enemyDeadPc).transform.position = transform.position;
-        if(GameManager.Instance.isGameOver == false && GameManager.Instance.isUpgrade == false) 
+
+        if (GameManager.Instance.isGameOver == false && GameManager.Instance.isUpgrade == false)
+        {
+            Camera.main.DOShakePosition(1, new Vector3(0.04f, 0.01f, 0), 10).OnComplete(() => 
+            Camera.main.transform.DOMove(new Vector3(0, 0, -10), 0.01f));
+
             GameManager.Instance.Score += score;
-        if(GameManager.Instance.tutorialNum != 1)
+        }
+
+        if (GameManager.Instance.tutorialNum != 1)
         {
             for (int i = 0; i < Random.Range(0, 4); i++)
             {
                 Spawner.Instance.Pop(money, new Vector2(transform.position.x, transform.position.y));
             }
         }
-        //DOTween.KillAll(transform);
+
         isDead = true;
         Spawner.Instance.Push(gameObject);
     }
     protected abstract void Move();
     private void OnTriggerEnter2D(Collider2D collision)
     {
-    
+
         if (collision.CompareTag("Bullet"))
         {
             hp -= collision.GetComponent<Bullet>().dmg;
