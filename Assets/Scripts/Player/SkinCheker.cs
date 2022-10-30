@@ -43,7 +43,7 @@ public class SkinCheker : MonoBehaviour
     {
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
         
-        if (selectSkin.index >= (skins.Count - 1)) selectSkin = skins[0];
+        if (selectSkin.index >= (skins.Count -1)) selectSkin = skins[0];
         else selectSkin = skins[(selectSkin.index + 1)];
 
         SkinDisplay();
