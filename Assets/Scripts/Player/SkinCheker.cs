@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
 public class SkinCheker : MonoBehaviour
 {
     private readonly int price = 20000;
@@ -26,6 +25,7 @@ public class SkinCheker : MonoBehaviour
     private void Start()
     {
         selectSkin = skins[0];
+        print(PlayerPrefs.GetInt("PlayerSkinIndex"));
         isSkin = skins[PlayerPrefs.GetInt("PlayerSkinIndex")];
         SkinDisplay();
     }

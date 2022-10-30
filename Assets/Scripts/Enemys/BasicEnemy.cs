@@ -106,7 +106,8 @@ public abstract class BasicEnemy : MonoBehaviour
         }
         if (collision.CompareTag("Boom"))
         {
-            hp = 0;
+            hp -= maxHp;
+            print("isHit");
         }
     }
 }

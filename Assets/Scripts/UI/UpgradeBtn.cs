@@ -54,7 +54,6 @@ public class UpgradeBtn : MonoBehaviour
         upgradeWnd.GetComponent<UpgradeSelect>().Check(this.gameObject);
         upgradeWnd.SetActive(false);
         
-        gameObject.SetActive(false);
     }
 
     private void Ability()

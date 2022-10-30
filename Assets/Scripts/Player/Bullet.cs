@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         rb.velocity = dir * spd;
+        Destroy(gameObject, 1f);
     }
     public void SetBullet(int _dmg, float _spd, Vector3 _dir)
     {
@@ -20,10 +21,10 @@ public class Bullet : MonoBehaviour
         dir = _dir;
     }
 
-    public virtual void OnDestroy()
+    private void OnApplicationQuit()
     {
+        Destroy(gameObject);
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         switch (collision.tag)

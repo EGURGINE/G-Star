@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-public class ShotArea : Singleton<ShotArea>
+public class ShotArea : MonoBehaviour
 {
     [SerializeField] private Transform shotPos;
     [SerializeField] private Transform leftPos, rightPos;
@@ -20,10 +20,20 @@ public class ShotArea : Singleton<ShotArea>
     public List<GameObject> Enemys = new List<GameObject>();
     private GameObject target;
 
+    #region Singleton
+    public static ShotArea Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+    #endregion
     private void Start()
     {
         boomShotSpd = 3f;
         boomSpd = 3f;
+
+        print("»ý¼ºµÊ");
     }
     private void FixedUpdate()
     {
@@ -31,22 +41,25 @@ public class ShotArea : Singleton<ShotArea>
         {
             Enemys.Clear();
         }
-        DistanceEnemy();
-        if ( bulletCnt >= bulletShotSpd)
+        else
         {
-            bulletCnt = 0;
-            Shot();
-        }
-        bulletCnt += Time.deltaTime;
-
-        if (PlayerData.Instance.data[PlayerSkills.Boom] == true)  
-        {
-            if (boomCnt >= boomShotSpd)
+            DistanceEnemy();
+            if (bulletCnt >= bulletShotSpd)
             {
-                boomCnt = 0;
-                BoomShot();
+                bulletCnt = 0;
+                Shot();
             }
-            boomCnt += Time.deltaTime;
+            bulletCnt += Time.deltaTime;
+
+            if (PlayerData.Instance.data[PlayerSkills.Boom] == true)
+            {
+                if (boomCnt >= boomShotSpd)
+                {
+                    boomCnt = 0;
+                    BoomShot();
+                }
+                boomCnt += Time.deltaTime;
+            }
         }
     }
     private GameObject DistanceEnemy()
@@ -62,9 +75,10 @@ public class ShotArea : Singleton<ShotArea>
 
     private void BoomShot()
     {
-        Vector3 randDir = new Vector3(Random.Range(-180, 180), Random.Range(-180, 180), 0);
+        Vector3 randDir = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
 
         Bullet bullet = Instantiate(bullets[1]);
+
         bullet.transform.position = shotPos.position;
         bullet.SetBullet(0, boomSpd, randDir);
     }

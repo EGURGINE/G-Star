@@ -12,6 +12,6 @@ public class DeadObj : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        Destroy(transform);
+        Destroy(gameObject);
     }
 }

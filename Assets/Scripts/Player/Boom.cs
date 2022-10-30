@@ -6,9 +6,8 @@ public class Boom : Bullet
 {
     [SerializeField] private GameObject boomRange;
 
-    public override void OnDestroy()
+    private void OnDestroy()
     {
-        base.OnDestroy();
         Instantiate(boomRange).transform.position = transform.position;
     }
 }
