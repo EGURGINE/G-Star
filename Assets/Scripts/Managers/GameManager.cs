@@ -61,20 +61,21 @@ public class GameManager : Singleton<GameManager>
 
                 if (level > 16)
                 {
-                    Spawner.Instance.enemySpawnNum = 6;
+                    Spawner.Instance.enemySpawnNum = 8;
                     Spawner.Instance.spawnDelay = 2f;
                     Spawner.Instance.spawnEnemyTypeNum = 5;
 
                 }
                 else if (level > 11)
                 {
-                    Spawner.Instance.enemySpawnNum = 5;
+                    Spawner.Instance.enemySpawnNum = 7;
                     Spawner.Instance.spawnDelay = 2.5f;
                     Spawner.Instance.spawnEnemyTypeNum = 4;
 
                 }
                 else if (level > 6)
                 {
+                    Spawner.Instance.enemySpawnNum = 6;
                     Spawner.Instance.spawnDelay = 2.8f;
                     Spawner.Instance.spawnEnemyTypeNum = 3;
 
@@ -177,7 +178,7 @@ public class GameManager : Singleton<GameManager>
         UpgradeBottomUI.Instance.StartSet();
 
         //카메라 셋팅
-        Camera.main.transform.DOMove(new Vector3(0, 0, -10), 0.1f);
+        Camera.main.transform.DOMove(new Vector3(0, 0, -10), 0.01f);
     }//시작 셋팅
     public void Tutorial()
     {

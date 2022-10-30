@@ -69,7 +69,7 @@ public abstract class BasicEnemy : MonoBehaviour
     {
         if (GameManager.Instance.isTutorial && GameManager.Instance.tutorialNum == 1)
             GameManager.Instance.tutorialNextBtn.gameObject.SetActive(true);
-        Camera.main.DOShakePosition(1,new Vector3(0.04f,0.01f,0),10).OnComplete(()=>Camera.main.transform.DOMove(new Vector3(0, 0, -10),0.1f));
+        Camera.main.DOShakePosition(1,new Vector3(0.04f,0.01f,0),10).OnComplete(()=>Camera.main.transform.DOMove(new Vector3(0, 0, -10),0.01f));
 
         Instantiate(enemyDeadPc).transform.position = transform.position;
         if(GameManager.Instance.isGameOver == false && GameManager.Instance.isUpgrade == false) 
