@@ -15,7 +15,7 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     private Vector2 joystickVector;
 
     private Coroutine runningCoroutine;
-    private float rotateSpeed = 1000f;
+    private float rotateSpeed = 10000000f;
 
  
     private void FixedUpdate()
@@ -69,7 +69,7 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
         for (float i = mod; i < angle; i += rotateSpeed)
         {
             character.transform.Rotate(0, 0, sign * rotateSpeed); // 캐릭터 rotateSpeed만큼 회전
-            yield return new WaitForSeconds(0.005f); // 0.01초 대기
+            yield return new WaitForSeconds(0.0001f); // 0.0001초 대기
         }
         character.transform.Rotate(0, 0, sign * mod); // 남은 각도 회전
     }

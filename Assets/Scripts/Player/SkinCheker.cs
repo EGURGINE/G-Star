@@ -7,6 +7,7 @@ public class SkinCheker : MonoBehaviour
 {
     private readonly int price = 20000;
     public SkinData isSkin;
+    public int isSkinIndex { private get; set; }
 
     [SerializeField] 
     private List<SkinData> skins = new List<SkinData>();
@@ -25,7 +26,7 @@ public class SkinCheker : MonoBehaviour
     private void Start()
     {
         selectSkin = skins[0];
-        isSkin = skins[PlayerPrefs.GetInt("PlayerSkinIndex")];
+        isSkin = skins[isSkinIndex];
         SkinDisplay();
     }
 

@@ -14,7 +14,7 @@ public class GameManager : Singleton<GameManager>
     [Header("Á¡¼ö")]
     private int score;
     [SerializeField] private Text scoreTxt;
-    private float highScore;
+    public float highScore;
     [SerializeField] private Text highScoreTxt;
 
     [Header("µ·")]
