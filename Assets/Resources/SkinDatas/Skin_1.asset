@@ -15,4 +15,4 @@ MonoBehaviour:
   index: 1
   name: Core
   image: {fileID: 21300000, guid: 1e6c1d3ec181e454c861b217c6fcf3b7, type: 3}
-  isBuy: 1
+  isBuy: 0

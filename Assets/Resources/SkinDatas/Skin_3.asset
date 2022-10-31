@@ -15,4 +15,4 @@ MonoBehaviour:
   index: 3
   name: Ghost
   image: {fileID: 21300000, guid: 23a0eb7ec947052499fe98a7990f7740, type: 3}
-  isBuy: 1
+  isBuy: 0
