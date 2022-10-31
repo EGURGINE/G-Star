@@ -32,8 +32,6 @@ public class ShotArea : MonoBehaviour
     {
         boomShotSpd = 3f;
         boomSpd = 3f;
-
-        print("»ý¼ºµÊ");
     }
     private void FixedUpdate()
     {

@@ -25,7 +25,6 @@ public class SkinCheker : MonoBehaviour
     private void Start()
     {
         selectSkin = skins[0];
-        print(PlayerPrefs.GetInt("PlayerSkinIndex"));
         isSkin = skins[PlayerPrefs.GetInt("PlayerSkinIndex")];
         SkinDisplay();
     }
