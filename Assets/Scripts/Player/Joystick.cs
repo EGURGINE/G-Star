@@ -28,8 +28,8 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
 
         joystickVector = new Vector2((endPos.x - startPos.x), (endPos.y - startPos.y));
 
-        TurnAngle(joystickVector);
         // Character에게 조이스틱 방향 넘기기
+        TurnAngle(joystickVector);
     }
 
     public void OnPointerDown(PointerEventData eventData)

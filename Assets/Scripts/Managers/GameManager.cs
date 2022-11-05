@@ -59,27 +59,7 @@ public class GameManager : Singleton<GameManager>
                 lv.text = level.ToString();
                 LevelProduction();
 
-                if (level > 16)
-                {
-                    Spawner.Instance.enemySpawnNum = 7;
-                    Spawner.Instance.spawnDelay = 2f;
-                    Spawner.Instance.spawnEnemyTypeNum = 5;
-
-                }
-                else if (level > 11)
-                {
-                    Spawner.Instance.enemySpawnNum = 6;
-                    Spawner.Instance.spawnDelay = 2.5f;
-                    Spawner.Instance.spawnEnemyTypeNum = 4;
-
-                }
-                else if (level > 6)
-                {
-                    Spawner.Instance.enemySpawnNum = 5;
-                    Spawner.Instance.spawnDelay = 2.8f;
-                    Spawner.Instance.spawnEnemyTypeNum = 3;
-
-                }
+                LevelDesign();
 
                 expSlider.fillAmount = exp / maxExp;
                 isUpgrade = true;
@@ -89,7 +69,6 @@ public class GameManager : Singleton<GameManager>
                 upgradeWnd.GetComponent<UpgradeSelect>().Choice();
 
                 if (isTutorial && tutorialNum == 2) tutorialNextBtn.gameObject.SetActive(true);
-                //joystick.SetActive(false);
             }
             expSlider.fillAmount = exp / maxExp;
         }
@@ -125,6 +104,31 @@ public class GameManager : Singleton<GameManager>
         money = PlayerPrefs.GetInt("Money");
         moneyTxt.text = money.ToString();
     }
+
+    private void LevelDesign()
+    {
+        if (level > 16)
+        {
+            Spawner.Instance.enemySpawnNum = 7;
+            Spawner.Instance.spawnDelay = 2f;
+            Spawner.Instance.spawnEnemyTypeNum = 5;
+
+        }
+        else if (level > 11)
+        {
+            Spawner.Instance.enemySpawnNum = 6;
+            Spawner.Instance.spawnDelay = 2.5f;
+            Spawner.Instance.spawnEnemyTypeNum = 4;
+
+        }
+        else if (level > 6)
+        {
+            Spawner.Instance.enemySpawnNum = 5;
+            Spawner.Instance.spawnDelay = 2.8f;
+            Spawner.Instance.spawnEnemyTypeNum = 3;
+
+        }
+    }
     public void NextLevel()
     {
         exp -= maxExp;
@@ -150,7 +154,6 @@ public class GameManager : Singleton<GameManager>
         scoreTxt.text = score.ToString();
         highScore = PlayerPrefs.GetFloat("HighScore");
         highScoreTxt.text = highScore.ToString();
-
 
         //플레이어 스폰
         Instantiate(player.playerSpawnPc).transform.position = Vector3.zero;

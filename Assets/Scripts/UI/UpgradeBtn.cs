@@ -37,8 +37,10 @@ public class UpgradeBtn : MonoBehaviour
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
         GameManager.Instance.isUpgrade = false;
 
+        //능력
         Ability();
 
+        //플레이어 소환
         player.SetActive(true);
         player.transform.position = Vector3.zero;
         player.transform.localEulerAngles = Vector3.zero;
@@ -51,6 +53,7 @@ public class UpgradeBtn : MonoBehaviour
         
         UpgradeBottomUI.Instance.OnUI(type);
         
+        //버튼 체크
         upgradeWnd.GetComponent<UpgradeSelect>().Check(this.gameObject);
         upgradeWnd.SetActive(false);
         

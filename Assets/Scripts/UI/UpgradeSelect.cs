@@ -14,6 +14,7 @@ public class UpgradeSelect : MonoBehaviour
     [SerializeField] private GameObject btns;
     public void ResetChoice()
     {
+        // upgrade 리스트 지우고 새로 채우기
         upgrade.Clear();
         for (int i = 0; i < UPGRADE.Count; i++)
         {
@@ -22,11 +23,13 @@ public class UpgradeSelect : MonoBehaviour
     }
     public void Choice()
     {
+        //고르기전 버튼들 끄기
         for (int i = 0; i < btns.transform.childCount; i++)
         {
             btns.transform.GetChild(i).gameObject.SetActive(false);
         }
 
+        //랜덤으로 버튼 뽑기
         for (int i = 0; i < 2; i++)
         {
             choiceCheck[i] = upgrade[Random.Range(0, upgrade.Count - 1)];
@@ -34,6 +37,7 @@ public class UpgradeSelect : MonoBehaviour
             choice.Add(choiceCheck[i]);
         }
 
+        //뽑은 버튼 켜기
         for (int i = 0; i < 2; i++)
         {
             choice[i].SetActive(true);
@@ -43,6 +47,7 @@ public class UpgradeSelect : MonoBehaviour
 
     public void Check(GameObject _this)
     {
+        //반복 버튼인지 체크
         if (_this.GetComponent<UpgradeBtn>().type == BtnType.Score ||
             _this.GetComponent<UpgradeBtn>().type == BtnType.Money)
         {
@@ -56,8 +61,10 @@ public class UpgradeSelect : MonoBehaviour
             if (_this == choiceCheck[0]) upgrade.Add(choiceCheck[1]);
             else upgrade.Add(choiceCheck[0]);
         }
-
+        
         choice.Clear();
+
+        //만약 남은 버튼수가 2개 미만이면 반복 버튼 추가
         if (upgrade.Count < 2)
         {
             foreach (var item in lastBtn)
