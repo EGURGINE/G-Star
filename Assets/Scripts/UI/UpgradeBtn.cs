@@ -25,9 +25,9 @@ public class UpgradeBtn : MonoBehaviour
 {
     public BtnType type;
     private GameObject player => GameManager.Instance.player.gameObject;
-    [SerializeField] GameObject upgradeWnd;
-    [SerializeField] GameObject playerData;
-
+    [SerializeField] private GameObject upgradeWnd;
+    [SerializeField] private GameObject playerData;
+    public GameObject mIcon;
     private void Start()
     {
         this.GetComponent<Button>().onClick.AddListener(() => UPBtn());
@@ -35,28 +35,56 @@ public class UpgradeBtn : MonoBehaviour
     public void UPBtn()
     {
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
-        GameManager.Instance.isUpgrade = false;
 
-        //능력
-        Ability();
+        if (GameManager.Instance.isStartingAbility && GameManager.Instance.Money < 1000) return;
 
-        //플레이어 소환
-        player.SetActive(true);
-        player.transform.position = Vector3.zero;
-        player.transform.localEulerAngles = Vector3.zero;
-
-        GameManager.Instance.NextLevel();
-        GameManager.Instance.expSlider.DOKill();
-        GameManager.Instance.expSlider.DOFade(1, 0.1f);
-       
-        Spawner.Instance.enemySpawnTime = 0;
+            //능력
+            Ability();
         
         UpgradeBottomUI.Instance.OnUI(type);
         
         //버튼 체크
         upgradeWnd.GetComponent<UpgradeSelect>().Check(this.gameObject);
+        if (GameManager.Instance.isStartingAbility)
+        {
+            GameManager.Instance.Money -= 1000;
+            PlayerData.Instance.StartAbility += 1;
+            upgradeWnd.GetComponent<UpgradeSelect>().Choice();
+            if (PlayerData.Instance.StartAbility >= 2)
+            {
+                GameManager.Instance.isStartingAbility = false;
+            }
+        }
+        else
+        {
+            GameManager.Instance.isUpgrade = false;
+            GameManager.Instance.PlayerSpawn();
+
+            GameManager.Instance.NextLevel();
+            GameManager.Instance.expSlider.DOKill();
+            GameManager.Instance.expSlider.DOFade(1, 0.1f);
+
+            Spawner.Instance.enemySpawnTime = 0;
+
+            upgradeWnd.SetActive(false);
+        }
+
+    }
+
+    public void SkipBtn()
+    {
+
+        upgradeWnd.GetComponent<UpgradeSelect>().Push();
+        GameManager.Instance.isUpgrade = false;
+        GameManager.Instance.PlayerSpawn();
+
+        GameManager.Instance.NextLevel();
+        GameManager.Instance.expSlider.DOKill();
+        GameManager.Instance.expSlider.DOFade(1, 0.1f);
+
+        Spawner.Instance.enemySpawnTime = 0;
+
         upgradeWnd.SetActive(false);
-        
     }
 
     private void Ability()
@@ -64,13 +92,13 @@ public class UpgradeBtn : MonoBehaviour
         switch (type)
         {
             case BtnType.damage:
-                ShotArea.Instance.dmg++;
+                GameManager.Instance.player.shotArea.dmg++;
                 break;
             case BtnType.speed:
                 GameManager.Instance.player.playerSpd += 0.5f;
                 break;
             case BtnType.shotSpeed:
-                ShotArea.Instance.bulletShotSpd -= 0.005f;
+                GameManager.Instance.player.shotArea.bulletShotSpd -= 0.005f;
                 break;
             case BtnType.doubleShot:
                 PlayerData.Instance.data[PlayerSkills.doubleShot] = true;
@@ -82,10 +110,10 @@ public class UpgradeBtn : MonoBehaviour
                 PlayerData.Instance.data[PlayerSkills.RadialShot] = true;
                 break;
             case BtnType.BulletSpeed:
-                ShotArea.Instance.bulletSpd = 8;
+                GameManager.Instance.player.shotArea.bulletSpd = 8;
                 break;
             case BtnType.ShotRange:
-                ShotArea.Instance.ShotRangeUp();
+                GameManager.Instance.player.shotArea.ShotRangeUp();
                 break;
             case BtnType.QuadBullet:
                 PlayerData.Instance.data[PlayerSkills.QuadShot] = true;

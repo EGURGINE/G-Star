@@ -10,7 +10,6 @@ public class GameManager : Singleton<GameManager>
     [Header("플레이어")]
     public Player player;
 
-
     [Header("점수")]
     private int score;
     [SerializeField] private Text scoreTxt;
@@ -44,6 +43,8 @@ public class GameManager : Singleton<GameManager>
     public int tutorialNum;
     public Button tutorialNextBtn;
     [SerializeField] GameObject btnManager;
+
+    public bool isStartingAbility;
     public float Exp
     {
         get { return exp; }
@@ -62,11 +63,9 @@ public class GameManager : Singleton<GameManager>
                 LevelDesign();
 
                 expSlider.fillAmount = exp / maxExp;
-                isUpgrade = true;
                 player.gameObject.SetActive(false);
 
-                upgradeWnd.SetActive(true);
-                upgradeWnd.GetComponent<UpgradeSelect>().Choice();
+                UpgradeWndOn();
 
                 if (isTutorial && tutorialNum == 2) tutorialNextBtn.gameObject.SetActive(true);
             }
@@ -139,6 +138,13 @@ public class GameManager : Singleton<GameManager>
     {
         expSlider.DOFade(0.5f,0.5f).SetLoops(-1,LoopType.Yoyo);
     }// 레벨 연출
+
+    private void UpgradeWndOn()
+    {
+        isUpgrade = true;
+        upgradeWnd.SetActive(true);
+        upgradeWnd.GetComponent<UpgradeSelect>().Choice();
+    }
     public void StartSet()
     {
         isGameOver = isTutorial == true ? true : false;
@@ -155,16 +161,13 @@ public class GameManager : Singleton<GameManager>
         highScore = PlayerPrefs.GetFloat("HighScore");
         highScoreTxt.text = highScore.ToString();
 
-        //플레이어 스폰
-        Instantiate(player.playerSpawnPc).transform.position = Vector3.zero;
-        player.gameObject.SetActive(true);
-        player.gameObject.GetComponent<SpriteRenderer>().sprite = player.SC.isSkin.image;
-        player.transform.position = Vector3.zero;
-        player.transform.Rotate(Vector3.zero);
-
         // 스텟 초기화
         player.playerSpd = 3;
         player.shotArea.ResetState();
+
+        // 능력들 초기화
+        isStartingAbility = true;
+        PlayerData.Instance.StartAbility = 0;
         for (int i = 0; i < (int)PlayerSkills.End; i++)
         {
             PlayerData.Instance.data[(PlayerSkills)i] = false;
@@ -182,7 +185,18 @@ public class GameManager : Singleton<GameManager>
 
         //카메라 셋팅
         Camera.main.transform.DOMove(new Vector3(0, 0, -10), 0.01f);
+
+        UpgradeWndOn();
     }//시작 셋팅
+
+    public void PlayerSpawn()
+    {
+        Instantiate(player.playerSpawnPc).transform.position = Vector3.zero;
+        player.gameObject.SetActive(true);
+        player.gameObject.GetComponent<SpriteRenderer>().sprite = player.SC.isSkin.image;
+        player.transform.position = Vector3.zero;
+        player.transform.rotation = Quaternion.Euler(Vector3.zero);
+    }//플레이어 스폰
     public void Tutorial()
     {
         tutorialNum++;
@@ -251,4 +265,10 @@ public class GameManager : Singleton<GameManager>
         }
 
     }//게임 오버 셋팅
+
+    private void OnApplicationQuit()
+    {
+        DOTween.KillAll();
+        StopAllCoroutines();
+    }
 }

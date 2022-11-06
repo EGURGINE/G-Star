@@ -41,10 +41,19 @@ public class UpgradeSelect : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             choice[i].SetActive(true);
+            choice[i].GetComponent<UpgradeBtn>().mIcon.SetActive(GameManager.Instance.isStartingAbility);
             choice[i].transform.position = choice_Pos[i].transform.position;
         }
     }
 
+    public void Push()
+    {
+        foreach (var item in choiceCheck)
+        {
+            upgrade.Add(item);
+        }
+        choice.Clear();
+    }
     public void Check(GameObject _this)
     {
         //반복 버튼인지 체크

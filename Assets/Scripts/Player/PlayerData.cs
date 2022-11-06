@@ -17,7 +17,19 @@ public class PlayerData : Singleton<PlayerData>
 {
 
     public Dictionary<PlayerSkills, bool> data = new Dictionary<PlayerSkills, bool>();
-  
+
+    private int startAbility;
+    public int StartAbility {
+        get
+        {
+            return startAbility; 
+        }
+        set
+        {
+            startAbility = value;
+          
+        } }
+
     private void Start()
     {
         for (int i = 0; i < (int)PlayerSkills.End; i++)
