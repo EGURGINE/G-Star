@@ -52,6 +52,7 @@ public class GameManager : Singleton<GameManager>
         {
             if (isTutorial == true && isLevelupTrue == false || isUpgrade == true) return;
             exp = value;
+            expSlider.fillAmount = exp / maxExp;
             if (exp >= maxExp)
             {
                 SoundManager.Instance.PlaySound(ESoundSources.LEVEL);
@@ -62,14 +63,12 @@ public class GameManager : Singleton<GameManager>
 
                 LevelDesign();
 
-                expSlider.fillAmount = exp / maxExp;
                 player.gameObject.SetActive(false);
 
                 UpgradeWndOn();
 
                 if (isTutorial && tutorialNum == 2) tutorialNextBtn.gameObject.SetActive(true);
             }
-            expSlider.fillAmount = exp / maxExp;
         }
     }
     public int Money
@@ -106,21 +105,21 @@ public class GameManager : Singleton<GameManager>
 
     private void LevelDesign()
     {
-        if (level > 16)
+        if (level > 10)
         {
             Spawner.Instance.enemySpawnNum = 7;
             Spawner.Instance.spawnDelay = 2f;
             Spawner.Instance.spawnEnemyTypeNum = 5;
 
         }
-        else if (level > 11)
+        else if (level > 6)
         {
             Spawner.Instance.enemySpawnNum = 6;
             Spawner.Instance.spawnDelay = 2.5f;
             Spawner.Instance.spawnEnemyTypeNum = 4;
 
         }
-        else if (level > 6)
+        else if (level > 3)
         {
             Spawner.Instance.enemySpawnNum = 5;
             Spawner.Instance.spawnDelay = 2.8f;
@@ -130,7 +129,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void NextLevel()
     {
-        exp -= maxExp;
+        exp = 0;
         maxExp += 10;
         expSlider.fillAmount = 0;
     } //레벨 셋팅
@@ -152,8 +151,8 @@ public class GameManager : Singleton<GameManager>
         level = 1;
         lv.text = level.ToString();
         exp = 0;
-        maxExp = 10;
-        expSlider.fillAmount = exp;
+        maxExp = 20;
+        expSlider.fillAmount = 0;
 
         //점수 초기화
         score = 0;

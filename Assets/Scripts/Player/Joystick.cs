@@ -15,7 +15,7 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     private Vector2 joystickVector;
 
     private Coroutine runningCoroutine;
-    private float rotateSpeed = 10000000f;
+    private float rotateSpeed = 1000000000000f;
 
  
     private void FixedUpdate()
@@ -24,6 +24,8 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     }
     public void OnDrag(PointerEventData eventData)
     {
+        if (GameManager.Instance.isTutorial && GameManager.Instance.tutorialNum == 0) GameManager.Instance.Tutorial();
+
         endPos = eventData.position;
 
         joystickVector = new Vector2((endPos.x - startPos.x), (endPos.y - startPos.y));
@@ -62,14 +64,14 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
         // 코루틴이 한 개만 존재하도록.
         // => 회전 중에 새로운 회전이 들어왔을 경우, 회전 중이던 것을 멈추고 새로운 회전을 함.
     }
-
     IEnumerator RotateAngle(float angle, int sign)
     {
         float mod = angle % rotateSpeed; // 남은 각도 계산
         for (float i = mod; i < angle; i += rotateSpeed)
         {
             character.transform.Rotate(0, 0, sign * rotateSpeed); // 캐릭터 rotateSpeed만큼 회전
-            yield return new WaitForSeconds(0.0001f); // 0.0001초 대기
+            yield return null;
+         //   yield return new WaitForSeconds(0.0001f); // 0.0001초 대기
         }
         character.transform.Rotate(0, 0, sign * mod); // 남은 각도 회전
     }

@@ -71,21 +71,7 @@ public class UpgradeBtn : MonoBehaviour
 
     }
 
-    public void SkipBtn()
-    {
-
-        upgradeWnd.GetComponent<UpgradeSelect>().Push();
-        GameManager.Instance.isUpgrade = false;
-        GameManager.Instance.PlayerSpawn();
-
-        GameManager.Instance.NextLevel();
-        GameManager.Instance.expSlider.DOKill();
-        GameManager.Instance.expSlider.DOFade(1, 0.1f);
-
-        Spawner.Instance.enemySpawnTime = 0;
-
-        upgradeWnd.SetActive(false);
-    }
+    
 
     private void Ability()
     {

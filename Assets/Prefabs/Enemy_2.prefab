@@ -135,8 +135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6670539668a2e5942860c1b0d3a99b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 2
-  hp: 2
+  maxHp: 5
+  hp: 5
   spd: 120
   score: 10
   enemySpawnPc: {fileID: 3146009235527661145, guid: 5d924c48f2370c649a501bf812e7d1b5, type: 3}

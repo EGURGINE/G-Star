@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -81,5 +82,22 @@ public class UpgradeSelect : MonoBehaviour
                 upgrade.Add(item);
             }
         }
+    }
+
+    public void SkipBtn()
+    {
+
+        this.GetComponent<UpgradeSelect>().Push();
+        GameManager.Instance.isUpgrade = false;
+        GameManager.Instance.PlayerSpawn();
+        GameManager.Instance.isStartingAbility = false;
+
+        GameManager.Instance.NextLevel();
+        GameManager.Instance.expSlider.DOKill();
+        GameManager.Instance.expSlider.DOFade(1, 0.1f);
+
+        Spawner.Instance.enemySpawnTime = 0;
+
+        this.gameObject.SetActive(false);
     }
 }
