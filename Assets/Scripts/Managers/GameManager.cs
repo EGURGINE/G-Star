@@ -111,25 +111,41 @@ public class GameManager : Singleton<GameManager>
     private void LevelDesign()
     {
         time += Time.deltaTime;
-        if (time > 45)
+        if (time > 105)
         {
             Spawner.Instance.enemySpawnNum = 7;
             Spawner.Instance.spawnDelay = 2f;
             Spawner.Instance.spawnEnemyTypeNum = 5;
 
         }
-        else if (time > 30)
+        else if (time > 90)
         {
             Spawner.Instance.enemySpawnNum = 6;
             Spawner.Instance.spawnDelay = 2.5f;
             Spawner.Instance.spawnEnemyTypeNum = 4;
 
         }
-        else if (time > 15)
+        else if (time > 75)
         {
             Spawner.Instance.enemySpawnNum = 5;
-            Spawner.Instance.spawnDelay = 2.8f;
+        }
+        else if (time > 60)
+        {
+            Spawner.Instance.spawnDelay = 2.6f;
             Spawner.Instance.spawnEnemyTypeNum = 3;
+
+        }
+        else if (time > 45)
+        {
+            Spawner.Instance.enemySpawnNum = 5;
+        }
+        else if (time > 30)
+        {
+            Spawner.Instance.spawnDelay = 2.7f;
+        }
+        else if (time > 15)
+        {
+            Spawner.Instance.spawnEnemyTypeNum = 2;
 
         }
     }
@@ -198,6 +214,7 @@ public class GameManager : Singleton<GameManager>
 
     public void PlayerSpawn()
     {
+        CameraSetting.Instance.MainPost();
         Instantiate(player.playerSpawnPc).transform.position = Vector3.zero;
         player.gameObject.SetActive(true);
         player.gameObject.GetComponent<SpriteRenderer>().sprite = player.SC.isSkin.image;
