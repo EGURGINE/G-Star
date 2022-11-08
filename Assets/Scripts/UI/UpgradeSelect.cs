@@ -24,6 +24,7 @@ public class UpgradeSelect : MonoBehaviour
     }
     public void Choice()
     {
+        CameraSetting.Instance.UpgradePost();
         //고르기전 버튼들 끄기
         for (int i = 0; i < btns.transform.childCount; i++)
         {
@@ -98,6 +99,8 @@ public class UpgradeSelect : MonoBehaviour
 
         Spawner.Instance.enemySpawnTime = 0;
 
+        CameraSetting.Instance.MainPost();
         this.gameObject.SetActive(false);
+        
     }
 }

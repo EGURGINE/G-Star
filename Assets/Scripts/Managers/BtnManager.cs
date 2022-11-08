@@ -22,6 +22,7 @@ public class BtnManager : MonoBehaviour
     {
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
 
+        CameraSetting.Instance.MainPost();
         gameOverWnd.SetActive(false);
         gameWnd.SetActive(false);
         menuWnd.SetActive(true);

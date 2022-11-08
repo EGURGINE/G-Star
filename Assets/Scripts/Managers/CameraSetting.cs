@@ -1,11 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class CameraSetting : MonoBehaviour
+using UnityEngine.Rendering.PostProcessing;
+public class CameraSetting : Singleton<CameraSetting>
 {
+    [SerializeField] PostProcessVolume volume;
+    [SerializeField] Bloom bloom;
+
+    [ColorUsage(true,true)]
+    [SerializeField] Color start;
+    [ColorUsage(true, true)]
+    [SerializeField] Color upgrade;
+    [ColorUsage(true, true)]
+    [SerializeField] Color die;
+
     private void Awake()
     {
+        volume.profile.TryGetSettings(out bloom);
+
         Camera camera = GetComponent<Camera>();
         Rect rect = camera.rect;
         float scaleheight = ((float)Screen.width / Screen.height) / ((float)9 / 16);
@@ -21,5 +33,18 @@ public class CameraSetting : MonoBehaviour
             rect.x = (1f - scalewidth) / 2f;
         }
         camera.rect = rect;
+    }
+
+    public void MainPost()
+    {
+        bloom.color.value = start;
+    }
+    public void UpgradePost()
+    {
+        bloom.color.value = upgrade;
+    }
+    public void DiePost()
+    {
+        bloom.color.value = die;
     }
 }

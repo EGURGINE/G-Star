@@ -61,8 +61,6 @@ public class GameManager : Singleton<GameManager>
                 lv.text = level.ToString();
                 LevelProduction();
 
-                LevelDesign();
-
                 player.gameObject.SetActive(false);
 
                 UpgradeWndOn();
@@ -103,23 +101,31 @@ public class GameManager : Singleton<GameManager>
         moneyTxt.text = money.ToString();
     }
 
+    float time;
+
+    private void FixedUpdate()
+    {
+        if (isGameOver == false) LevelDesign();
+    }
+
     private void LevelDesign()
     {
-        if (level > 10)
+        time += Time.deltaTime;
+        if (time > 45)
         {
             Spawner.Instance.enemySpawnNum = 7;
             Spawner.Instance.spawnDelay = 2f;
             Spawner.Instance.spawnEnemyTypeNum = 5;
 
         }
-        else if (level > 6)
+        else if (time > 30)
         {
             Spawner.Instance.enemySpawnNum = 6;
             Spawner.Instance.spawnDelay = 2.5f;
             Spawner.Instance.spawnEnemyTypeNum = 4;
 
         }
-        else if (level > 3)
+        else if (time > 15)
         {
             Spawner.Instance.enemySpawnNum = 5;
             Spawner.Instance.spawnDelay = 2.8f;
@@ -154,6 +160,8 @@ public class GameManager : Singleton<GameManager>
         maxExp = 20;
         expSlider.fillAmount = 0;
 
+        time = 0;
+
         //점수 초기화
         score = 0;
         scoreTxt.text = score.ToString();
@@ -184,7 +192,7 @@ public class GameManager : Singleton<GameManager>
 
         //카메라 셋팅
         Camera.main.transform.DOMove(new Vector3(0, 0, -10), 0.01f);
-
+        CameraSetting.Instance.MainPost();
         UpgradeWndOn();
     }//시작 셋팅
 
@@ -250,6 +258,7 @@ public class GameManager : Singleton<GameManager>
         }
         else // 인게임 일때
         {
+            CameraSetting.Instance.DiePost();
             isGameOver = true;
             player.gameObject.SetActive(false);
             //최고점수 기록

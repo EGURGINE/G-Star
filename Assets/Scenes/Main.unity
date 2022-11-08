@@ -3907,6 +3907,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a3f25bf722a8214eb833b240ccb2634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volume: {fileID: 519420033}
+  bloom: {fileID: 0}
+  start: {r: 0.5294118, g: 0.74509805, b: 0.7058824, a: 0}
+  upgrade: {r: 0.539986, g: 0.5294118, b: 0.74509805, a: 0}
+  die: {r: 0.74509805, g: 0.5294118, b: 0.67577463, a: 0}
 --- !u!1 &522413572
 GameObject:
   m_ObjectHideFlags: 0
