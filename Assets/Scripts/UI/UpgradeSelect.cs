@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public class UpgradeSelect : MonoBehaviour
 {
     [SerializeField] List<GameObject> UPGRADE;
@@ -13,6 +14,13 @@ public class UpgradeSelect : MonoBehaviour
     [SerializeField] private Transform[] choice_Pos;
 
     [SerializeField] private GameObject btns;
+
+    [SerializeField] private Image countNum;
+    [SerializeField] private Sprite[] nums;
+    private bool isCnt;
+    private float cntNum;
+    private int cnt;
+
     public void ResetChoice()
     {
         // upgrade 리스트 지우고 새로 채우기
@@ -88,6 +96,7 @@ public class UpgradeSelect : MonoBehaviour
     public void SkipBtn()
     {
 
+        isCnt = false;
         this.GetComponent<UpgradeSelect>().Push();
         GameManager.Instance.isUpgrade = false;
         GameManager.Instance.PlayerSpawn();
@@ -102,5 +111,33 @@ public class UpgradeSelect : MonoBehaviour
         CameraSetting.Instance.MainPost();
         this.gameObject.SetActive(false);
         
+    }
+   
+    private void Count()
+    {
+        cnt = 0;
+        cntNum = 0;
+        countNum.sprite = nums[0];
+        isCnt = true;
+    }
+
+    private void FixedUpdate()
+    {
+        if (isCnt == true)
+        {
+            cntNum += Time.deltaTime;
+            if (cntNum >= 1)
+            {
+                cnt++;
+                cntNum = 0;
+
+                if (cnt >= 5) SkipBtn();
+                countNum.sprite = nums[cnt];
+            }
+        }
+    }
+    private void OnEnable()
+    {
+        Count();
     }
 }
