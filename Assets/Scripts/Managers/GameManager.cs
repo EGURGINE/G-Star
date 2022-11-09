@@ -107,43 +107,44 @@ public class GameManager : Singleton<GameManager>
     {
         if (isGameOver == false) LevelDesign();
     }
-
+    [SerializeField] private float[] waveTime = new float[7];
+    
     private void LevelDesign()
     {
         time += Time.deltaTime;
-        if (time > 210)
+        if (time > waveTime[6])
         {
             Spawner.Instance.enemySpawnNum = 7;
             Spawner.Instance.spawnDelay = 2f;
             Spawner.Instance.spawnEnemyTypeNum = 5;
 
         }
-        else if (time > 180)
+        else if (time > waveTime[5])
         {
             Spawner.Instance.enemySpawnNum = 6;
             Spawner.Instance.spawnDelay = 2.5f;
             Spawner.Instance.spawnEnemyTypeNum = 4;
 
         }
-        else if (time > 150)
+        else if (time > waveTime[4])
         {
             Spawner.Instance.enemySpawnNum = 5;
         }
-        else if (time > 120)
+        else if (time > waveTime[3])
         {
             Spawner.Instance.spawnDelay = 2.6f;
             Spawner.Instance.spawnEnemyTypeNum = 3;
 
         }
-        else if (time > 90)
+        else if (time > waveTime[2])
         {
             Spawner.Instance.enemySpawnNum = 5;
         }
-        else if (time > 60)
+        else if (time > waveTime[1])
         {
             Spawner.Instance.spawnDelay = 2.7f;
         }
-        else if (time > 30)
+        else if (time > waveTime[0])
         {
             Spawner.Instance.spawnEnemyTypeNum = 2;
 

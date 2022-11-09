@@ -3466,6 +3466,14 @@ MonoBehaviour:
   tutorialNextBtn: {fileID: 1368676644}
   btnManager: {fileID: 969902125}
   isStartingAbility: 0
+  waveTime:
+  - 15
+  - 30
+  - 45
+  - 60
+  - 75
+  - 100
+  - 120
 --- !u!1 &390579259
 GameObject:
   m_ObjectHideFlags: 0
