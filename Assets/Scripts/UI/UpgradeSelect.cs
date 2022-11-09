@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 public class UpgradeSelect : MonoBehaviour
 {
     [SerializeField] List<GameObject> UPGRADE;
@@ -66,6 +67,7 @@ public class UpgradeSelect : MonoBehaviour
     }
     public void Check(GameObject _this)
     {
+        int checkNum = 0;
         //반복 버튼인지 체크
         if (_this.GetComponent<UpgradeBtn>().type == BtnType.Score ||
             _this.GetComponent<UpgradeBtn>().type == BtnType.Money)
@@ -77,10 +79,35 @@ public class UpgradeSelect : MonoBehaviour
         }
         else
         {
-            if (_this == choiceCheck[0]) upgrade.Add(choiceCheck[1]);
-            else upgrade.Add(choiceCheck[0]);
+            if (_this == choiceCheck[0]) checkNum = 1;
+            else checkNum = 0;
+            
+            upgrade.Add(choiceCheck[checkNum]); 
         }
-        
+        choiceCheck[checkNum].gameObject.SetActive(false);
+        _this.transform.DOMove(Vector3.zero, 0.5f).OnComplete(
+            ()=> _this.transform.DOScale(new Vector3(1.2f,1.2f,1),0.5f).OnComplete(
+                () =>
+                {
+                    if(GameManager.Instance.isStartingAbility)
+                        transform.GetComponent<UpgradeSelect>().Choice();
+                    else
+                    {
+
+                        GameManager.Instance.isUpgrade = false;
+                        GameManager.Instance.PlayerSpawn();
+
+                        GameManager.Instance.NextLevel();
+                        GameManager.Instance.expSlider.DOKill();
+                        GameManager.Instance.expSlider.DOFade(1, 0.1f);
+
+                        Spawner.Instance.enemySpawnTime = 0;
+
+                        gameObject.SetActive(false);
+                    }
+                }
+                )
+            );
         choice.Clear();
 
         //만약 남은 버튼수가 2개 미만이면 반복 버튼 추가
@@ -112,7 +139,12 @@ public class UpgradeSelect : MonoBehaviour
         this.gameObject.SetActive(false);
         
     }
-   
+    public void ResetCount()
+    {
+        cnt = 0;
+        cntNum = 0;
+        countNum.sprite = nums[0];
+    }
     private void Count()
     {
         cnt = 0;

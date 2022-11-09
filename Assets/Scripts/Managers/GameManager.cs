@@ -210,6 +210,8 @@ public class GameManager : Singleton<GameManager>
         //카메라 셋팅
         Camera.main.transform.DOMove(new Vector3(0, 0, -10), 0.01f);
         CameraSetting.Instance.MainPost();
+
+        if(isTutorial == false)
         UpgradeWndOn();
     }//시작 셋팅
 
