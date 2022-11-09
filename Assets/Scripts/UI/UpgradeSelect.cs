@@ -34,6 +34,8 @@ public class UpgradeSelect : MonoBehaviour
     public void Choice()
     {
         CameraSetting.Instance.UpgradePost();
+
+        BtnMove();
         //고르기전 버튼들 끄기
         for (int i = 0; i < btns.transform.childCount; i++)
         {
@@ -57,6 +59,13 @@ public class UpgradeSelect : MonoBehaviour
         }
     }
 
+    private void BtnMove()
+    {
+        btns.transform.localScale = Vector3.one;
+        float posY = btns.transform.localPosition.y + 30;
+        btns.transform.DOLocalMoveY(posY, 0.5f).SetLoops(-1, LoopType.Yoyo);
+    }
+
     public void Push()
     {
         foreach (var item in choiceCheck)
@@ -67,6 +76,8 @@ public class UpgradeSelect : MonoBehaviour
     }
     public void Check(GameObject _this)
     {
+        btns.transform.DOKill();
+        btns.transform.localPosition = Vector3.zero;
         int checkNum = 0;
         //반복 버튼인지 체크
         if (_this.GetComponent<UpgradeBtn>().type == BtnType.Score ||
@@ -89,7 +100,9 @@ public class UpgradeSelect : MonoBehaviour
             ()=> _this.transform.DOScale(new Vector3(1.2f,1.2f,1),0.5f).OnComplete(
                 () =>
                 {
-                    if(GameManager.Instance.isStartingAbility)
+                    UpgradeBottomUI.Instance.OnUI(_this.GetComponent<UpgradeBtn>().type);
+
+                    if (GameManager.Instance.isStartingAbility)
                         transform.GetComponent<UpgradeSelect>().Choice();
                     else
                     {

@@ -43,7 +43,6 @@ public class UpgradeBtn : MonoBehaviour
             Ability();
         upgradeWnd.GetComponent<UpgradeSelect>().ResetCount();
         
-        UpgradeBottomUI.Instance.OnUI(type);
         
         //버튼 체크
         upgradeWnd.GetComponent<UpgradeSelect>().Check(gameObject);
@@ -57,12 +56,10 @@ public class UpgradeBtn : MonoBehaviour
             }
         }
     }
-
-    private void OnEnable()
+    private void OnDisable()
     {
         transform.localScale = Vector3.one;
-        float posY = transform.localPosition.y + 30;
-        transform.DOLocalMoveY(posY, 0.5f).SetLoops(-1,LoopType.Yoyo);
+        
     }
     private void Ability()
     {
