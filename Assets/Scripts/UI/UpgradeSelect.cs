@@ -96,7 +96,7 @@ public class UpgradeSelect : MonoBehaviour
             upgrade.Add(choiceCheck[checkNum]); 
         }
         choiceCheck[checkNum].gameObject.SetActive(false);
-        _this.transform.DOMove(Vector3.zero, 0.5f).OnComplete(
+        _this.transform.DOMove(new Vector3(0,0.5f,0), 0.5f).OnComplete(
             ()=> _this.transform.DOScale(new Vector3(1.2f,1.2f,1),0.5f).OnComplete(
                 () =>
                 {
