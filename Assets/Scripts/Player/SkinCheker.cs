@@ -59,7 +59,7 @@ public class SkinCheker : MonoBehaviour
             moneyImage.gameObject.SetActive(false);
             priceBtnTxt.gameObject.SetActive(false);
             selectBtnTxt.gameObject.SetActive(selectSkin.isBuy);
-        }
+        } 
         else
         {
             moneyImage.gameObject.SetActive(true);
@@ -78,7 +78,10 @@ public class SkinCheker : MonoBehaviour
             selectSkin.isBuy = true;
         }
 
-        if(selectSkin.isBuy) isSkin = selectSkin;
+        if (selectSkin.isBuy) {
+            isSkin = selectSkin;
+            selectBtnTxt.text = "SELECTED";
+        }
 
         SkinDisplay();
     }
