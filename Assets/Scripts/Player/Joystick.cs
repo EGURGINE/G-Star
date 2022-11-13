@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     private GameObject character => GameManager.Instance.player.gameObject;
-
+    private float spd => GameManager.Instance.player.playerSpd;
     private int isTouch = 0;
 
     private Vector2 startPos;
@@ -15,7 +15,7 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
 
     private void FixedUpdate()
     {
-        character.GetComponent<Rigidbody2D>().velocity = character.transform.up * GameManager.Instance.player.playerSpd * isTouch;
+        character.GetComponent<Rigidbody2D>().velocity = character.transform.up * spd * isTouch;
     }
     public void OnDrag(PointerEventData eventData)
     {
