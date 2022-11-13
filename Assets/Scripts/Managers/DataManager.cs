@@ -6,6 +6,7 @@ using DG.Tweening.CustomPlugins;
 using System.Runtime.InteropServices;
 using System.IO;
 
+[Serializable]
 public class SaveState
 {
 
@@ -34,7 +35,7 @@ public class SaveState
 
 public class DataManager : Singleton<DataManager>
 {
-    SaveState myState;
+    [SerializeField] private SaveState myState;
 
     [SerializeField] private SkinCheker skinCheker;
 
@@ -43,12 +44,13 @@ public class DataManager : Singleton<DataManager>
     private static string SavePath =>
         Application.persistentDataPath + "/saves/";
 
+    private void Start()
+    {
+        Save();
+    }
+
     public void Save()
     {
-        
-
-        string saveJson = JsonUtility.ToJson(myState);
-
         myState.money = GameManager.Instance.Money;
         myState.highScore = GameManager.Instance.highScore;
 
