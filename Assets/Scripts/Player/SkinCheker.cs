@@ -9,8 +9,7 @@ public class SkinCheker : MonoBehaviour
     public SkinData isSkin;
     public int isSkinIndex { private get; set; }
 
-    [SerializeField] 
-    private List<SkinData> skins = new List<SkinData>();
+    public List<SkinData> skins = new List<SkinData>();
     [SerializeField] 
     private SkinData selectSkin;
     [SerializeField] 
@@ -79,17 +78,14 @@ public class SkinCheker : MonoBehaviour
             GameManager.Instance.Money -= price;
             selectSkin.isBuy = true;
         }
-
-        if (selectSkin.isBuy && isSkin != selectSkin) {
+        else if (selectSkin.isBuy && isSkin != selectSkin)
+        {
             isSkin = selectSkin;
             selectBtnTxt.text = "SELECTED";
+            PlayerPrefs.SetInt("IsSkinIndex", isSkin.index);
         }
 
-        SkinDisplay();
-    }
 
-    private void OnApplicationQuit()
-    {
-        PlayerPrefs.SetInt("PlayerSkinIndex", isSkin.index);
+        SkinDisplay();
     }
 }
