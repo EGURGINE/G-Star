@@ -34,4 +34,9 @@ public class Setting : MonoBehaviour
         bgmValue.text = 50.ToString() + "%";
         sfxValue.text = 50.ToString() + "%";
     }
+
+    public void ExitBtn()
+    {
+        Application.Quit();
+    }
 }
