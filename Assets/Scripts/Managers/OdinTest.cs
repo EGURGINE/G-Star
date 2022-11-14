@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class OdinTest : MonoBehaviour
 {
+
     [AssetList]
     public List<AudioClip> num1 = new List<AudioClip>();
 

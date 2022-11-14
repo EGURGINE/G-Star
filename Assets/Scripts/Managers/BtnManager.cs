@@ -73,5 +73,6 @@ public class BtnManager : MonoBehaviour
             }
             else item.SetActive(false);
         }
+        if (num == 1) GameManager.Instance.player.SC.SkinDisplay();
     }
 }

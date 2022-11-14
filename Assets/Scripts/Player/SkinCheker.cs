@@ -48,7 +48,7 @@ public class SkinCheker : MonoBehaviour
         SkinDisplay();
 
     }
-    private void SkinDisplay()
+    public void SkinDisplay()
     {
         exSkinImage.sprite = selectSkin.image;
         skinName.text = selectSkin.name;
