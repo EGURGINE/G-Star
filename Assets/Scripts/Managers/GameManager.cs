@@ -211,8 +211,13 @@ public class GameManager : Singleton<GameManager>
         Camera.main.transform.DOMove(new Vector3(0, 0, -10), 0.01f);
         CameraSetting.Instance.MainPost();
 
-        if(isTutorial == false)
-        UpgradeWndOn();
+        if (isTutorial == false)
+            if (money >= 1000) UpgradeWndOn();
+            else
+            {
+                isStartingAbility = false;
+                PlayerSpawn();
+            }
     }//시작 셋팅
 
     public void PlayerSpawn()

@@ -36,11 +36,6 @@ public class UpgradeBtn : MonoBehaviour
     {
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
 
-        if (GameManager.Instance.isStartingAbility && GameManager.Instance.Money < 1000) {
-            return;
-            //연출
-                }
-
         this.transform.DOKill();
             //능력
             Ability();
@@ -53,7 +48,7 @@ public class UpgradeBtn : MonoBehaviour
         {
             GameManager.Instance.Money -= 1000;
             PlayerData.Instance.StartAbility++;
-            if (PlayerData.Instance.StartAbility > 2)
+            if (PlayerData.Instance.StartAbility > 2 || GameManager.Instance.Money < 1000)
             {
                 GameManager.Instance.isStartingAbility = false;
             }
@@ -62,7 +57,6 @@ public class UpgradeBtn : MonoBehaviour
     private void OnDisable()
     {
         transform.localScale = Vector3.one;
-        
     }
     private void Ability()
     {

@@ -159,7 +159,6 @@ public class UpgradeSelect : MonoBehaviour
     }
     private void Count()
     {
-        print(PlayerData.Instance.StartAbility);
         if (GameManager.Instance.isStartingAbility)
         {
             countNum.gameObject.SetActive(GameManager.Instance.isStartingAbility);
@@ -190,7 +189,6 @@ public class UpgradeSelect : MonoBehaviour
     }
     private void OnEnable()
     {
-        print(PlayerData.Instance.StartAbility);
         if (GameManager.Instance.isStartingAbility)
         {
             countNum.gameObject.SetActive(GameManager.Instance.isStartingAbility);
