@@ -21,7 +21,6 @@ public class UpgradeSelect : MonoBehaviour
     private bool isCnt;
     private float cntNum;
     private int cnt;
-
     public void ResetChoice()
     {
         // upgrade 리스트 지우고 새로 채우기
@@ -160,6 +159,14 @@ public class UpgradeSelect : MonoBehaviour
     }
     private void Count()
     {
+        print(PlayerData.Instance.StartAbility);
+        if (GameManager.Instance.isStartingAbility)
+        {
+            countNum.gameObject.SetActive(GameManager.Instance.isStartingAbility);
+
+        }
+        else countNum.gameObject.SetActive(GameManager.Instance.isStartingAbility);
+
         cnt = 0;
         cntNum = 0;
         countNum.sprite = nums[0];
@@ -183,6 +190,13 @@ public class UpgradeSelect : MonoBehaviour
     }
     private void OnEnable()
     {
-        Count();
+        print(PlayerData.Instance.StartAbility);
+        if (GameManager.Instance.isStartingAbility)
+        {
+            countNum.gameObject.SetActive(GameManager.Instance.isStartingAbility);
+            Count();
+
+        }
+        else countNum.gameObject.SetActive(GameManager.Instance.isStartingAbility);
     }
 }
