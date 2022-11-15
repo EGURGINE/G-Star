@@ -238,6 +238,7 @@ public class GameManager : Singleton<GameManager>
                 //튜토리얼 조건
                 isLevelupTrue = false;
                 Spawner.Instance.enemySpawnNum = 2;
+                isStartingAbility = false;
                 break;
             case 1:
                 tutorialNextBtn.gameObject.SetActive(false);
