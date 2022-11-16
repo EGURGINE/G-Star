@@ -106,7 +106,7 @@ public class GameManager : Singleton<GameManager>
 
     private void FixedUpdate()
     {
-        if (isGameOver == false) LevelDesign();
+        if (isGameOver == false && isUpgrade == false) LevelDesign();
     }
     
     private void LevelDesign()
