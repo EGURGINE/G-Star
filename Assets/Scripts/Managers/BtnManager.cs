@@ -53,6 +53,16 @@ public class BtnManager : MonoBehaviour
 
         GameManager.Instance.Tutorial();
     }
+    public void TutirialExit()
+    {
+        SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
+
+        GameManager.Instance.tutorialWnd.SetActive(false);
+        GameManager.Instance.isGameOver = true;
+        GameManager.Instance.isTutorial = false;
+        GameManager.Instance.player.gameObject.SetActive(false);
+        MenuBtn();
+    }
     public void VideoBtn()
     {
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
@@ -73,5 +83,6 @@ public class BtnManager : MonoBehaviour
             }
             else item.SetActive(false);
         }
+        if (num == 1) GameManager.Instance.player.SC.SkinDisplay();
     }
 }

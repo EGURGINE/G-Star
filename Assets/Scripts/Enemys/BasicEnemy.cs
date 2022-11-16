@@ -74,8 +74,7 @@ public abstract class BasicEnemy : MonoBehaviour
 
         if (GameManager.Instance.isGameOver == false && GameManager.Instance.isUpgrade == false)
         {
-            Camera.main.DOShakePosition(1, new Vector3(0.04f, 0.01f, 0), 10).OnComplete(() => 
-            Camera.main.transform.DOMove(new Vector3(0, 0, -10), 0.01f));
+            CameraSetting.Instance.Shake();
 
             GameManager.Instance.Score += score;
         }

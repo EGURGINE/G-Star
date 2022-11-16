@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 public class UpgradeSelect : MonoBehaviour
 {
     [SerializeField] List<GameObject> UPGRADE;
@@ -20,7 +21,6 @@ public class UpgradeSelect : MonoBehaviour
     private bool isCnt;
     private float cntNum;
     private int cnt;
-
     public void ResetChoice()
     {
         // upgrade 리스트 지우고 새로 채우기
@@ -33,6 +33,8 @@ public class UpgradeSelect : MonoBehaviour
     public void Choice()
     {
         CameraSetting.Instance.UpgradePost();
+
+        BtnMove();
         //고르기전 버튼들 끄기
         for (int i = 0; i < btns.transform.childCount; i++)
         {
@@ -56,6 +58,13 @@ public class UpgradeSelect : MonoBehaviour
         }
     }
 
+    private void BtnMove()
+    {
+        btns.transform.localScale = Vector3.one;
+        float posY = btns.transform.localPosition.y + 30;
+        btns.transform.DOLocalMoveY(posY, 0.5f).SetLoops(-1, LoopType.Yoyo);
+    }
+
     public void Push()
     {
         foreach (var item in choiceCheck)
@@ -66,6 +75,9 @@ public class UpgradeSelect : MonoBehaviour
     }
     public void Check(GameObject _this)
     {
+        btns.transform.DOKill();
+        btns.transform.localPosition = Vector3.zero;
+        int checkNum = 0;
         //반복 버튼인지 체크
         if (_this.GetComponent<UpgradeBtn>().type == BtnType.Score ||
             _this.GetComponent<UpgradeBtn>().type == BtnType.Money)
@@ -77,10 +89,37 @@ public class UpgradeSelect : MonoBehaviour
         }
         else
         {
-            if (_this == choiceCheck[0]) upgrade.Add(choiceCheck[1]);
-            else upgrade.Add(choiceCheck[0]);
+            if (_this == choiceCheck[0]) checkNum = 1;
+            else checkNum = 0;
+            
+            upgrade.Add(choiceCheck[checkNum]); 
         }
-        
+        choiceCheck[checkNum].gameObject.SetActive(false);
+        _this.transform.DOMove(new Vector3(0,0.5f,0), 0.5f).OnComplete(
+            ()=> _this.transform.DOScale(new Vector3(1.2f,1.2f,1),0.5f).OnComplete(
+                () =>
+                {
+                    UpgradeBottomUI.Instance.OnUI(_this.GetComponent<UpgradeBtn>().type);
+
+                    if (GameManager.Instance.isStartingAbility)
+                        transform.GetComponent<UpgradeSelect>().Choice();
+                    else
+                    {
+
+                        GameManager.Instance.isUpgrade = false;
+                        GameManager.Instance.PlayerSpawn();
+
+                        GameManager.Instance.NextLevel();
+                        GameManager.Instance.expSlider.DOKill();
+                        GameManager.Instance.expSlider.DOFade(1, 0.1f);
+
+                        Spawner.Instance.enemySpawnTime = 0;
+
+                        gameObject.SetActive(false);
+                    }
+                }
+                )
+            );
         choice.Clear();
 
         //만약 남은 버튼수가 2개 미만이면 반복 버튼 추가
@@ -112,9 +151,21 @@ public class UpgradeSelect : MonoBehaviour
         this.gameObject.SetActive(false);
         
     }
-   
+    public void ResetCount()
+    {
+        cnt = 0;
+        cntNum = 0;
+        countNum.sprite = nums[0];
+    }
     private void Count()
     {
+        if (GameManager.Instance.isStartingAbility)
+        {
+            countNum.gameObject.SetActive(GameManager.Instance.isStartingAbility);
+
+        }
+        else countNum.gameObject.SetActive(GameManager.Instance.isStartingAbility);
+
         cnt = 0;
         cntNum = 0;
         countNum.sprite = nums[0];
@@ -138,6 +189,12 @@ public class UpgradeSelect : MonoBehaviour
     }
     private void OnEnable()
     {
-        Count();
+        if (GameManager.Instance.isStartingAbility)
+        {
+            countNum.gameObject.SetActive(GameManager.Instance.isStartingAbility);
+            Count();
+
+        }
+        else countNum.gameObject.SetActive(GameManager.Instance.isStartingAbility);
     }
 }

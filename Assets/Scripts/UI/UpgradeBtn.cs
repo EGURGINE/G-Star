@@ -36,43 +36,28 @@ public class UpgradeBtn : MonoBehaviour
     {
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
 
-        if (GameManager.Instance.isStartingAbility && GameManager.Instance.Money < 1000) return;
-
+        this.transform.DOKill();
             //능력
             Ability();
+        upgradeWnd.GetComponent<UpgradeSelect>().ResetCount();
         
-        UpgradeBottomUI.Instance.OnUI(type);
         
         //버튼 체크
-        upgradeWnd.GetComponent<UpgradeSelect>().Check(this.gameObject);
+        upgradeWnd.GetComponent<UpgradeSelect>().Check(gameObject);
         if (GameManager.Instance.isStartingAbility)
         {
             GameManager.Instance.Money -= 1000;
-            PlayerData.Instance.StartAbility += 1;
-            upgradeWnd.GetComponent<UpgradeSelect>().Choice();
-            if (PlayerData.Instance.StartAbility >= 2)
+            PlayerData.Instance.StartAbility++;
+            if (PlayerData.Instance.StartAbility > 2 || GameManager.Instance.Money < 1000)
             {
                 GameManager.Instance.isStartingAbility = false;
             }
         }
-        else
-        {
-            GameManager.Instance.isUpgrade = false;
-            GameManager.Instance.PlayerSpawn();
-
-            GameManager.Instance.NextLevel();
-            GameManager.Instance.expSlider.DOKill();
-            GameManager.Instance.expSlider.DOFade(1, 0.1f);
-
-            Spawner.Instance.enemySpawnTime = 0;
-
-            upgradeWnd.SetActive(false);
-        }
-
     }
-
-    
-
+    private void OnDisable()
+    {
+        transform.localScale = Vector3.one;
+    }
     private void Ability()
     {
         switch (type)

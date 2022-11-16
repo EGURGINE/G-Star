@@ -101,13 +101,13 @@ public class GameManager : Singleton<GameManager>
         moneyTxt.text = money.ToString();
     }
 
-    float time;
+    private float time;
+    [SerializeField] private float[] waveTime = new float[7];
 
     private void FixedUpdate()
     {
         if (isGameOver == false) LevelDesign();
     }
-    [SerializeField] private float[] waveTime = new float[7];
     
     private void LevelDesign()
     {
@@ -149,7 +149,7 @@ public class GameManager : Singleton<GameManager>
             Spawner.Instance.spawnEnemyTypeNum = 2;
 
         }
-    }
+    }// 레벨 디자인
     public void NextLevel()
     {
         exp = 0;
@@ -166,7 +166,7 @@ public class GameManager : Singleton<GameManager>
         isUpgrade = true;
         upgradeWnd.SetActive(true);
         upgradeWnd.GetComponent<UpgradeSelect>().Choice();
-    }
+    }//업그레이드 창 열기
     public void StartSet()
     {
         isGameOver = isTutorial == true ? true : false;
@@ -210,7 +210,14 @@ public class GameManager : Singleton<GameManager>
         //카메라 셋팅
         Camera.main.transform.DOMove(new Vector3(0, 0, -10), 0.01f);
         CameraSetting.Instance.MainPost();
-        UpgradeWndOn();
+
+        if (isTutorial == false)
+            if (money >= 1000) UpgradeWndOn();
+            else
+            {
+                isStartingAbility = false;
+                PlayerSpawn();
+            }
     }//시작 셋팅
 
     public void PlayerSpawn()
@@ -218,6 +225,7 @@ public class GameManager : Singleton<GameManager>
         CameraSetting.Instance.MainPost();
         Instantiate(player.playerSpawnPc).transform.position = Vector3.zero;
         player.gameObject.SetActive(true);
+        player.SC.isSkin = player.SC.skins[PlayerPrefs.GetInt("IsSkinIndex")];
         player.gameObject.GetComponent<SpriteRenderer>().sprite = player.SC.isSkin.image;
         player.transform.position = Vector3.zero;
         player.transform.rotation = Quaternion.Euler(Vector3.zero);
@@ -231,10 +239,11 @@ public class GameManager : Singleton<GameManager>
                 tutorialNextBtn.gameObject.SetActive(false);
                 tutorialTxt.text = "Drag screen to move.";
                 StartSet();
-
+                PlayerSpawn();
                 //튜토리얼 조건
                 isLevelupTrue = false;
                 Spawner.Instance.enemySpawnNum = 2;
+                isStartingAbility = false;
                 break;
             case 1:
                 tutorialNextBtn.gameObject.SetActive(false);

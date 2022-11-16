@@ -22,7 +22,7 @@ public class Money : MonoBehaviour
     }
     void FixedUpdate()
     {
-        transform.Rotate(0, 0, 0.1f);
+        transform.Rotate(0, 0, 3f);
         if (GameManager.Instance.isGameOver||GameManager.Instance.isUpgrade)
         {
             GameManager.Instance.Money += 1;
@@ -37,7 +37,7 @@ public class Money : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            transform.DOMove(collision.transform.position, 0.1f).OnComplete(() =>
+            transform.DOMove(collision.transform.position, 0.1f).SetEase(Ease.InSine).OnComplete(() =>
             {
                 SoundManager.Instance.PlaySound(ESoundSources.MONEY);
                 GameManager.Instance.Money += 1;
