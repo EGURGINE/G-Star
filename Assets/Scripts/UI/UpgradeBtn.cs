@@ -28,20 +28,26 @@ public class UpgradeBtn : MonoBehaviour
     [SerializeField] private GameObject upgradeWnd;
     [SerializeField] private GameObject playerData;
     public GameObject mIcon;
+    private bool isTouch;
     private void Start()
     {
         this.GetComponent<Button>().onClick.AddListener(() => UPBtn());
     }
     public void UPBtn()
     {
+        if (isTouch == true) return;
+
+
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
 
         this.transform.DOKill();
-            //능력
-            Ability();
+
+        isTouch = true;
+        //능력
+        Ability();
         upgradeWnd.GetComponent<UpgradeSelect>().ResetCount();
-        
-        
+
+
         //버튼 체크
         upgradeWnd.GetComponent<UpgradeSelect>().Check(gameObject);
         if (GameManager.Instance.isStartingAbility)
@@ -53,6 +59,10 @@ public class UpgradeBtn : MonoBehaviour
                 GameManager.Instance.isStartingAbility = false;
             }
         }
+    }
+    private void OnEnable()
+    {
+        isTouch = false;
     }
     private void OnDisable()
     {

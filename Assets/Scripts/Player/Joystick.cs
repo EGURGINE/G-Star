@@ -13,7 +13,7 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     private Vector2 endPos;
     private Vector2 joystickVector;
 
-    private void FixedUpdate()
+    private void Update()
     {
         character.GetComponent<Rigidbody2D>().velocity = character.transform.up * spd * isTouch;
     }
@@ -23,7 +23,7 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
 
         endPos = eventData.position;
 
-        joystickVector = new Vector2((endPos.x - startPos.x), (endPos.y - startPos.y));
+        joystickVector = endPos - startPos;
 
         // Character에게 조이스틱 방향 넘기기
         TurnAngle(joystickVector);
@@ -51,6 +51,7 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
         // sign: character가 바라보는 방향 기준으로, 왼쪽:+ 오른쪽:-
 
         character.transform.Rotate(0, 0, sign * angle);
-       
+
+        print(sign * angle);
     }
 }

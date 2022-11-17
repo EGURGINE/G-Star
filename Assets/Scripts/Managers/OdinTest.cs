@@ -8,7 +8,7 @@ public class OdinTest : MonoBehaviour
 {
 
     [AssetList]
-    public List<AudioClip> num1 = new List<AudioClip>();
+    public List<SkinData> num1 = new List<SkinData>();
 
     [Space(10f)]
 

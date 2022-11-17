@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Sirenix.OdinInspector;
+
 public class SkinCheker : MonoBehaviour
 {
     private readonly int price = 20000;
     public SkinData isSkin;
     public int isSkinIndex { private get; set; }
 
+    [AssetList]
     public List<SkinData> skins = new List<SkinData>();
+
     [SerializeField] 
     private SkinData selectSkin;
     [SerializeField] 
