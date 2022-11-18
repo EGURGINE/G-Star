@@ -70,6 +70,12 @@ public abstract class BasicEnemy : MonoBehaviour
             Die();
         }
     }
+
+    public void PushObj()
+    {
+        isDead = true;
+        Spawner.Instance.Push(gameObject);
+    }
     public virtual void Die()
     {
         if (GameManager.Instance.isTutorial && GameManager.Instance.tutorialNum == 1)
@@ -92,8 +98,7 @@ public abstract class BasicEnemy : MonoBehaviour
             }
         }
 
-        isDead = true;
-        Spawner.Instance.Push(gameObject);
+        PushObj();
     }
     protected abstract void Move();
     private void OnTriggerEnter2D(Collider2D collision)

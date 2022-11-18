@@ -18,6 +18,15 @@ public class UpgradeBottomUI : Singleton<UpgradeBottomUI>
 
         GameObject go = Instantiate(basicUI,this.transform);
         go.transform.GetChild(0).GetComponent<Image>().sprite = upUI[((int)type)];
+        UISeeOn(false);
+    }
+
+    public void UISeeOn(bool isUi)
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(isUi);
+        }
     }
 
 }

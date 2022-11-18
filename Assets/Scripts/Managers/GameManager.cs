@@ -169,7 +169,6 @@ public class GameManager : Singleton<GameManager>
     }//업그레이드 창 열기
     public void StartSet()
     {
-        isGameOver = isTutorial == true ? true : false;
         //경험치 초기화
         level = 1;
         lv.text = level.ToString();
@@ -177,8 +176,8 @@ public class GameManager : Singleton<GameManager>
         maxExp = 20;
         expSlider.fillAmount = 0;
 
-        time = 0;
 
+        time = 0;
         //점수 초기화
         score = 0;
         scoreTxt.text = score.ToString();
@@ -218,6 +217,7 @@ public class GameManager : Singleton<GameManager>
                 isStartingAbility = false;
                 PlayerSpawn();
             }
+        isGameOver = isTutorial == true ? true : false;
     }//시작 셋팅
 
     public void PlayerSpawn()

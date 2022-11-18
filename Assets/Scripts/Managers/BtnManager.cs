@@ -11,10 +11,23 @@ public class BtnManager : MonoBehaviour
     [Space(10f)]
     [SerializeField] private GameObject gameWnd;
     [SerializeField] private GameObject gameOverWnd;
+    [SerializeField] private Setting set;
     public void ReTryBtn()
     {
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
 
+        if (set.isSetting == true)
+        {
+            set.IngameWndBtn();
+            GameManager.Instance.isGameOver = true;
+            print(GameManager.Instance.isGameOver);
+            GameManager.Instance.player.gameObject.SetActive(false);
+            BasicEnemy[] obj = FindObjectsOfType<BasicEnemy>();
+            foreach (var item in obj)
+            {
+                item.PushObj();
+            }
+        }
         gameOverWnd.SetActive(false);
         GameManager.Instance.StartSet();
     }
@@ -22,6 +35,13 @@ public class BtnManager : MonoBehaviour
     {
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
 
+        if (set.isSetting == true)
+        {
+            set.IngameWndBtn();
+            GameManager.Instance.isGameOver = true;
+            GameManager.Instance.player.gameObject.SetActive(false);
+
+        }
         CameraSetting.Instance.MainPost();
         gameOverWnd.SetActive(false);
         gameWnd.SetActive(false);

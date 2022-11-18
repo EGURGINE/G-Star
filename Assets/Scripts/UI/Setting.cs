@@ -9,6 +9,8 @@ public class Setting : MonoBehaviour
     [SerializeField] TextMeshProUGUI bgmValue;
     [SerializeField] Slider Sfx;
     [SerializeField] TextMeshProUGUI sfxValue;
+    [SerializeField] GameObject settingWnd;
+    public bool isSetting = false;
 
     private void Start()
     {
@@ -38,5 +40,21 @@ public class Setting : MonoBehaviour
     public void ExitBtn()
     {
         Application.Quit();
+    }
+
+    public void IngameWndBtn()
+    {
+        if (isSetting == false)
+        {
+            isSetting = true;
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            isSetting = false;
+            Time.timeScale = 1f;
+        }
+        settingWnd.SetActive(isSetting);
+        UpgradeBottomUI.Instance.UISeeOn(isSetting);
     }
 }
