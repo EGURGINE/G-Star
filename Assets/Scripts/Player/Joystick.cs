@@ -37,13 +37,14 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        joystickVector = Vector2.zero;
         isTouch = 0;
     }
 
     private void TurnAngle(Vector3 currentJoystickVec)
     {
         Vector3 originJoystickVec = character.transform.up;
-        // character가 바라보고 있는 벡터
+        // character가 바라보;고 있는 벡터
 
         float angle = Vector3.Angle(currentJoystickVec, originJoystickVec);
         int sign = (Vector3.Cross(currentJoystickVec, originJoystickVec).z > 0) ? -1 : 1;
@@ -52,6 +53,5 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
 
         character.transform.Rotate(0, 0, sign * angle);
 
-        print(sign * angle);
     }
 }
