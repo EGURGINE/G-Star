@@ -55,7 +55,7 @@ public abstract class BasicEnemy : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (isHit && rb.velocity == Vector2.zero)
+        if (isHit && isDead == false && rb.velocity == Vector2.zero)
         {
             Move();
         }
