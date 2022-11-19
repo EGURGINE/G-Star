@@ -185,7 +185,7 @@ public class GameManager : Singleton<GameManager>
         highScoreTxt.text = highScore.ToString();
 
         // 스텟 초기화
-        player.playerSpd = 3;
+        player.playerSpd = 0.5f;
         player.shotArea.ResetState();
 
         // 능력들 초기화
@@ -196,7 +196,7 @@ public class GameManager : Singleton<GameManager>
             PlayerData.Instance.data[(PlayerSkills)i] = false;
         }
         upgradeWnd.GetComponent<UpgradeSelect>().ResetChoice();
-
+        upgradeWnd.gameObject.SetActive(false);
         //스포너 초기화
         Spawner.Instance.spawnEnemyTypeNum = 1;
         Spawner.Instance.enemySpawnNum = 4;

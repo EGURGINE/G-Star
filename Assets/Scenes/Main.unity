@@ -11511,7 +11511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11467636, guid: 7973d81b61b491640b7a0d00c9de83d3, type: 3}
       propertyPath: Radio
-      value: 0.1
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 11467636, guid: 7973d81b61b491640b7a0d00c9de83d3, type: 3}
       propertyPath: SmoothTime
@@ -23070,7 +23070,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpawnPc: {fileID: 3146009235527661145, guid: bd3f24599e5d6f84b890c39d3bb4f488, type: 3}
-  playerSpd: 3
+  playerSpd: 0.5
   shotArea: {fileID: 8973259734242846751}
   SC: {fileID: 212764124}
   js: {fileID: 622240609}

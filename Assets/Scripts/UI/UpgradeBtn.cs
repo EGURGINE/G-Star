@@ -76,7 +76,7 @@ public class UpgradeBtn : MonoBehaviour
                 GameManager.Instance.player.shotArea.dmg++;
                 break;
             case BtnType.speed:
-                GameManager.Instance.player.playerSpd += 0.5f;
+                GameManager.Instance.player.playerSpd += 0.2f;
                 break;
             case BtnType.shotSpeed:
                 GameManager.Instance.player.shotArea.bulletShotSpd -= 0.005f;

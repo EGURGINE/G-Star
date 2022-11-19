@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Vector3 dir = new Vector3(js.Horizontal,js.Vertical,0);
-        dir.Normalize();
+        if (GameManager.Instance.isTutorial && GameManager.Instance.tutorialNum == 0 && dir != Vector3.zero) GameManager.Instance.Tutorial();
         transform.position += dir * playerSpd * Time.deltaTime;
         TurnAngle(dir);
     }
