@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 public class UpgradeSelect : MonoBehaviour
 {
     [SerializeField] List<GameObject> UPGRADE;
@@ -21,6 +20,8 @@ public class UpgradeSelect : MonoBehaviour
     private bool isCnt;
     private float cntNum;
     private int cnt;
+
+    [SerializeField] private GameObject levelUpTxtObj;
     public void ResetChoice()
     {
         // upgrade 리스트 지우고 새로 채우기
@@ -193,8 +194,11 @@ public class UpgradeSelect : MonoBehaviour
         {
             countNum.gameObject.SetActive(GameManager.Instance.isStartingAbility);
             Count();
-
         }
-        else countNum.gameObject.SetActive(GameManager.Instance.isStartingAbility);
+        else
+        {
+            countNum.gameObject.SetActive(GameManager.Instance.isStartingAbility);
+        }
+        levelUpTxtObj.SetActive(!GameManager.Instance.isStartingAbility);
     }
 }
