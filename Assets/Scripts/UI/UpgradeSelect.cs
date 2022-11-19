@@ -108,8 +108,9 @@ public class UpgradeSelect : MonoBehaviour
                     {
 
                         GameManager.Instance.isUpgrade = false;
-                        GameManager.Instance.PlayerSpawn();
-
+                        //GameManager.Instance.PlayerSpawn();
+                        GameManager.Instance.player.gameObject.SetActive(true);
+                        CameraSetting.Instance.MainPost();
                         GameManager.Instance.NextLevel();
                         GameManager.Instance.expSlider.DOKill();
                         GameManager.Instance.expSlider.DOFade(1, 0.1f);
