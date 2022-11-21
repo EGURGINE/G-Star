@@ -211,12 +211,14 @@ public class GameManager : Singleton<GameManager>
         CameraSetting.Instance.MainPost();
 
         if (isTutorial == false)
+        {
             if (money >= 1000) UpgradeWndOn();
             else
             {
                 isStartingAbility = false;
                 PlayerSpawn();
             }
+        }
         isGameOver = isTutorial == true ? true : false;
     }//시작 셋팅
 

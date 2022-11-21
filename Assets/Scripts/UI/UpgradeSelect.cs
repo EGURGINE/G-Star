@@ -192,14 +192,8 @@ public class UpgradeSelect : MonoBehaviour
     private void OnEnable()
     {
         if (GameManager.Instance.isStartingAbility)
-        {
-            countNum.gameObject.SetActive(GameManager.Instance.isStartingAbility);
             Count();
-        }
-        else
-        {
-            countNum.gameObject.SetActive(GameManager.Instance.isStartingAbility);
-        }
+        countNum.gameObject.SetActive(GameManager.Instance.isStartingAbility);
         levelUpTxtObj.SetActive(!GameManager.Instance.isStartingAbility);
     }
 }
