@@ -25,7 +25,7 @@ public class UpgradeBtn : MonoBehaviour
 {
     public BtnType type;
     private GameObject player => GameManager.Instance.player.gameObject;
-    [SerializeField] private GameObject upgradeWnd;
+    private GameObject upgradeWnd => GameManager.Instance.upSelect.gameObject;
     [SerializeField] private GameObject playerData;
     public GameObject mIcon;
     private bool isTouch;
@@ -40,7 +40,7 @@ public class UpgradeBtn : MonoBehaviour
 
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
 
-        this.transform.DOKill();
+        upgradeWnd.transform.DOKill();
 
         isTouch = true;
         //´É·Â

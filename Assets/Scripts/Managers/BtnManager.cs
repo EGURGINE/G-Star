@@ -44,6 +44,8 @@ public class BtnManager : MonoBehaviour
         }
         CameraSetting.Instance.MainPost();
         gameOverWnd.SetActive(false);
+        GameManager.Instance.upSelect.ChoiceReset();
+        GameManager.Instance.upSelect.gameObject.SetActive(false);
         gameWnd.SetActive(false);
         menuWnd.SetActive(true);
     }

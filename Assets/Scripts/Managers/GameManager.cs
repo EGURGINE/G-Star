@@ -32,7 +32,7 @@ public class GameManager : Singleton<GameManager>
     public float maxExp;
 
     [Header("업그레이드")]
-    [SerializeField] private GameObject upgradeWnd;
+    public UpgradeSelect upSelect;
     public bool isUpgrade = false;
 
     [Header("튜토리얼")]
@@ -164,8 +164,8 @@ public class GameManager : Singleton<GameManager>
     private void UpgradeWndOn()
     {
         isUpgrade = true;
-        upgradeWnd.SetActive(true);
-        upgradeWnd.GetComponent<UpgradeSelect>().Choice();
+        upSelect.gameObject.SetActive(true);
+        upSelect.GetComponent<UpgradeSelect>().Choice();
     }//업그레이드 창 열기
     public void StartSet()
     {
@@ -195,8 +195,8 @@ public class GameManager : Singleton<GameManager>
         {
             PlayerData.Instance.data[(PlayerSkills)i] = false;
         }
-        upgradeWnd.GetComponent<UpgradeSelect>().ResetChoice();
-        upgradeWnd.gameObject.SetActive(false);
+        upSelect.GetComponent<UpgradeSelect>().ResetChoice();
+        upSelect.gameObject.SetActive(false);
         //스포너 초기화
         Spawner.Instance.spawnEnemyTypeNum = 1;
         Spawner.Instance.enemySpawnNum = 4;
