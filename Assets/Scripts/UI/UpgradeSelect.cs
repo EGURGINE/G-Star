@@ -31,18 +31,23 @@ public class UpgradeSelect : MonoBehaviour
             upgrade.Add(UPGRADE[i]);
         }
     }
+
+    public void ChoiceReset()
+    {
+        choice.Clear();
+    }
     public void Choice()
     {
         CameraSetting.Instance.UpgradePost();
 
         BtnMove();
-        //고르기전 버튼들 끄기
+        // 고르기전 버튼들 끄기
         for (int i = 0; i < btns.transform.childCount; i++)
         {
             btns.transform.GetChild(i).gameObject.SetActive(false);
         }
 
-        //랜덤으로 버튼 뽑기
+        // 랜덤으로 버튼 뽑기
         for (int i = 0; i < 2; i++)
         {
             choiceCheck[i] = upgrade[Random.Range(0, upgrade.Count - 1)];
@@ -50,7 +55,7 @@ public class UpgradeSelect : MonoBehaviour
             choice.Add(choiceCheck[i]);
         }
 
-        //뽑은 버튼 켜기
+        // 뽑은 버튼 켜기
         for (int i = 0; i < 2; i++)
         {
             choice[i].SetActive(true);
@@ -80,6 +85,10 @@ public class UpgradeSelect : MonoBehaviour
         btns.transform.localPosition = Vector3.zero;
         int checkNum = 0;
         //반복 버튼인지 체크
+
+        if (_this == choiceCheck[0]) checkNum = 1;
+        else checkNum = 0;
+
         if (_this.GetComponent<UpgradeBtn>().type == BtnType.Score ||
             _this.GetComponent<UpgradeBtn>().type == BtnType.Money)
         {
@@ -90,9 +99,6 @@ public class UpgradeSelect : MonoBehaviour
         }
         else
         {
-            if (_this == choiceCheck[0]) checkNum = 1;
-            else checkNum = 0;
-            
             upgrade.Add(choiceCheck[checkNum]); 
         }
         choiceCheck[checkNum].gameObject.SetActive(false);
