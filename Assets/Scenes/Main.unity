@@ -1804,8 +1804,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c36ccdee8ea4a2742b61ff767fb3a168, type: 2}
   - {fileID: 11400000, guid: 76634845cf154e048a7eace47f134bb3, type: 2}
   - {fileID: 11400000, guid: 37b2985e5e8c21b489206df57c84c074, type: 2}
-  - {fileID: 11400000, guid: f1c76cc86fddc3441941e1cf224f9003, type: 2}
   - {fileID: 11400000, guid: 3b57e18400543824fba7e96bd5adc48f, type: 2}
+  - {fileID: 11400000, guid: c043934abca0c954997ed13c006b5bee, type: 2}
   selectSkin: {fileID: 0}
   exSkinImage: {fileID: 297716853}
   skinName: {fileID: 341689704}
@@ -2283,7 +2283,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &262198726
 Transform:
   m_ObjectHideFlags: 0
@@ -2324,7 +2324,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c36ccdee8ea4a2742b61ff767fb3a168, type: 2}
   - {fileID: 11400000, guid: 76634845cf154e048a7eace47f134bb3, type: 2}
   - {fileID: 11400000, guid: 37b2985e5e8c21b489206df57c84c074, type: 2}
-  - {fileID: 11400000, guid: f1c76cc86fddc3441941e1cf224f9003, type: 2}
+  - {fileID: 11400000, guid: c043934abca0c954997ed13c006b5bee, type: 2}
   - {fileID: 11400000, guid: 3b57e18400543824fba7e96bd5adc48f, type: 2}
 --- !u!21 &269791528
 Material:
