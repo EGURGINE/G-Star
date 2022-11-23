@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using DG.Tweening.CustomPlugins;
-using System.Runtime.InteropServices;
 using System.IO;
+using Sirenix.OdinInspector;
 
 [Serializable]
 public class SaveState
@@ -16,20 +15,39 @@ public class SaveState
     public float sfxVolum;
 
     public int isSkinIndex;
-    public bool[] skinIsBuy = new bool[7]; 
+    public List<bool> skinIsBuy = new List<bool>(); 
 }
 
 public class DataManager : Singleton<DataManager>
 {
-    [SerializeField] private SaveState myState = new SaveState();
+    public SaveState myState = new SaveState();
 
     [SerializeField] private SkinCheker skinCheker;
 
+    [AssetList]
     [SerializeField] private SkinData[] skinData;
 
-    string json;
-    private void Start()
+    string filePath;
+    private void Awake()
     {
+        filePath = Application.persistentDataPath + "/GameDataText.txt";
+        Load();
+    }
+    private void ResetSave()
+    {
+        myState.money = 0;
+        myState.highScore = 0;
+
+        myState.bgmVolum = 50;
+        myState.sfxVolum = 50;
+
+        myState.isSkinIndex = 0;
+
+        for (int i = 0; i < 7; i++)
+        {
+            myState.skinIsBuy.Add(false);
+        }
+        myState.skinIsBuy[0] = true;
         Save();
         Load();
     }
@@ -43,32 +61,34 @@ public class DataManager : Singleton<DataManager>
 
         myState.isSkinIndex = skinCheker.isSkin.index;
 
-        for (int i = 0; i < skinData.Length; i++)
+
+        for (int i = 0; i < 7; i++)
         {
             myState.skinIsBuy[i] = skinData[i].isBuy;
         }
 
-        json = JsonUtility.ToJson(myState);
-        print(json);
+        string jData = JsonUtility.ToJson(myState);
+        byte[] bytes = System.Text.Encoding.UTF8.GetBytes(jData);
+        string code = System.Convert.ToBase64String(bytes);
+
+        File.WriteAllText(filePath, code);
     }
 
     public void Load()
     {
-        myState = JsonUtility.FromJson<SaveState>(json);
+        if (!File.Exists(filePath)) { ResetSave(); return; }
 
-        GameManager.Instance.Money = myState.money;
-        GameManager.Instance.highScore = myState.highScore;
+        string code = File.ReadAllText(filePath);
 
-        SoundManager.Instance.BGMVolum = myState.bgmVolum;
-        SoundManager.Instance.SFXVolum = myState.sfxVolum;
-
-        skinCheker.isSkinIndex = myState.isSkinIndex;
-
-        for (int i = 0; i < skinData.Length; i++)
-        {
-           skinData[i].isBuy = myState.skinIsBuy[i];
-        }
-
-        print("load");
+        byte[] bytes = System.Convert.FromBase64String(code);
+        string jData = System.Text.Encoding.UTF8.GetString(bytes);
+        myState = JsonUtility.FromJson<SaveState>(jData);
+        print(myState);
     }
+
+    private void OnApplicationQuit()
+    {
+        Save();
+    }
+
 }

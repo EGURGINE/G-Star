@@ -9,7 +9,7 @@ public class SkinCheker : MonoBehaviour
 {
     private readonly int price = 20000;
     public SkinData isSkin;
-    public int isSkinIndex { private get; set; }
+    public int isSkinIndex { get; set; }
 
     [AssetList]
     public List<SkinData> skins = new List<SkinData>();
@@ -28,11 +28,20 @@ public class SkinCheker : MonoBehaviour
     private Image moneyImage;
     private void Start()
     {
+        int dataIndex = DataManager.Instance.myState.isSkinIndex;
+        isSkin = skins[dataIndex];
         selectSkin = skins[0];
-        isSkin = skins[isSkinIndex];
+        startSetSkinData();
         SkinDisplay();
     }
 
+    private void startSetSkinData()
+    {
+        for (int i = 0; i < 7; i++)
+        {
+            skins[i].isBuy = DataManager.Instance.myState.skinIsBuy[i];
+        }
+    }
     public void LeftBtn()
     {
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
@@ -86,7 +95,6 @@ public class SkinCheker : MonoBehaviour
         {
             isSkin = selectSkin;
             selectBtnTxt.text = "SELECTED";
-            PlayerPrefs.SetInt("IsSkinIndex", isSkin.index);
         }
 
 

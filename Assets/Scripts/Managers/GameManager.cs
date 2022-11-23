@@ -75,7 +75,6 @@ public class GameManager : Singleton<GameManager>
         set
         {
             money = value;
-            PlayerPrefs.SetInt("Money", money);
             moneyTxt.text = money.ToString();
         }
     }
@@ -93,11 +92,11 @@ public class GameManager : Singleton<GameManager>
         isGameOver = true;
 
         //게임 시작시 최고점수 가져오기
-        highScore = PlayerPrefs.GetFloat("HighScore");
+        highScore = DataManager.Instance.myState.highScore;
         highScoreTxt.text = highScore.ToString();
 
         // 게임 시작시 저장한 돈 가져오기
-        money = PlayerPrefs.GetInt("Money");
+        money = DataManager.Instance.myState.money;
         moneyTxt.text = money.ToString();
     }
 
@@ -181,7 +180,6 @@ public class GameManager : Singleton<GameManager>
         //점수 초기화
         score = 0;
         scoreTxt.text = score.ToString();
-        highScore = PlayerPrefs.GetFloat("HighScore");
         highScoreTxt.text = highScore.ToString();
 
         // 스텟 초기화
@@ -227,7 +225,6 @@ public class GameManager : Singleton<GameManager>
         CameraSetting.Instance.MainPost();
         Instantiate(player.playerSpawnPc).transform.position = Vector3.zero;
         player.gameObject.SetActive(true);
-        player.SC.isSkin = player.SC.skins[PlayerPrefs.GetInt("IsSkinIndex")];
         player.gameObject.GetComponent<SpriteRenderer>().sprite = player.SC.isSkin.image;
         player.transform.position = Vector3.zero;
         player.transform.rotation = Quaternion.Euler(Vector3.zero);
@@ -291,10 +288,9 @@ public class GameManager : Singleton<GameManager>
             isGameOver = true;
             player.gameObject.SetActive(false);
             //최고점수 기록
-            if (score > PlayerPrefs.GetFloat("HighScore"))
+            if (score > highScore)
             {
                 highScore = score;
-                PlayerPrefs.SetFloat("HighScore", highScore);
                 highScoreTxt.text = highScore.ToString();
             }
 

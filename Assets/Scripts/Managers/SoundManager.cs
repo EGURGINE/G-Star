@@ -33,8 +33,8 @@ public class SoundManager : MonoBehaviour
         {
             audioSources.Add(Resources.Load<AudioClip>("Audio/"+ ((ESoundSources)i).ToString()));
         }
-        BGMVolum = PlayerPrefs.GetFloat("BGMVolum");
-        SFXVolum = PlayerPrefs.GetFloat("SFXVolum");
+        BGMVolum = DataManager.Instance.myState.bgmVolum;
+        SFXVolum = DataManager.Instance.myState.sfxVolum;
         PlaySound(ESoundSources.BGM);
     }
 
@@ -59,9 +59,4 @@ public class SoundManager : MonoBehaviour
         Destroy(go, audio.clip.length);
     }
 
-    private void OnApplicationQuit()
-    {
-        PlayerPrefs.SetFloat("BGMVolum", BGMVolum);
-        PlayerPrefs.SetFloat("SFXVolum", SFXVolum);
-    }
 }
