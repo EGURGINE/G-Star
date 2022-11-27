@@ -83,7 +83,6 @@ public class DataManager : Singleton<DataManager>
         byte[] bytes = System.Convert.FromBase64String(code);
         string jData = System.Text.Encoding.UTF8.GetString(bytes);
         myState = JsonUtility.FromJson<SaveState>(jData);
-        print(myState);
     }
 
     private void OnApplicationQuit()

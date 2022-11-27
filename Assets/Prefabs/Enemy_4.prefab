@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 926867852509110583}
   - component: {fileID: 926867852509110581}
   - component: {fileID: -1237872269312262156}
-  - component: {fileID: 7060773863020658686}
+  - component: {fileID: 5288639044333836231}
   m_Layer: 0
   m_Name: Enemy_4
   m_TagString: Enemy
@@ -128,8 +128,8 @@ MonoBehaviour:
   playerDeadPc: {fileID: 1641648458358345791, guid: bcd96ac0168784145833382f663d9f57, type: 3}
   startColor: {r: 1, g: 0, b: 0.45882356, a: 0}
   isHit: 0
---- !u!58 &7060773863020658686
-CircleCollider2D:
+--- !u!60 &5288639044333836231
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -142,8 +142,39 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.55, y: 2.55}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.015, y: -0.035}
+      - {x: 1.015, y: 0.024999999}
+      - {x: 0.955, y: 0.13499999}
+      - {x: 0.775, y: 0.445}
+      - {x: 0.695, y: 0.585}
+      - {x: 0.585, y: 0.775}
+      - {x: 0.515, y: 0.885}
+      - {x: -0.505, y: 0.885}
+      - {x: -0.525, y: 0.875}
+      - {x: -0.66499996, y: 0.635}
+      - {x: -0.92499995, y: 0.185}
+      - {x: -1.015, y: 0.024999999}
+      - {x: -1.015, y: -0.035}
+      - {x: -0.955, y: -0.145}
+      - {x: -0.885, y: -0.265}
+      - {x: -0.66499996, y: -0.645}
+      - {x: -0.585, y: -0.78499997}
+      - {x: -0.515, y: -0.895}
+      - {x: 0.505, y: -0.895}
+      - {x: 0.525, y: -0.885}
+      - {x: 0.585, y: -0.78499997}
+      - {x: 0.92499995, y: -0.195}
 --- !u!1 &4453744579324412178
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,7 +184,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4807668289903314486}
-  - component: {fileID: 5679357221147467203}
+  - component: {fileID: 3252580827296147046}
   m_Layer: 7
   m_Name: GameObject
   m_TagString: Untagged
@@ -175,8 +206,8 @@ Transform:
   m_Father: {fileID: 926867852509110582}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &5679357221147467203
-CircleCollider2D:
+--- !u!60 &3252580827296147046
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -189,5 +220,36 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.55, y: 2.55}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.015, y: -0.035}
+      - {x: 1.015, y: 0.024999999}
+      - {x: 0.955, y: 0.13499999}
+      - {x: 0.775, y: 0.445}
+      - {x: 0.695, y: 0.585}
+      - {x: 0.585, y: 0.775}
+      - {x: 0.515, y: 0.885}
+      - {x: -0.505, y: 0.885}
+      - {x: -0.525, y: 0.875}
+      - {x: -0.66499996, y: 0.635}
+      - {x: -0.92499995, y: 0.185}
+      - {x: -1.015, y: 0.024999999}
+      - {x: -1.015, y: -0.035}
+      - {x: -0.955, y: -0.145}
+      - {x: -0.885, y: -0.265}
+      - {x: -0.66499996, y: -0.645}
+      - {x: -0.585, y: -0.78499997}
+      - {x: -0.515, y: -0.895}
+      - {x: 0.505, y: -0.895}
+      - {x: 0.525, y: -0.885}
+      - {x: 0.585, y: -0.78499997}
+      - {x: 0.92499995, y: -0.195}

@@ -36,7 +36,7 @@ public abstract class BasicEnemy : MonoBehaviour
         hp = maxHp;
         cnt = 0;
         GetComponent<SpriteRenderer>().color = startColor;
-        GetComponent<CircleCollider2D>().enabled = false;
+        GetComponent<PolygonCollider2D>().enabled = false;
         StartCoroutine(Fade(1.5f));
     }
     IEnumerator Fade(float _time)
@@ -47,7 +47,7 @@ public abstract class BasicEnemy : MonoBehaviour
             GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, (Time.deltaTime / _time));
             yield return null;
         }
-        GetComponent<CircleCollider2D>().enabled = true;
+        GetComponent<PolygonCollider2D>().enabled = true;
         isHit = true;
         Move();
         isDead = false;
