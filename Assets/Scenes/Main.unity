@@ -1741,6 +1741,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 202113296}
   m_CullTransparentMesh: 1
+--- !u!1 &206758635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 206758636}
+  - component: {fileID: 206758637}
+  m_Layer: 0
+  m_Name: ObserverManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &206758636
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206758635}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1319193751}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &206758637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206758635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6ca04d7924f14c4db50f939377b47d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &212764121
 GameObject:
   m_ObjectHideFlags: 0
@@ -3875,6 +3918,7 @@ MonoBehaviour:
   moneyTxt: {fileID: 1561826053}
   gameOverWnd: {fileID: 1682459384}
   isGameOver: 0
+  observerManager: {fileID: 206758637}
   lv: {fileID: 519062136}
   level: 0
   expSlider: {fileID: 1791353657}
@@ -15924,6 +15968,7 @@ Transform:
   - {fileID: 169598582}
   - {fileID: 1734408603}
   - {fileID: 262198726}
+  - {fileID: 206758636}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

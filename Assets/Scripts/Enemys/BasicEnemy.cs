@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-public abstract class BasicEnemy : MonoBehaviour
+public abstract class BasicEnemy : MonoBehaviour,ObserverPattern.IObserver
 {
     [SerializeField] private int maxHp;
     [SerializeField] private int hp;
@@ -38,6 +38,8 @@ public abstract class BasicEnemy : MonoBehaviour
         GetComponent<SpriteRenderer>().color = startColor;
         GetComponent<PolygonCollider2D>().enabled = false;
         StartCoroutine(Fade(1.5f));
+        //본인을 옵저버로 등록한다.
+        GameManager.Instance.observerManager.ResisterObserver(this);
     }
     IEnumerator Fade(float _time)
     {
@@ -99,6 +101,8 @@ public abstract class BasicEnemy : MonoBehaviour
         }
 
         PushObj();
+        //죽을시 옵저버를 해지한다.
+        GameManager.Instance.observerManager.RemoveObserver(this);
     }
     protected abstract void Move();
     private void OnTriggerEnter2D(Collider2D collision)
@@ -117,5 +121,10 @@ public abstract class BasicEnemy : MonoBehaviour
         {
             hp -= maxHp;
         }
+    }
+
+    public void DestroyObj()
+    {
+        Die();
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-public class Money : MonoBehaviour
+public class Money : MonoBehaviour,ObserverPattern.IObserver
 {
     [SerializeField] private float spd;
     private Transform startTr => this.transform;
@@ -15,6 +15,7 @@ public class Money : MonoBehaviour
     float cnt;
     private void Start()
     {
+        GameManager.Instance.observerManager.ResisterObserver(this);
         StartCoroutine(Fade(4f));
     }
     IEnumerator Fade(float _time)
@@ -29,7 +30,7 @@ public class Money : MonoBehaviour
         yield return null;
     }
 
-     public void Init()
+    public void Init()
     {
         m_timerMax = Random.RandomRange(0.8f, 1.0f);
         m_Points[0] = startTr.position;
@@ -59,8 +60,6 @@ public class Money : MonoBehaviour
 
         if (GameManager.Instance.isGameOver||GameManager.Instance.isUpgrade)
         {
-            GameManager.Instance.Money += 1;
-            Destroy(gameObject);
         }
 
         if (m_timerCurrent > m_timerMax) return;
@@ -85,5 +84,11 @@ public class Money : MonoBehaviour
             GameManager.Instance.Exp += 5;
             Destroy(gameObject);
         }
+    }
+
+    public void DestroyObj()
+    {
+        GameManager.Instance.Money += 1;
+        Destroy(gameObject);
     }
 }

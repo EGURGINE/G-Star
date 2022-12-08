@@ -23,6 +23,7 @@ public class GameManager : Singleton<GameManager>
     [Header("게임오버")]
     [SerializeField] private GameObject gameOverWnd;
     public bool isGameOver = false;
+    public ObserverPattern.ObserverData observerManager;
 
     [Header("레벨")]
     [SerializeField] private Text lv;
