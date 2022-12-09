@@ -62,6 +62,8 @@ public class GameManager : Singleton<GameManager>
                 lv.text = level.ToString();
                 LevelProduction();
 
+                observerManager.NotifyObservers();
+
                 player.gameObject.SetActive(false);
 
                 UpgradeWndOn();
@@ -273,6 +275,8 @@ public class GameManager : Singleton<GameManager>
     public void SetDie()
     {
         SoundManager.Instance.PlaySound(ESoundSources.DIE);
+        observerManager.NotifyObservers();
+
         if (isTutorial) // 튜토리얼 일때
         {
             isGameOver = true;
