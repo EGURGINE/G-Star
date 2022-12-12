@@ -56,13 +56,13 @@ public class GameManager : Singleton<GameManager>
             expSlider.fillAmount = exp / maxExp;
             if (exp >= maxExp)
             {
+                observerManager.NotifyObservers();
                 SoundManager.Instance.PlaySound(ESoundSources.LEVEL);
                 
                 level++;
                 lv.text = level.ToString();
                 LevelProduction();
 
-                observerManager.NotifyObservers();
 
                 player.gameObject.SetActive(false);
 

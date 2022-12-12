@@ -13,16 +13,18 @@ public class Money : MonoBehaviour,ObserverPattern.IObserver
     private float m_timerCurrent = 0;
 
     float cnt;
-    private void Start()
+
+    private void OnEnable()
     {
         GameManager.Instance.observerManager.ResisterObserver(this);
         StartCoroutine(Fade(4f));
     }
+
     IEnumerator Fade(float _time)
     {
         while (cnt<1)
         {
-            cnt+=Time.deltaTime/_time;
+            cnt += Time.deltaTime/_time;
             GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -(Time.deltaTime / _time)); 
             yield return null;
         }
@@ -58,10 +60,6 @@ public class Money : MonoBehaviour,ObserverPattern.IObserver
     {
         transform.Rotate(0, 0, 3f);
 
-        if (GameManager.Instance.isGameOver||GameManager.Instance.isUpgrade)
-        {
-        }
-
         if (m_timerCurrent > m_timerMax) return;
 
         m_timerCurrent += Time.deltaTime * spd;
@@ -80,15 +78,18 @@ public class Money : MonoBehaviour,ObserverPattern.IObserver
         if (collision.CompareTag("Player"))
         {
             SoundManager.Instance.PlaySound(ESoundSources.MONEY);
-            GameManager.Instance.Money += 1;
             GameManager.Instance.Exp += 5;
-            Destroy(gameObject);
+            Die();
+            GameManager.Instance.observerManager.RemoveObserver(this);
         }
     }
-
-    public void DestroyObj()
+    private void Die()
     {
         GameManager.Instance.Money += 1;
-        Destroy(gameObject);
+        Spawner.Instance.Push(this.gameObject);
+    }
+    public void DestroyObj()
+    {
+        Die();
     }
 }

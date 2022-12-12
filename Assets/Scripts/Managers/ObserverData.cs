@@ -22,6 +22,7 @@ namespace ObserverPattern
             {
                 observer.DestroyObj();
             }
+            list_Observers.Clear();
         }
     }
 }
