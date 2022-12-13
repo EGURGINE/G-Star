@@ -18,6 +18,8 @@ public class Money : MonoBehaviour,ObserverPattern.IObserver
     {
         GameManager.Instance.observerManager.ResisterObserver(this);
         StartCoroutine(Fade(4f));
+        m_timerMax = 0;
+        m_timerCurrent = 0;
     }
 
     IEnumerator Fade(float _time)
@@ -79,8 +81,8 @@ public class Money : MonoBehaviour,ObserverPattern.IObserver
         {
             SoundManager.Instance.PlaySound(ESoundSources.MONEY);
             GameManager.Instance.Exp += 5;
-            Die();
             GameManager.Instance.observerManager.RemoveObserver(this);
+            Die();
         }
     }
     private void Die()

@@ -96,16 +96,21 @@ public class Spawner : Singleton<Spawner>
             obj.TryGetComponent(out BasicEnemy isEnemy);
             if (isEnemy)
             {
-                obj.transform.transform.position = spawnPos.position;
+                obj.transform.position = spawnPos.position;
                 obj.GetComponent<BasicEnemy>().SpawnSet();
             }
-            else obj.transform.position = _EnemyPos + new Vector2(Random.Range(-0.15f,0.15f), Random.Range(-0.15f, 0.15f));
+            else
+            {
+                obj.transform.position = _EnemyPos + new Vector2(Random.Range(-0.15f, 0.15f), Random.Range(-0.15f, 0.15f));
+            }
         }
     }
     public void Push(GameObject _this)
     {
         poolObjs[_this.name].Push(_this);
-        _this.transform.parent = EnemyObjs.transform;
+        if(_this.name == moneyName)
+            _this.transform.parent = MoneyObjs.transform;
+        else _this.transform.parent = EnemyObjs.transform;
         _this.SetActive(false);
     }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-public abstract class BasicEnemy : MonoBehaviour,ObserverPattern.IObserver
+public abstract class BasicEnemy : MonoBehaviour, ObserverPattern.IObserver
 {
     [SerializeField] private int maxHp;
     [SerializeField] private int hp;
@@ -60,11 +60,6 @@ public abstract class BasicEnemy : MonoBehaviour,ObserverPattern.IObserver
         if (isHit && isDead == false && rb.velocity == Vector2.zero)
         {
             Move();
-        }
-
-        if (GameManager.Instance.isGameOver || GameManager.Instance.isUpgrade)
-        {
-            Die();
         }
         if (hp <= 0)
         {
@@ -125,6 +120,6 @@ public abstract class BasicEnemy : MonoBehaviour,ObserverPattern.IObserver
 
     public void DestroyObj()
     {
-        Die();
+        PushObj();
     }
 }
