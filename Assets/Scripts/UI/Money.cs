@@ -8,34 +8,43 @@ public class Money : MonoBehaviour,ObserverPattern.IObserver
     private Transform startTr => this.transform;
     private Transform endTr => GameManager.Instance.player.transform;
     Vector3[] m_Points = new Vector3[4];
-
+    private SpriteRenderer SR => this.GetComponent<SpriteRenderer>();
+    private Color sColor = new Color(0,255,255,1);
     private float m_timerMax = 0;
     private float m_timerCurrent = 0;
 
     float cnt;
 
+    private bool isHit;
+
+    private Coroutine fadeC;
+
     private void OnEnable()
     {
         GameManager.Instance.observerManager.ResisterObserver(this);
-        StartCoroutine(Fade(4f));
-        m_timerMax = 0;
+        SR.color = sColor;
+        fadeC = StartCoroutine(nameof(Fade));
         m_timerCurrent = 0;
+        cnt = 0;
+        isHit = false;
     }
 
-    IEnumerator Fade(float _time)
+    IEnumerator Fade()
     {
+        float _time = 4;
         while (cnt<1)
         {
             cnt += Time.deltaTime/_time;
-            GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, -(Time.deltaTime / _time)); 
+            SR.color += new Color(0, 0, 0, -(Time.deltaTime / _time)); 
             yield return null;
         }
-        Destroy(gameObject);
+        Die();
         yield return null;
     }
 
     public void Init()
     {
+        isHit = true;
         m_timerMax = Random.RandomRange(0.8f, 1.0f);
         m_Points[0] = startTr.position;
         m_Points[1] = (startTr.position + (Random.Range(-1.5f,1.5f) * startTr.right) + (Random.Range(-1.5f, 1.5f) * startTr.up));
@@ -62,7 +71,7 @@ public class Money : MonoBehaviour,ObserverPattern.IObserver
     {
         transform.Rotate(0, 0, 3f);
 
-        if (m_timerCurrent > m_timerMax) return;
+        if (isHit == false || m_timerCurrent > m_timerMax) return;
 
         m_timerCurrent += Time.deltaTime * spd;
 
@@ -81,14 +90,15 @@ public class Money : MonoBehaviour,ObserverPattern.IObserver
         {
             SoundManager.Instance.PlaySound(ESoundSources.MONEY);
             GameManager.Instance.Exp += 5;
+            GameManager.Instance.Money += 1;
             GameManager.Instance.observerManager.RemoveObserver(this);
             Die();
         }
     }
     private void Die()
     {
-        GameManager.Instance.Money += 1;
         Spawner.Instance.Push(this.gameObject);
+        StopCoroutine(fadeC);
     }
     public void DestroyObj()
     {
