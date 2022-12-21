@@ -20,7 +20,6 @@ public class BtnManager : MonoBehaviour
         {
             set.IngameWndBtn();
             GameManager.Instance.isGameOver = true;
-            print(GameManager.Instance.isGameOver);
             GameManager.Instance.player.gameObject.SetActive(false);
             BasicEnemy[] obj = FindObjectsOfType<BasicEnemy>();
             foreach (var item in obj)

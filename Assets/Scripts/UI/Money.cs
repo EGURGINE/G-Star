@@ -19,7 +19,7 @@ public class Money : MonoBehaviour,ObserverPattern.IObserver
 
     private Coroutine fadeC;
 
-    private void OnEnable()
+    public void OnEnableObj()
     {
         GameManager.Instance.observerManager.ResisterObserver(this);
         SR.color = sColor;
@@ -97,8 +97,8 @@ public class Money : MonoBehaviour,ObserverPattern.IObserver
     }
     private void Die()
     {
-        Spawner.Instance.Push(this.gameObject);
         StopCoroutine(fadeC);
+        Spawner.Instance.Push(this.gameObject);
     }
     public void DestroyObj()
     {

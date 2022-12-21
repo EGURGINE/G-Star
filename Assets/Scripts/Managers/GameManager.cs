@@ -150,6 +150,7 @@ public class GameManager : Singleton<GameManager>
         {
             Spawner.Instance.spawnEnemyTypeNum = 2;
         }
+        //else Spawner.Instance.spawnEnemyTypeNum = 6;
     }// 레벨 디자인
     public void NextLevel()
     {

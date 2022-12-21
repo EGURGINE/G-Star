@@ -63,17 +63,16 @@ public class Spawner : Singleton<Spawner>
         GameObject newDoll = Instantiate(_obj);
         int index = newDoll.name.IndexOf("(Clone)");
         if (index > 0) newDoll.name = newDoll.name.Substring(0, index);
-        newDoll.SetActive(false);
-        poolObjs[_obj.name].Push(newDoll);
         if(_obj == moneyObj) newDoll.transform.parent = MoneyObjs.transform;
         else newDoll.transform.parent = EnemyObjs.transform;
-
+        poolObjs[_obj.name].Push(newDoll);
+        newDoll.SetActive(false);
     }
     public void Pop(string _name , Vector2 _EnemyPos)
     {
         if (poolObjs.ContainsKey(_name))
         {
-            if (poolObjs[_name].Count == 0)
+            if (poolObjs[_name].Count <= 0)
             {
                 if (_name == moneyName)
                 {
@@ -86,6 +85,7 @@ public class Spawner : Singleton<Spawner>
                         if (item.name == _name)
                         {
                             CreateObj(item);
+                            break;
                         }
                     }
                 }
@@ -97,11 +97,12 @@ public class Spawner : Singleton<Spawner>
             if (isEnemy)
             {
                 obj.transform.position = spawnPos.position;
-                obj.GetComponent<BasicEnemy>().SpawnSet();
+                isEnemy.SpawnSet();
             }
             else
             {
                 obj.transform.position = _EnemyPos + new Vector2(Random.Range(-0.15f, 0.15f), Random.Range(-0.15f, 0.15f));
+                obj.GetComponent<Money>().OnEnableObj();
             }
         }
     }
