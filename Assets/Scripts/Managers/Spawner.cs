@@ -126,7 +126,7 @@ public class Spawner : Singleton<Spawner>
                 for (int i = 0; i < enemySpawnNum; i++)
                 {
                     spawnPos.position = new Vector2(Random.Range(-2.03f, 2.03f), Random.Range(-2.7f, 3.04f));
-                    EEnemyType _name = (EEnemyType)Random.Range(0, spawnEnemyTypeNum);
+                    EEnemyType _name = (EEnemyType)Random.Range(((int)EEnemyType.Enemy_1), spawnEnemyTypeNum);
                     Pop(_name.ToString(), Vector2.zero);
 
                 }

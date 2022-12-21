@@ -37,11 +37,6 @@ public class Setting : MonoBehaviour
         sfxValue.text = 50.ToString() + "%";
     }
 
-    public void ExitBtn()
-    {
-        Application.Quit();
-    }
-
     public void IngameWndBtn()
     {
         if (isSetting == false)

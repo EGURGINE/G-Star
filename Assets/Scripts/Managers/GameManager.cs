@@ -118,7 +118,7 @@ public class GameManager : Singleton<GameManager>
         {
             Spawner.Instance.enemySpawnNum = 7;
             Spawner.Instance.spawnDelay = 2f;
-            Spawner.Instance.spawnEnemyTypeNum = 5;
+            Spawner.Instance.spawnEnemyTypeNum = 6;
 
         }
         else if (time > waveTime[5])
@@ -149,7 +149,6 @@ public class GameManager : Singleton<GameManager>
         else if (time > waveTime[0])
         {
             Spawner.Instance.spawnEnemyTypeNum = 2;
-
         }
     }// 레벨 디자인
     public void NextLevel()
@@ -269,6 +268,7 @@ public class GameManager : Singleton<GameManager>
                 isTutorial = false;
                 btnManager.GetComponent<BtnManager>().MenuBtn();
                 player.gameObject.SetActive(false);
+                observerManager.NotifyObservers();
                 break;
         }
     }//튜토리얼

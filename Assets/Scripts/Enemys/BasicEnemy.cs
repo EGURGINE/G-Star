@@ -94,7 +94,6 @@ public abstract class BasicEnemy : MonoBehaviour, ObserverPattern.IObserver
                 Spawner.Instance.Pop(money, new Vector2(transform.position.x, transform.position.y));
             }
         }
-
         PushObj();
         //죽을시 옵저버를 해지한다.
         GameManager.Instance.observerManager.RemoveObserver(this);

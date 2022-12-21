@@ -23,7 +23,11 @@ public class Enemy_2 : BasicEnemy
         {
             yield return new WaitForSeconds(0.001f);
 
-            transform.position = Vector2.MoveTowards(transform.position, target.position, Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, target.position, Time.deltaTime / spd);
         }
+    }
+    private void OnDisable()
+    {
+        StopCoroutine(TargetMove());
     }
 }
