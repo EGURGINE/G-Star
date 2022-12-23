@@ -6,12 +6,17 @@ public class MoneyRange : MonoBehaviour
 {
     [SerializeField] private Money my;
     private bool isCheck = false;
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && isCheck == false)
         {
             isCheck = true;
             my.Init();
         }
+    }
+
+    private void OnEnable()
+    {
+        isCheck = false;
     }
 }
