@@ -82,6 +82,7 @@ public class BtnManager : MonoBehaviour
         GameManager.Instance.isGameOver = true;
         GameManager.Instance.isTutorial = false;
         GameManager.Instance.player.gameObject.SetActive(false);
+        GameManager.Instance.observerManager.NotifyObservers();
         MenuBtn();
     }
     public void VideoBtn()

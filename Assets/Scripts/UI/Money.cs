@@ -97,6 +97,7 @@ public class Money : MonoBehaviour,ObserverPattern.IObserver
     }
     private void Die()
     {
+        if(fadeC != null)
         StopCoroutine(fadeC);
         Spawner.Instance.Push(this.gameObject);
     }
