@@ -28,6 +28,12 @@ public class BtnManager : MonoBehaviour
             }
         }
         gameOverWnd.SetActive(false);
+
+        if (GameManager.Instance.isTutorial)
+        {
+            Tutorial();
+        }
+        else
         GameManager.Instance.StartSet();
     }
     public void MenuBtn()
@@ -48,6 +54,7 @@ public class BtnManager : MonoBehaviour
         gameOverWnd.SetActive(false);
         GameManager.Instance.upSelect.ChoiceReset();
         GameManager.Instance.upSelect.gameObject.SetActive(false);
+        GameManager.Instance.observerManager.NotifyObservers();
         gameWnd.SetActive(false);
         menuWnd.SetActive(true);
     }
