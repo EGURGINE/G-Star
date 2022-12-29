@@ -41,6 +41,9 @@ public class BtnManager : MonoBehaviour
             GameManager.Instance.player.gameObject.SetActive(false);
 
         }
+        GameManager.Instance.tutorialWnd.SetActive(false);
+        GameManager.Instance.isGameOver = true;
+        GameManager.Instance.isTutorial = false;
         CameraSetting.Instance.MainPost();
         gameOverWnd.SetActive(false);
         GameManager.Instance.upSelect.ChoiceReset();
@@ -73,17 +76,6 @@ public class BtnManager : MonoBehaviour
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
 
         GameManager.Instance.Tutorial();
-    }
-    public void TutirialExit()
-    {
-        SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
-
-        GameManager.Instance.tutorialWnd.SetActive(false);
-        GameManager.Instance.isGameOver = true;
-        GameManager.Instance.isTutorial = false;
-        GameManager.Instance.player.gameObject.SetActive(false);
-        GameManager.Instance.observerManager.NotifyObservers();
-        MenuBtn();
     }
     public void VideoBtn()
     {

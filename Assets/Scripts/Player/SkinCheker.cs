@@ -26,6 +26,8 @@ public class SkinCheker : MonoBehaviour
     private TextMeshProUGUI priceBtnTxt;
     [SerializeField]
     private Image moneyImage;
+
+    int num;
     private void Start()
     {
         int dataIndex = DataManager.Instance.myState.isSkinIndex;
@@ -33,6 +35,7 @@ public class SkinCheker : MonoBehaviour
         selectSkin = skins[0];
         startSetSkinData();
         SkinDisplay();
+        num = selectSkin.index;
     }
 
     private void startSetSkinData()
@@ -44,6 +47,7 @@ public class SkinCheker : MonoBehaviour
     }
     public void LeftBtn()
     {
+        print(selectSkin.index);
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
 
         if (selectSkin.index <= 0) selectSkin = skins[(skins.Count - 1)];
@@ -54,8 +58,8 @@ public class SkinCheker : MonoBehaviour
     public void RightBtn()
     {
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
-        
-        if (selectSkin.index >= (skins.Count -1)) selectSkin = skins[0];
+
+        if (selectSkin.index == (skins.Count -1)) selectSkin = skins[0];
         else selectSkin = skins[(selectSkin.index + 1)];
 
         SkinDisplay();
