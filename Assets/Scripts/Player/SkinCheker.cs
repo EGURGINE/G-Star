@@ -71,6 +71,9 @@ public class SkinCheker : MonoBehaviour
             moneyImage.gameObject.SetActive(false);
             priceBtnTxt.gameObject.SetActive(false);
             selectBtnTxt.gameObject.SetActive(selectSkin.isBuy);
+
+
+
             if (isSkin != selectSkin) selectBtnTxt.text = "SELECT";
             else selectBtnTxt.text = "SELECTED";
         } 
@@ -79,6 +82,9 @@ public class SkinCheker : MonoBehaviour
             moneyImage.gameObject.SetActive(true);
             priceBtnTxt.gameObject.SetActive(true);
             priceBtnTxt.text = price.ToString();
+
+            if (GameManager.Instance.Money < price) priceBtnTxt.color = Color.red;
+            else priceBtnTxt.color = Color.white;
             selectBtnTxt.gameObject.SetActive(selectSkin.isBuy);
         }
     }

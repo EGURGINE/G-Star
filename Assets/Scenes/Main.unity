@@ -12512,7 +12512,7 @@ GameObject:
   - component: {fileID: 1089956275}
   - component: {fileID: 1089956274}
   m_Layer: 5
-  m_Name: SelectTxt
+  m_Name: PriceTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19332,7 +19332,7 @@ GameObject:
   - component: {fileID: 1755833307}
   - component: {fileID: 1755833306}
   m_Layer: 5
-  m_Name: PriceTxt
+  m_Name: SelectTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

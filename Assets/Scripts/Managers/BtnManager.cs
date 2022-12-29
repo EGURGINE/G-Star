@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Advertisements;
 public class BtnManager : MonoBehaviour
 {
     [Header("창들")]
@@ -90,9 +90,34 @@ public class BtnManager : MonoBehaviour
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
 
         // 광고 넣기
+        //ShowReward();
         GameManager.Instance.Money += 2000;
     }
+
+    private void ShowReward()
+    {
+        if (Advertisement.IsReady("Rewarded Android"))
+        {
+            ShowOptions options = new ShowOptions { resultCallback = ResultAds };
+            Advertisement.Show("Rewarded Android", options);
+        }
+    }
      
+    private void ResultAds(ShowResult result)
+    {
+        switch (result)
+        {
+            case ShowResult.Failed:
+                break;
+            case ShowResult.Skipped:
+                break;
+            case ShowResult.Finished:
+                GameManager.Instance.Money += 2000;
+                break;
+            default:
+                break;
+        }
+    }
     public void WndBtnSet(int num)
     {
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
