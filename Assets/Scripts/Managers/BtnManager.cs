@@ -84,39 +84,6 @@ public class BtnManager : MonoBehaviour
 
         GameManager.Instance.Tutorial();
     }
-    public void VideoBtn()
-    {
-        SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
-
-        // ±¤°í ³Ö±â
-        //ShowReward();
-        GameManager.Instance.Money += 2000;
-    }
-
-    private void ShowReward()
-    {
-        if (Advertisement.IsReady("Rewarded Android"))
-        {
-            ShowOptions options = new ShowOptions { resultCallback = ResultAds };
-            Advertisement.Show("Rewarded Android", options);
-        }
-    }
-     
-    private void ResultAds(ShowResult result)
-    {
-        switch (result)
-        {
-            case ShowResult.Failed:
-                break;
-            case ShowResult.Skipped:
-                break;
-            case ShowResult.Finished:
-                GameManager.Instance.Money += 2000;
-                break;
-            default:
-                break;
-        }
-    }
     public void WndBtnSet(int num)
     {
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
