@@ -45,6 +45,9 @@ public class GameManager : Singleton<GameManager>
     public Button tutorialNextBtn;
     [SerializeField] GameObject btnManager;
 
+    [Header("버튼 매니저")]
+    public BtnManager btnGM;
+
     public bool isStartingAbility;
     public float Exp
     {
