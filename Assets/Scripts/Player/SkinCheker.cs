@@ -12,7 +12,7 @@ public class SkinCheker : MonoBehaviour
     public int isSkinIndex { get; set; }
 
     [AssetList]
-    public List<SkinData> skins = new List<SkinData>();
+    public List<SkinData> skins;
 
     [SerializeField] 
     private SkinData selectSkin;
@@ -47,11 +47,11 @@ public class SkinCheker : MonoBehaviour
     }
     public void LeftBtn()
     {
-        print(selectSkin.index);
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
 
         if (selectSkin.index <= 0) selectSkin = skins[(skins.Count - 1)];
         else selectSkin = skins[(selectSkin.index -1)];
+
         SkinDisplay();
 
     }
@@ -59,7 +59,7 @@ public class SkinCheker : MonoBehaviour
     {
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
 
-        if (selectSkin.index >= (skins.Count -1)) selectSkin = skins[0];
+        if (selectSkin.index >= (skins.Count -1)) selectSkin = skins [0];
         else selectSkin = skins[(selectSkin.index + 1)];
 
         SkinDisplay();

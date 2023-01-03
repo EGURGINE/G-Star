@@ -288,6 +288,7 @@ public class GameManager : Singleton<GameManager>
             player.gameObject.SetActive(false);
             Instantiate(player.playerSpawnPc).transform.position = Vector3.zero;
             player.gameObject.SetActive(true);
+            ShotArea.Instance.Enemys.Clear();
             player.transform.position = Vector3.zero;
             player.transform.Rotate(Vector3.zero);
         }
