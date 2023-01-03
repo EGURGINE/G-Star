@@ -3975,6 +3975,7 @@ MonoBehaviour:
   tutorialNextBtn: {fileID: 1368676644}
   btnManager: {fileID: 969902125}
   btnGM: {fileID: 969902126}
+  dieAD: {fileID: 1195027017}
   isStartingAbility: 0
   waveTime:
   - 50
@@ -13937,7 +13938,7 @@ GameObject:
   - component: {fileID: 1195027016}
   - component: {fileID: 1195027017}
   m_Layer: 0
-  m_Name: REGameAD
+  m_Name: DieAD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18660,9 +18661,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1195027017}
-        m_TargetAssemblyTypeName: ReTryAD, Assembly-CSharp
-        m_MethodName: Retry
+      - m_Target: {fileID: 969902126}
+        m_TargetAssemblyTypeName: BtnManager, Assembly-CSharp
+        m_MethodName: ReTryBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

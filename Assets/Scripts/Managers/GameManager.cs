@@ -47,6 +47,7 @@ public class GameManager : Singleton<GameManager>
 
     [Header("버튼 매니저")]
     public BtnManager btnGM;
+    [SerializeField] private DieAD dieAD;
 
     public bool isStartingAbility;
     public float Exp
@@ -283,7 +284,6 @@ public class GameManager : Singleton<GameManager>
 
         if (isTutorial) // 튜토리얼 일때
         {
-            isGameOver = true;
             isGameOver = false;
             player.gameObject.SetActive(false);
             Instantiate(player.playerSpawnPc).transform.position = Vector3.zero;
@@ -293,6 +293,7 @@ public class GameManager : Singleton<GameManager>
         }
         else // 인게임 일때
         {
+            dieAD.ADCheck();
             CameraSetting.Instance.DiePost();
             isGameOver = true;
             player.gameObject.SetActive(false);
@@ -304,6 +305,7 @@ public class GameManager : Singleton<GameManager>
             }
 
             gameOverWnd.SetActive(true);
+            //광고
         }
 
     }//게임 오버 셋팅

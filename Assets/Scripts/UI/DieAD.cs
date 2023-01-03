@@ -5,7 +5,7 @@ using GoogleMobileAds.Api;
 using System;
 using Sirenix.OdinInspector.Editor.Drawers;
 
-public class ReTryAD : MonoBehaviour
+public class DieAD : MonoBehaviour
 {
     private InterstitialAd interstitial;
 
@@ -32,11 +32,11 @@ public class ReTryAD : MonoBehaviour
     {
         //reGame
 
-        GameManager.Instance.btnGM.ReTryBtn();
+        //GameManager.Instance.btnGM.ReTryBtn();
         ShowAD();
     }
     
-    public void Retry()
+    public void ADCheck()
     {
         int num = UnityEngine.Random.Range(0, 3);
 
@@ -49,8 +49,6 @@ public class ReTryAD : MonoBehaviour
             }
 
         }
-        else GameManager.Instance.btnGM.ReTryBtn();
-
     }
 
 }
