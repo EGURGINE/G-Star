@@ -17,7 +17,7 @@ public class RewardAD : MonoBehaviour
 
     private void RequestRewardedAd()
     {
-        string adUnitld = "ca-app-pub-5525985757997085/8302461032";
+        string adUnitld = "ca-app-pub-5708876822263347/5752830069";
 
         this.rewardAD = new RewardedAd(adUnitld);
 

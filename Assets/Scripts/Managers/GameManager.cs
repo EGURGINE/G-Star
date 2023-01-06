@@ -47,7 +47,7 @@ public class GameManager : Singleton<GameManager>
 
     [Header("버튼 매니저")]
     public BtnManager btnGM;
-    [SerializeField] private DieAD dieAD;
+    [SerializeField] private FrontAD dieAD;
 
     public bool isStartingAbility;
     public float Exp

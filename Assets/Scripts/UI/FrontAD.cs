@@ -5,7 +5,7 @@ using GoogleMobileAds.Api;
 using System;
 using Sirenix.OdinInspector.Editor.Drawers;
 
-public class DieAD : MonoBehaviour
+public class FrontAD : MonoBehaviour
 {
     private InterstitialAd interstitial;
 
@@ -16,7 +16,7 @@ public class DieAD : MonoBehaviour
 
     private void ShowAD()
     {
-        string adUnitld = "ca-app-pub-5525985757997085/8852576638";
+        string adUnitld = "ca-app-pub-5708876822263347/1601832066";
 
         this.interstitial = new InterstitialAd(adUnitld);
 
