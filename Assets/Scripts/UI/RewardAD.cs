@@ -51,11 +51,4 @@ public class RewardAD : MonoBehaviour
         }
     }
 
-    public void HandleOnAdClosed(object sender, EventArgs args)
-    {
-        //reGame
-
-        GameManager.Instance.Money += 2000;
-    }
-
 }
