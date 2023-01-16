@@ -30,9 +30,13 @@ public class DataManager : Singleton<DataManager>
     string filePath;
     private void Awake()
     {
+        //저장 경로
         filePath = Application.persistentDataPath + "/GameDataText.txt";
         Load();
     }
+    /// <summary>
+    /// 초기화
+    /// </summary>
     private void ResetSave()
     {
         myState.money = 0;
@@ -51,6 +55,9 @@ public class DataManager : Singleton<DataManager>
         Save();
         Load();
     }
+    /// <summary>
+    /// 저장
+    /// </summary>
     public void Save()
     {
         myState.money = GameManager.Instance.Money;
@@ -73,7 +80,9 @@ public class DataManager : Singleton<DataManager>
 
         File.WriteAllText(filePath, code);
     }
-
+    /// <summary>
+    /// 불러오기
+    /// </summary>
     public void Load()
     {
         if (!File.Exists(filePath)) { ResetSave(); return; }
@@ -85,6 +94,9 @@ public class DataManager : Singleton<DataManager>
         myState = JsonUtility.FromJson<SaveState>(jData);
     }
 
+    /// <summary>
+    /// 게임 꺼지면 저장
+    /// </summary>
     private void OnApplicationQuit()
     {
         Save();
