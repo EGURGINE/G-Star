@@ -60,13 +60,13 @@ public class GameManager : Singleton<GameManager>
             expSlider.fillAmount = exp / maxExp;
             if (exp >= maxExp)
             {
+                //레벨업 연출
                 observerManager.NotifyObservers();
                 SoundManager.Instance.PlaySound(ESoundSources.LEVEL);
                 
                 level++;
                 lv.text = level.ToString();
                 LevelProduction();
-
 
                 player.gameObject.SetActive(false);
 
@@ -114,7 +114,6 @@ public class GameManager : Singleton<GameManager>
     {
         if (isGameOver == false && isUpgrade == false) LevelDesign();
     }
-    
     private void LevelDesign()
     {
         time += Time.deltaTime;

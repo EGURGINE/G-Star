@@ -21,6 +21,7 @@ public class Enemy_2 : BasicEnemy
         StartCoroutine(TargetMove());
     }
 
+    //Å¸°Ù ÃßÀû 
     private IEnumerator TargetMove()
     {
         while (true)
