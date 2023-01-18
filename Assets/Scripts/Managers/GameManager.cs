@@ -23,7 +23,10 @@ public class GameManager : Singleton<GameManager>
     [Header("게임오버")]
     [SerializeField] private GameObject gameOverWnd;
     public bool isGameOver = false;
-    public ObserverPattern.ObserverData observerManager;
+
+    [Header("부활하기")]
+    [SerializeField] private GameObject reviveWnd;
+    private bool isRevive;
 
     [Header("레벨")]
     [SerializeField] private Text lv;
@@ -45,7 +48,8 @@ public class GameManager : Singleton<GameManager>
     public Button tutorialNextBtn;
     [SerializeField] GameObject btnManager;
 
-    [Header("버튼 매니저")]
+    [Header("매니저")]
+    public ObserverPattern.ObserverData observerManager;
     public BtnManager btnGM;
     [SerializeField] private FrontAD dieAD;
 
@@ -183,6 +187,7 @@ public class GameManager : Singleton<GameManager>
 
 
         time = 0;
+        isRevive = false;
         //점수 초기화
         score = 0;
         scoreTxt.text = score.ToString();
@@ -276,6 +281,18 @@ public class GameManager : Singleton<GameManager>
                 break;
         }
     }//튜토리얼
+
+    public void SetRevive()
+    {
+        if (isRevive)
+        {
+            isRevive = true;
+            isGameOver = true;
+            reviveWnd.SetActive(true);
+        }
+        else SetDie();
+
+    }
     public void SetDie()
     {
         SoundManager.Instance.PlaySound(ESoundSources.DIE);

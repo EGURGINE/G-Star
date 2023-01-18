@@ -8,7 +8,7 @@ public class RewardAD : MonoBehaviour
 {
     private RewardedAd rewardAD;
 
-    
+    [SerializeField] private bool isReviveBtn;
 
     private void Start()
     {
@@ -34,7 +34,8 @@ public class RewardAD : MonoBehaviour
     public void HandleRewardedAdClosed(object sender, EventArgs args)
     {
         print("HandleRewardedAdClosed event received");
-        GameManager.Instance.Money += 2000;
+        if (isReviveBtn == true) ; //revive
+        else GameManager.Instance.Money += 2000;
         RequestRewardedAd();
     }
 
