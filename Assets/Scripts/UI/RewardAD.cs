@@ -34,7 +34,7 @@ public class RewardAD : MonoBehaviour
     public void HandleRewardedAdClosed(object sender, EventArgs args)
     {
         print("HandleRewardedAdClosed event received");
-        if (isReviveBtn == true) ; //revive
+        if (isReviveBtn == true) GameManager.Instance.reviveWnd.Revive(); //revive
         else GameManager.Instance.Money += 2000;
         RequestRewardedAd();
     }

@@ -25,7 +25,8 @@ public class GameManager : Singleton<GameManager>
     public bool isGameOver = false;
 
     [Header("부활하기")]
-    [SerializeField] private GameObject reviveWnd;
+    [SerializeField] private GameObject reviveWndObj;
+    public ReviveWnd reviveWnd;
     private bool isRevive;
 
     [Header("레벨")]
@@ -284,11 +285,14 @@ public class GameManager : Singleton<GameManager>
 
     public void SetRevive()
     {
-        if (isRevive)
+        observerManager.NotifyObservers();
+
+        if (isRevive == false)
         {
+            player.gameObject.SetActive(false);
             isRevive = true;
             isGameOver = true;
-            reviveWnd.SetActive(true);
+            reviveWndObj.SetActive(true);
         }
         else SetDie();
 
