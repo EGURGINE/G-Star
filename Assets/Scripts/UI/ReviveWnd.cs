@@ -51,6 +51,9 @@ public class ReviveWnd : MonoBehaviour
     {
         GameManager.Instance.isGameOver = false;
         GameManager.Instance.player.gameObject.SetActive(true);
+        ShotArea.Instance.Enemys.Clear();
+        GameManager.Instance.player.transform.position = Vector3.zero;
+        GameManager.Instance.player.transform.Rotate(Vector3.zero);
         gameObject.SetActive(false);
     }
     public void SkipBtn()
