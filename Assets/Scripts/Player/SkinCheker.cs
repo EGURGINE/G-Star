@@ -94,19 +94,29 @@ public class SkinCheker : MonoBehaviour
     }
     public void SelectBtn()
     {
-        SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
-
-        if (selectSkin.isBuy == false && GameManager.Instance.Money >= price)
+        if (selectSkin.isBuy == false)
         {
-            GameManager.Instance.Money -= price;
-            selectSkin.isBuy = true;
-        }
-        else if (selectSkin.isBuy && isSkin != selectSkin)
-        {
-            isSkin = selectSkin;
-            selectBtnTxt.text = "SELECTED";
-        }
+            if (GameManager.Instance.Money < price)
+            {
+                SoundManager.Instance.PlaySound(ESoundSources.BLOCKED);
+            }
+            else
+            {
+                SoundManager.Instance.PlaySound(ESoundSources.BUY);
+                GameManager.Instance.Money -= price;
+                selectSkin.isBuy = true;
+            }
 
+        }
+        else
+        {
+            if (isSkin != selectSkin)
+            {
+                SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
+                isSkin = selectSkin;
+                selectBtnTxt.text = "SELECTED";
+            }
+        }
 
         SkinDisplay();
     }
