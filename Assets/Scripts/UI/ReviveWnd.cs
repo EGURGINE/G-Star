@@ -42,7 +42,13 @@ public class ReviveWnd : MonoBehaviour
     }
     public void MoneyReviveBtn()
     {
-        if (GameManager.Instance.Money < price) return;
+        if (GameManager.Instance.Money < price)
+        {
+            SoundManager.Instance.PlaySound(ESoundSources.BLOCKED);
+            return;
+        }
+
+        SoundManager.Instance.PlaySound(ESoundSources.BUY);
         GameManager.Instance.Money -= price;
         Revive();
     }
@@ -58,6 +64,7 @@ public class ReviveWnd : MonoBehaviour
     }
     public void SkipBtn()
     {
+        SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
         GameManager.Instance.SetDie();
         gameObject.SetActive(false);
 

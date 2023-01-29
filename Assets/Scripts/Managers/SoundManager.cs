@@ -9,6 +9,8 @@ public enum ESoundSources
     MONEY,
     LEVEL,
     DIE,
+    BLOCKED,
+    BUY,
     END
 }
 public class SoundManager : MonoBehaviour
