@@ -11,12 +11,11 @@ public class SkinCheker : MonoBehaviour
     public SkinData isSkin;
     public int isSkinIndex { get; set; }
 
-    [AssetList]
     public List<SkinData> skins;
 
-    [SerializeField] 
+    [SerializeField]
     private SkinData selectSkin;
-    [SerializeField] 
+    [SerializeField]
     private Image exSkinImage;
     [SerializeField]
     private TextMeshProUGUI skinName;
@@ -24,6 +23,8 @@ public class SkinCheker : MonoBehaviour
     private TextMeshProUGUI selectBtnTxt;
     [SerializeField]
     private TextMeshProUGUI priceBtnTxt;
+    [SerializeField]
+    private TextMeshProUGUI conditionTxt;
     [SerializeField]
     private Image moneyImage;
 
@@ -50,7 +51,7 @@ public class SkinCheker : MonoBehaviour
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
 
         if (selectSkin.index <= 0) selectSkin = skins[(skins.Count - 1)];
-        else selectSkin = skins[(selectSkin.index -1)];
+        else selectSkin = skins[(selectSkin.index - 1)];
 
         SkinDisplay();
 
@@ -59,7 +60,7 @@ public class SkinCheker : MonoBehaviour
     {
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
 
-        if (selectSkin.index >= (skins.Count -1)) selectSkin = skins [0];
+        if (selectSkin.index >= (skins.Count - 1)) selectSkin = skins[0];
         else selectSkin = skins[(selectSkin.index + 1)];
 
         SkinDisplay();
@@ -72,23 +73,52 @@ public class SkinCheker : MonoBehaviour
 
         if (selectSkin.isBuy)
         {
+            conditionTxt.gameObject.SetActive(false);
             moneyImage.gameObject.SetActive(false);
             priceBtnTxt.gameObject.SetActive(false);
             selectBtnTxt.gameObject.SetActive(selectSkin.isBuy);
 
-
-
             if (isSkin != selectSkin) selectBtnTxt.text = "SELECT";
             else selectBtnTxt.text = "SELECTED";
-        } 
+        }
         else
         {
-            moneyImage.gameObject.SetActive(true);
+            moneyImage.gameObject.SetActive(false);
             priceBtnTxt.gameObject.SetActive(true);
-            priceBtnTxt.text = price.ToString();
+            conditionTxt.gameObject.SetActive(true);
 
-            if (GameManager.Instance.Money < price) priceBtnTxt.color = Color.red;
-            else priceBtnTxt.color = Color.white;
+            priceBtnTxt.GetComponent<RectTransform>().localPosition = Vector3.zero;
+
+            switch (selectSkin.index)
+            {
+                case 4:
+                    if (GameManager.Instance.highScore < 3000) priceBtnTxt.color = Color.red;
+                    else priceBtnTxt.color = Color.white;
+                    conditionTxt.text = "Score over 3000";
+                    priceBtnTxt.text = $"{GameManager.Instance.highScore} / 3000";
+                    break;
+                case 5:
+                    if (GameManager.Instance.ClearCount < 3) priceBtnTxt.color = Color.red;
+                    else priceBtnTxt.color = Color.white;
+                    conditionTxt.text = "Clear 3 or more times";
+                    priceBtnTxt.text = $"{GameManager.Instance.ClearCount} / 3";
+                    break;
+                case 6:
+                    if (GameManager.Instance.ClearCount < 7) priceBtnTxt.color = Color.red;
+                    else priceBtnTxt.color = Color.white;
+                    conditionTxt.text = "Clear 7 or more times";
+                    priceBtnTxt.text = $"{GameManager.Instance.ClearCount} / 7";
+                    break;
+                default:
+                    if (GameManager.Instance.Money < price) priceBtnTxt.color = Color.red;
+                    else priceBtnTxt.color = Color.white;
+                    priceBtnTxt.GetComponent<RectTransform>().localPosition = new Vector3(50,0,0);
+                    conditionTxt.gameObject.SetActive(false);
+                    moneyImage.gameObject.SetActive(true);
+                    priceBtnTxt.text = price.ToString();
+                    break;
+            }
+
             selectBtnTxt.gameObject.SetActive(selectSkin.isBuy);
         }
     }
@@ -96,16 +126,57 @@ public class SkinCheker : MonoBehaviour
     {
         if (selectSkin.isBuy == false)
         {
-            if (GameManager.Instance.Money < price)
+            switch (selectSkin.index)
             {
-                SoundManager.Instance.PlaySound(ESoundSources.BLOCKED);
+                case 4:
+                    if (GameManager.Instance.highScore < 3000 )
+                    {
+                        SoundManager.Instance.PlaySound(ESoundSources.BLOCKED);
+                    }
+                    else
+                    {
+                        SoundManager.Instance.PlaySound(ESoundSources.BUY);
+                        selectSkin.isBuy = true;
+                    }
+                    break;
+                case 5:
+                    if (GameManager.Instance.ClearCount < 3)
+                    {
+                        SoundManager.Instance.PlaySound(ESoundSources.BLOCKED);
+                    }
+                    else
+                    {
+                        SoundManager.Instance.PlaySound(ESoundSources.BUY);
+                        selectSkin.isBuy = true;
+                    }
+                    break;
+                case 6:
+                    if (GameManager.Instance.ClearCount < 7)
+                    {
+                        SoundManager.Instance.PlaySound(ESoundSources.BLOCKED);
+                    }
+                    else
+                    {
+                        SoundManager.Instance.PlaySound(ESoundSources.BUY);
+                        selectSkin.isBuy = true;
+                    }
+                    break;
+                default:
+
+                    if (GameManager.Instance.Money < price)
+                    {
+                        SoundManager.Instance.PlaySound(ESoundSources.BLOCKED);
+                    }
+                    else
+                    {
+                        SoundManager.Instance.PlaySound(ESoundSources.BUY);
+                        GameManager.Instance.Money -= price;
+                        selectSkin.isBuy = true;
+                    }
+                    break;
             }
-            else
-            {
-                SoundManager.Instance.PlaySound(ESoundSources.BUY);
-                GameManager.Instance.Money -= price;
-                selectSkin.isBuy = true;
-            }
+
+
 
         }
         else

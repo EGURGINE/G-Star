@@ -122,7 +122,7 @@ MonoBehaviour:
   maxHp: 1
   hp: 1
   spd: 250
-  score: 10
+  score: 25
   enemySpawnPc: {fileID: 3146009235527661145, guid: 5d924c48f2370c649a501bf812e7d1b5, type: 3}
   enemyDeadPc: {fileID: 5585671604984661011, guid: c8024b1c8dba5ac45ac354c95aaf3221, type: 3}
   playerDeadPc: {fileID: 1641648458358345791, guid: bcd96ac0168784145833382f663d9f57, type: 3}
