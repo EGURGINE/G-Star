@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spd: 3
+  endTr: {fileID: 0}
 --- !u!58 &345645341689165291
 CircleCollider2D:
   m_ObjectHideFlags: 0

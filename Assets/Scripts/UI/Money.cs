@@ -5,41 +5,31 @@ using DG.Tweening;
 public class Money : MonoBehaviour,ObserverPattern.IObserver
 {
     [SerializeField] private float spd;
-    private Transform startTr => this.transform;
-    private Transform endTr => GameManager.Instance.player.transform;
-    Vector3[] m_Points = new Vector3[4];
-    private SpriteRenderer SR => this.GetComponent<SpriteRenderer>();
+    private Transform startTr;
+    [SerializeField] private Transform endTr;
+    private Vector3[] m_Points = new Vector3[4];
+    private SpriteRenderer SR;
     private Color sColor = new Color(0,255,255,1);
     private float m_timerMax = 0;
     private float m_timerCurrent = 0;
 
-    float cnt;
 
     private bool isHit;
 
-    private Coroutine fadeC;
+
+    private void Awake()
+    {
+        startTr = transform;
+        SR = GetComponent<SpriteRenderer>();
+    }
 
     public void OnEnableObj()
     {
         GameManager.Instance.observerManager.ResisterObserver(this);
         SR.color = sColor;
-        fadeC = StartCoroutine(nameof(Fade));
+        SR.DOFade(0, 4).OnComplete(Die);
         m_timerCurrent = 0;
-        cnt = 0;
         isHit = false;
-    }
-
-    IEnumerator Fade()
-    {
-        float _time = 4;
-        while (cnt<1)
-        {
-            cnt += Time.deltaTime/_time;
-            SR.color += new Color(0, 0, 0, -(Time.deltaTime / _time)); 
-            yield return null;
-        }
-        Die();
-        yield return null;
     }
 
     public void Init()
@@ -98,8 +88,6 @@ public class Money : MonoBehaviour,ObserverPattern.IObserver
     }
     private void Die()
     {
-        if(fadeC != null)
-        StopCoroutine(fadeC);
         Spawner.Instance.Push(this.gameObject);
     }
     public void DestroyObj()

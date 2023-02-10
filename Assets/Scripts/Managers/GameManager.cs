@@ -194,7 +194,7 @@ public class GameManager : Singleton<GameManager>
         level = 1;
         lv.text = level.ToString();
         exp = 0;
-        maxExp = 20;
+        maxExp = 100;
         expSlider.fillAmount = 0;
 
 
