@@ -85,6 +85,8 @@ public abstract class BasicEnemy : MonoBehaviour, ObserverPattern.IObserver
             CameraSetting.Instance.Shake();
 
             GameManager.Instance.Score += score;
+
+            GameManager.Instance.enemyKill ++;
         }
 
         if (GameManager.Instance.tutorialNum != 1)

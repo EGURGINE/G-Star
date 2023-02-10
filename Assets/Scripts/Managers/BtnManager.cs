@@ -16,6 +16,9 @@ public class BtnManager : MonoBehaviour
     {
         SoundManager.Instance.PlaySound(ESoundSources.BUTTON);
 
+        GameManager.Instance.dieAD.ADCheck();
+        GameManager.Instance.clearWnd.gameObject.SetActive(false);
+
         if (set.isSetting == true)
         {
             set.IngameWndBtn();
@@ -55,6 +58,7 @@ public class BtnManager : MonoBehaviour
         GameManager.Instance.upSelect.ChoiceReset();
         GameManager.Instance.upSelect.gameObject.SetActive(false);
         GameManager.Instance.observerManager.NotifyObservers();
+        GameManager.Instance.clearWnd.gameObject.SetActive(false);
         gameWnd.SetActive(false);
         menuWnd.SetActive(true);
     }

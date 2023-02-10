@@ -91,6 +91,7 @@ public class Money : MonoBehaviour,ObserverPattern.IObserver
             SoundManager.Instance.PlaySound(ESoundSources.MONEY);
             GameManager.Instance.Exp += 5;
             GameManager.Instance.Money += 1;
+            GameManager.Instance.getMoney++;
             GameManager.Instance.observerManager.RemoveObserver(this);
             Die();
         }

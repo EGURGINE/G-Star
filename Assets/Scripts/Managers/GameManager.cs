@@ -16,6 +16,11 @@ public class GameManager : Singleton<GameManager>
     public float highScore;
     [SerializeField] private Text highScoreTxt;
 
+    //결과창 점수들
+    public int getMoney;
+    public int enemyKill;
+    public int ClearCount;
+
     [Header("돈")]
     private int money;
     [SerializeField] private Text moneyTxt;
@@ -23,6 +28,9 @@ public class GameManager : Singleton<GameManager>
     [Header("게임오버")]
     [SerializeField] private GameObject gameOverWnd;
     public bool isGameOver = false;
+
+    [Header("게임 클리어")]
+    public ClearWnd clearWnd;
 
     [Header("부활하기")]
     [SerializeField] private GameObject reviveWndObj;
@@ -52,7 +60,8 @@ public class GameManager : Singleton<GameManager>
     [Header("매니저")]
     public ObserverPattern.ObserverData observerManager;
     public BtnManager btnGM;
-    [SerializeField] private FrontAD dieAD;
+    public FrontAD dieAD;
+    public Timer timer;
 
     public bool isStartingAbility;
     public float Exp
@@ -72,6 +81,9 @@ public class GameManager : Singleton<GameManager>
                 level++;
                 lv.text = level.ToString();
                 LevelProduction();
+
+                timer.TimerPause();
+                timer.gameObject.SetActive(false);
 
                 player.gameObject.SetActive(false);
 
@@ -110,6 +122,8 @@ public class GameManager : Singleton<GameManager>
         // 게임 시작시 저장한 돈 가져오기
         money = DataManager.Instance.myState.money;
         moneyTxt.text = money.ToString();
+
+        ClearCount = DataManager.Instance.myState.clearCount;
     }
 
     private float time;
@@ -122,26 +136,23 @@ public class GameManager : Singleton<GameManager>
     private void LevelDesign()
     {
         time += Time.deltaTime;
-        if (time > waveTime[6])
+       
+        if (time > waveTime[5])
         {
             Spawner.Instance.enemySpawnNum = 7;
             Spawner.Instance.spawnDelay = 2f;
-            Spawner.Instance.spawnEnemyTypeNum = 6;
-
-        }
-        else if (time > waveTime[5])
-        {
-            Spawner.Instance.enemySpawnNum = 6;
-            Spawner.Instance.spawnDelay = 2.5f;
-            Spawner.Instance.spawnEnemyTypeNum = 4;
 
         }
         else if (time > waveTime[4])
         {
-            Spawner.Instance.enemySpawnNum = 5;
+            Spawner.Instance.spawnEnemyTypeNum = 6;
+            Spawner.Instance.enemySpawnNum = 6;
+            Spawner.Instance.spawnDelay = 2.5f;
+            Spawner.Instance.spawnEnemyTypeNum = 4;
         }
         else if (time > waveTime[3])
         {
+            Spawner.Instance.enemySpawnNum = 5;
             Spawner.Instance.spawnDelay = 2.6f;
             Spawner.Instance.spawnEnemyTypeNum = 3;
 
@@ -163,7 +174,7 @@ public class GameManager : Singleton<GameManager>
     public void NextLevel()
     {
         exp = 0;
-        maxExp += 10;
+        maxExp *= 1.5f;
         expSlider.fillAmount = 0;
     } //레벨 셋팅
     private void LevelProduction()
@@ -194,6 +205,9 @@ public class GameManager : Singleton<GameManager>
         scoreTxt.text = score.ToString();
         highScoreTxt.text = highScore.ToString();
 
+        getMoney = 0;
+        enemyKill = 0;
+
         // 스텟 초기화
         player.playerSpd = 0.5f;
         player.shotArea.ResetState();
@@ -220,6 +234,7 @@ public class GameManager : Singleton<GameManager>
         Camera.main.transform.DOMove(new Vector3(0, 0, -10), 0.01f);
         CameraSetting.Instance.MainPost();
 
+
         if (isTutorial == false)
         {
             if (money >= 1000) UpgradeWndOn();
@@ -227,19 +242,29 @@ public class GameManager : Singleton<GameManager>
             {
                 isStartingAbility = false;
                 PlayerSpawn();
+                timer.gameObject.SetActive(true);
+                timer.StartSet();
             }
+
+            //타이머 셋팅
         }
         isGameOver = isTutorial == true ? true : false;
+
+        
     }//시작 셋팅
 
     public void PlayerSpawn()
     {
+
         CameraSetting.Instance.MainPost();
         Instantiate(player.playerSpawnPc).transform.position = Vector3.zero;
         player.gameObject.SetActive(true);
         player.gameObject.GetComponent<SpriteRenderer>().sprite = player.SC.isSkin.image;
         player.transform.position = Vector3.zero;
         player.transform.rotation = Quaternion.Euler(Vector3.zero);
+
+        GameManager.Instance.timer.gameObject.SetActive(true);
+        GameManager.Instance.timer.TimerPlay();
     }//플레이어 스폰
     public void Tutorial()
     {
@@ -296,11 +321,14 @@ public class GameManager : Singleton<GameManager>
         }
         else SetDie();
 
+        timer.gameObject.SetActive(false);
     }
     public void SetDie()
     {
         SoundManager.Instance.PlaySound(ESoundSources.DIE);
         observerManager.NotifyObservers();
+
+        timer.gameObject.SetActive(false);
 
         if (isTutorial) // 튜토리얼 일때
         {
@@ -314,6 +342,7 @@ public class GameManager : Singleton<GameManager>
         }
         else // 인게임 일때
         {
+            timer.gameObject.SetActive(false);
             dieAD.ADCheck();
             CameraSetting.Instance.DiePost();
             isGameOver = true;
