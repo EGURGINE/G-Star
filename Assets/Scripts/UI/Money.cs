@@ -35,7 +35,7 @@ public class Money : MonoBehaviour,ObserverPattern.IObserver
     public void Init()
     {
         isHit = true;
-        m_timerMax = Random.RandomRange(0.8f, 1.0f);
+        m_timerMax = Random.Range(0.8f, 1.0f);
         m_Points[0] = startTr.position;
         m_Points[1] = (startTr.position + (Random.Range(-1.5f,1.5f) * startTr.right) + (Random.Range(-1.5f, 1.5f) * startTr.up));
         m_Points[2] = (endTr.position +   (Random.Range(-1.5f,1.5f) * endTr.right)   + (Random.Range(-1.5f, 1.5f) * endTr.up));
