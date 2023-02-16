@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
+using UnityEngine.SocialPlatforms;
 public class ReaderBoards : MonoBehaviour
 {
-
     private void Awake()
     {
+        PlayGamesPlatform.InitializeInstance(new PlayGamesClientConfiguration.Builder().Build());
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
     public void DoLogin()
     {
         if (!Social.localUser.authenticated)
