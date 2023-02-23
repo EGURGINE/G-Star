@@ -93,24 +93,24 @@ public class SkinCheker : MonoBehaviour
             switch (selectSkin.index)
             {
                 case 4:
-                    if (GameManager.Instance.highScore < 3000) priceBtnTxt.color = Color.red;
-                    else priceBtnTxt.color = Color.white;
-                    conditionTxt.text = "Score over 3000";
-                    priceBtnTxt.text = $"{GameManager.Instance.highScore} / 3000";
-                    break;
-                case 5:
-                    if (GameManager.Instance.highScore < 6000) priceBtnTxt.color = Color.red;
-                    else priceBtnTxt.color = Color.white;
-                    conditionTxt.text = "Score over 6000";
-                    priceBtnTxt.text = $"{GameManager.Instance.highScore} / 6000";
-                    break;
-                case 6:
                     if (GameManager.Instance.Money < RoyalPrice) priceBtnTxt.color = Color.red;
                     else priceBtnTxt.color = Color.white;
                     priceBtnTxt.GetComponent<RectTransform>().localPosition = new Vector3(50, 0, 0);
                     conditionTxt.gameObject.SetActive(false);
                     moneyImage.gameObject.SetActive(true);
                     priceBtnTxt.text = RoyalPrice.ToString();
+                    break;
+                case 5:
+                    if (GameManager.Instance.highScore < 3000) priceBtnTxt.color = Color.red;
+                    else priceBtnTxt.color = Color.white;
+                    conditionTxt.text = "Score over 3000";
+                    priceBtnTxt.text = $"{GameManager.Instance.highScore} / 3000";
+                    break;
+                case 6:
+                    if (GameManager.Instance.highScore < 6000) priceBtnTxt.color = Color.red;
+                    else priceBtnTxt.color = Color.white;
+                    conditionTxt.text = "Score over 6000";
+                    priceBtnTxt.text = $"{GameManager.Instance.highScore} / 6000";
                     break;
                 default:
                     if (GameManager.Instance.Money < price) priceBtnTxt.color = Color.red;
