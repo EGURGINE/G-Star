@@ -10,7 +10,6 @@ public class SaveState
 {
     public int money;
     public float highScore;
-    public int clearCount;
 
     public float bgmVolum;
     public float sfxVolum;
@@ -42,8 +41,7 @@ public class DataManager : Singleton<DataManager>
     {
         myState.money = 0;
         myState.highScore = 0;
-        myState.clearCount = 0;
-
+        
         myState.bgmVolum = 50;
         myState.sfxVolum = 50;
 
@@ -64,7 +62,6 @@ public class DataManager : Singleton<DataManager>
     {
         myState.money = GameManager.Instance.Money;
         myState.highScore = GameManager.Instance.highScore;
-        myState.clearCount = GameManager.Instance.ClearCount;
 
         myState.bgmVolum = SoundManager.Instance.BGMVolum;
         myState.sfxVolum = SoundManager.Instance.SFXVolum;

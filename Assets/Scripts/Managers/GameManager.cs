@@ -16,11 +16,6 @@ public class GameManager : Singleton<GameManager>
     public float highScore;
     [SerializeField] private Text highScoreTxt;
 
-    //결과창 점수들
-    public int getMoney;
-    public int enemyKill;
-    public int ClearCount;
-
     [Header("돈")]
     private int money;
     [SerializeField] private Text moneyTxt;
@@ -28,9 +23,6 @@ public class GameManager : Singleton<GameManager>
     [Header("게임오버")]
     [SerializeField] private GameObject gameOverWnd;
     public bool isGameOver = false;
-
-    [Header("게임 클리어")]
-    public ClearWnd clearWnd;
 
     [Header("부활하기")]
     [SerializeField] private GameObject reviveWndObj;
@@ -61,8 +53,6 @@ public class GameManager : Singleton<GameManager>
     public ObserverPattern.ObserverData observerManager;
     public BtnManager btnGM;
     public FrontAD dieAD;
-    public Timer timer;
-
     public bool isStartingAbility;
     public float Exp
     {
@@ -81,9 +71,6 @@ public class GameManager : Singleton<GameManager>
                 level++;
                 lv.text = level.ToString();
                 LevelProduction();
-
-                timer.TimerPause();
-                timer.gameObject.SetActive(false);
 
                 player.gameObject.SetActive(false);
 
@@ -123,7 +110,6 @@ public class GameManager : Singleton<GameManager>
         money = DataManager.Instance.myState.money;
         moneyTxt.text = money.ToString();
 
-        ClearCount = DataManager.Instance.myState.clearCount;
     }
 
     private float time;
@@ -205,9 +191,6 @@ public class GameManager : Singleton<GameManager>
         scoreTxt.text = score.ToString();
         highScoreTxt.text = highScore.ToString();
 
-        getMoney = 0;
-        enemyKill = 0;
-
         // 스텟 초기화
         player.playerSpd = 0.5f;
         player.shotArea.ResetState();
@@ -242,8 +225,6 @@ public class GameManager : Singleton<GameManager>
             {
                 isStartingAbility = false;
                 PlayerSpawn();
-                timer.gameObject.SetActive(true);
-                timer.StartSet();
             }
 
             //타이머 셋팅
@@ -263,8 +244,6 @@ public class GameManager : Singleton<GameManager>
         player.transform.position = Vector3.zero;
         player.transform.rotation = Quaternion.Euler(Vector3.zero);
 
-        GameManager.Instance.timer.gameObject.SetActive(true);
-        GameManager.Instance.timer.TimerPlay();
     }//플레이어 스폰
     public void Tutorial()
     {
@@ -321,14 +300,11 @@ public class GameManager : Singleton<GameManager>
         }
         else SetDie();
 
-        timer.gameObject.SetActive(false);
     }
     public void SetDie()
     {
         SoundManager.Instance.PlaySound(ESoundSources.DIE);
         observerManager.NotifyObservers();
-
-        timer.gameObject.SetActive(false);
 
         if (isTutorial) // 튜토리얼 일때
         {
@@ -342,7 +318,6 @@ public class GameManager : Singleton<GameManager>
         }
         else // 인게임 일때
         {
-            timer.gameObject.SetActive(false);
             dieAD.ADCheck();
             CameraSetting.Instance.DiePost();
             isGameOver = true;

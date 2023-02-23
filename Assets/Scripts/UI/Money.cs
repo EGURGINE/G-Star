@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-public class Money : MonoBehaviour,ObserverPattern.IObserver
+public class Money : MonoBehaviour, ObserverPattern.IObserver
 {
     [SerializeField] private float spd;
     private Transform startTr;
     [SerializeField] private Transform endTr;
     private Vector3[] m_Points = new Vector3[4];
     private SpriteRenderer SR;
-    private Color sColor = new Color(0,255,255,1);
+    private Color sColor = new Color(0, 255, 255, 1);
     private float m_timerMax = 0;
     private float m_timerCurrent = 0;
 
@@ -37,8 +37,8 @@ public class Money : MonoBehaviour,ObserverPattern.IObserver
         isHit = true;
         m_timerMax = Random.Range(0.8f, 1.0f);
         m_Points[0] = startTr.position;
-        m_Points[1] = (startTr.position + (Random.Range(-1.5f,1.5f) * startTr.right) + (Random.Range(-1.5f, 1.5f) * startTr.up));
-        m_Points[2] = (endTr.position +   (Random.Range(-1.5f,1.5f) * endTr.right)   + (Random.Range(-1.5f, 1.5f) * endTr.up));
+        m_Points[1] = (startTr.position + (Random.Range(-1.5f, 1.5f) * startTr.right) + (Random.Range(-1.5f, 1.5f) * startTr.up));
+        m_Points[2] = (endTr.position + (Random.Range(-1.5f, 1.5f) * endTr.right) + (Random.Range(-1.5f, 1.5f) * endTr.up));
         m_Points[3] = endTr.position;
 
         transform.position = startTr.position;
@@ -54,7 +54,7 @@ public class Money : MonoBehaviour,ObserverPattern.IObserver
 
         float abbc = Mathf.Lerp(ab, bc, t);
         float bccd = Mathf.Lerp(bc, cd, t);
-        return Mathf.Lerp(abbc,bccd,t);
+        return Mathf.Lerp(abbc, bccd, t);
     }
 
     void Update()
@@ -81,7 +81,6 @@ public class Money : MonoBehaviour,ObserverPattern.IObserver
             SoundManager.Instance.PlaySound(ESoundSources.MONEY);
             GameManager.Instance.Exp += 5;
             GameManager.Instance.Money += 1;
-            GameManager.Instance.getMoney++;
             GameManager.Instance.observerManager.RemoveObserver(this);
             Die();
         }

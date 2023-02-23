@@ -121,8 +121,6 @@ public class UpgradeSelect : MonoBehaviour
                         GameManager.Instance.expSlider.DOKill();
                         GameManager.Instance.expSlider.DOFade(1, 0.1f);
                         Spawner.Instance.enemySpawnTime = 0;
-                        GameManager.Instance.timer.TimerPlay();
-                        GameManager.Instance.timer.gameObject.SetActive(true);
 
                         gameObject.SetActive(false);
                     }

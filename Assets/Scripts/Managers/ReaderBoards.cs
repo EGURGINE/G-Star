@@ -4,40 +4,68 @@ using UnityEngine;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 using UnityEngine.SocialPlatforms;
+using System.Threading.Tasks;
 public class ReaderBoards : MonoBehaviour
 {
-    private void Awake()
+    private void Start()
     {
-        PlayGamesPlatform.InitializeInstance(new PlayGamesClientConfiguration.Builder().Build());
-        PlayGamesPlatform.DebugLogEnabled = true;
+        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().Build();
+        PlayGamesPlatform.InitializeInstance(config);
         PlayGamesPlatform.Activate();
-    }
 
+        // 로그인
+        Social.localUser.Authenticate((bool success) => 
+        {
+            if (success)
+            {
+                Debug.Log("로그인 성공");
+            }
+            else
+            {
+                Debug.Log("로그인 실패");
+            }
+        });
+    }
     public void DoLogin()
     {
-        if (!Social.localUser.authenticated)
+        if (Social.localUser.authenticated)
         {
-            Social.localUser.Authenticate((bool isSuccess) =>
+            DoShowReaderBoards();
+        }
+        else
+        {
+            Social.localUser.Authenticate((bool isSucess) =>
             {
-                if (isSuccess)
+                if (isSucess)
                 {
-                    Debug.Log("dlswmd tjdrhd -> " + Social.localUser.userName);
+                    Debug.Log("로그인 성공");
+                    DoShowReaderBoards();
 
-                    DoShowLeaderBoard();
                 }
                 else
                 {
-                    Debug.Log("인증 실패");
+                    Debug.Log("로그인 실패");
                 }
             });
         }
 
     }
-    
-    public void DoShowLeaderBoard()
+
+    private void DoShowReaderBoards()
     {
-        Social.ReportScore(GameManager.Instance.ClearCount, GPGSIds.leaderboard_clearboards, (bool isSuccess) => { });
+        Social.ReportScore(((int)GameManager.Instance.highScore), GPGSIds.leaderboard_clearboards, (bool sucess) =>
+        {
+            if (sucess)
+            {
+                print("성공");
+            }
+            else
+            {
+                print("실패");
+            }
+        });
 
         Social.ShowLeaderboardUI();
     }
+
 }

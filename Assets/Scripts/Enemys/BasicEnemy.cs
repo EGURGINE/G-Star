@@ -86,7 +86,6 @@ public abstract class BasicEnemy : MonoBehaviour, ObserverPattern.IObserver
 
             GameManager.Instance.Score += score;
 
-            GameManager.Instance.enemyKill ++;
         }
 
         if (GameManager.Instance.tutorialNum != 1)

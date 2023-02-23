@@ -62,8 +62,6 @@ public class ReviveWnd : MonoBehaviour
         GameManager.Instance.player.transform.Rotate(Vector3.zero);
         gameObject.SetActive(false);
 
-        GameManager.Instance.timer.TimerPlay();
-        GameManager.Instance.timer.gameObject.SetActive(true);
     }
     public void SkipBtn()
     {

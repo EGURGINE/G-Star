@@ -8,6 +8,7 @@ using Sirenix.OdinInspector;
 public class SkinCheker : MonoBehaviour
 {
     private readonly int price = 20000;
+    private readonly int RoyalPrice = 40000;
     public SkinData isSkin;
     public int isSkinIndex { get; set; }
 
@@ -98,16 +99,18 @@ public class SkinCheker : MonoBehaviour
                     priceBtnTxt.text = $"{GameManager.Instance.highScore} / 3000";
                     break;
                 case 5:
-                    if (GameManager.Instance.ClearCount < 3) priceBtnTxt.color = Color.red;
+                    if (GameManager.Instance.highScore < 6000) priceBtnTxt.color = Color.red;
                     else priceBtnTxt.color = Color.white;
-                    conditionTxt.text = "Clear 3 or more times";
-                    priceBtnTxt.text = $"{GameManager.Instance.ClearCount} / 3";
+                    conditionTxt.text = "Score over 6000";
+                    priceBtnTxt.text = $"{GameManager.Instance.highScore} / 6000";
                     break;
                 case 6:
-                    if (GameManager.Instance.ClearCount < 7) priceBtnTxt.color = Color.red;
+                    if (GameManager.Instance.Money < RoyalPrice) priceBtnTxt.color = Color.red;
                     else priceBtnTxt.color = Color.white;
-                    conditionTxt.text = "Clear 7 or more times";
-                    priceBtnTxt.text = $"{GameManager.Instance.ClearCount} / 7";
+                    priceBtnTxt.GetComponent<RectTransform>().localPosition = new Vector3(50, 0, 0);
+                    conditionTxt.gameObject.SetActive(false);
+                    moneyImage.gameObject.SetActive(true);
+                    priceBtnTxt.text = RoyalPrice.ToString();
                     break;
                 default:
                     if (GameManager.Instance.Money < price) priceBtnTxt.color = Color.red;
@@ -140,7 +143,7 @@ public class SkinCheker : MonoBehaviour
                     }
                     break;
                 case 5:
-                    if (GameManager.Instance.ClearCount < 3)
+                    if (GameManager.Instance.highScore < 6000)
                     {
                         SoundManager.Instance.PlaySound(ESoundSources.BLOCKED);
                     }
@@ -151,7 +154,7 @@ public class SkinCheker : MonoBehaviour
                     }
                     break;
                 case 6:
-                    if (GameManager.Instance.ClearCount < 7)
+                    if (GameManager.Instance.Money < RoyalPrice)
                     {
                         SoundManager.Instance.PlaySound(ESoundSources.BLOCKED);
                     }
@@ -159,6 +162,7 @@ public class SkinCheker : MonoBehaviour
                     {
                         SoundManager.Instance.PlaySound(ESoundSources.BUY);
                         selectSkin.isBuy = true;
+                        GameManager.Instance.Money -= RoyalPrice;
                     }
                     break;
                 default:
