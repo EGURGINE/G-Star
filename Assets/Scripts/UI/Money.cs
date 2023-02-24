@@ -6,7 +6,7 @@ public class Money : MonoBehaviour, ObserverPattern.IObserver
 {
     [SerializeField] private float spd;
     private Transform startTr;
-    [SerializeField] private Transform endTr;
+    private Transform endTr;
     private Vector3[] m_Points = new Vector3[4];
     private SpriteRenderer SR;
     private Color sColor = new Color(0, 255, 255, 1);
@@ -20,6 +20,7 @@ public class Money : MonoBehaviour, ObserverPattern.IObserver
     private void Awake()
     {
         startTr = transform;
+        endTr = GameManager.Instance.player.transform;
         SR = GetComponent<SpriteRenderer>();
     }
 
