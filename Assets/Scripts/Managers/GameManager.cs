@@ -180,7 +180,7 @@ public class GameManager : Singleton<GameManager>
         level = 1;
         lv.text = level.ToString();
         exp = 0;
-        maxExp = 100;
+        maxExp = 30;
         expSlider.fillAmount = 0;
 
 

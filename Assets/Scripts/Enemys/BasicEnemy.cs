@@ -110,6 +110,7 @@ public abstract class BasicEnemy : MonoBehaviour, ObserverPattern.IObserver
         if (collision.CompareTag("Player"))
         {
             //playerDeadPc.SetActive(true);
+            if(GameManager.Instance.isTutorial == false)
             GameManager.Instance.SetRevive();
         }
         if (collision.CompareTag("Boom"))
