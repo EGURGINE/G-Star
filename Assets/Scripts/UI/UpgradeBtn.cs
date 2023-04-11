@@ -24,7 +24,6 @@ public enum BtnType
 public class UpgradeBtn : MonoBehaviour
 {
     public BtnType type;
-    private GameObject player => GameManager.Instance.player.gameObject;
     private GameObject upgradeWnd => GameManager.Instance.upSelect.gameObject;
     [SerializeField] private GameObject playerData;
     public GameObject mIcon;

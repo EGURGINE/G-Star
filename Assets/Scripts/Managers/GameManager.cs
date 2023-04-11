@@ -67,7 +67,7 @@ public class GameManager : Singleton<GameManager>
                 //레벨업 연출
                 observerManager.NotifyObservers();
                 SoundManager.Instance.PlaySound(ESoundSources.LEVEL);
-                
+
                 level++;
                 lv.text = level.ToString();
                 LevelProduction();
@@ -112,49 +112,55 @@ public class GameManager : Singleton<GameManager>
 
     }
 
-    private float time;
+    [SerializeField] private float time;
     [SerializeField] private float[] waveTime = new float[7];
-
-    private void FixedUpdate()
+    public IEnumerator LevelDesign()
     {
-        if (isGameOver == false && isUpgrade == false) LevelDesign();
-    }
-    private void LevelDesign()
-    {
-        time += Time.deltaTime;
-       
-        if (time > waveTime[5])
+        while (true)
         {
-            Spawner.Instance.enemySpawnNum = 7;
-            Spawner.Instance.spawnDelay = 2f;
+            yield return null;
 
-        }
-        else if (time > waveTime[4])
-        {
-            Spawner.Instance.spawnEnemyTypeNum = 6;
-            Spawner.Instance.enemySpawnNum = 6;
-            Spawner.Instance.spawnDelay = 2.5f;
-            Spawner.Instance.spawnEnemyTypeNum = 4;
-        }
-        else if (time > waveTime[3])
-        {
-            Spawner.Instance.enemySpawnNum = 5;
-            Spawner.Instance.spawnDelay = 2.6f;
-            Spawner.Instance.spawnEnemyTypeNum = 3;
+            time += Time.deltaTime;
 
+            if (time > waveTime[5])
+            {
+                Spawner.Instance.enemySpawnNum = 7;
+                Spawner.Instance.spawnDelay = 2f;
+
+            }
+            else if (time > waveTime[4])
+            {
+                Spawner.Instance.spawnEnemyTypeNum = 6;
+                Spawner.Instance.enemySpawnNum = 6;
+                Spawner.Instance.spawnDelay = 2.5f;
+                Spawner.Instance.spawnEnemyTypeNum = 4;
+            }
+            else if (time > waveTime[3])
+            {
+                Spawner.Instance.enemySpawnNum = 5;
+                Spawner.Instance.spawnDelay = 2.6f;
+                Spawner.Instance.spawnEnemyTypeNum = 3;
+
+            }
+            else if (time > waveTime[2])
+            {
+                Spawner.Instance.enemySpawnNum = 5;
+            }
+            else if (time > waveTime[1])
+            {
+                Spawner.Instance.spawnDelay = 2.7f;
+            }
+            else if (time > waveTime[0])
+            {
+                Spawner.Instance.spawnEnemyTypeNum = 2;
+            }
+
+            if (isGameOver == true || isUpgrade == true) break;
         }
-        else if (time > waveTime[2])
-        {
-            Spawner.Instance.enemySpawnNum = 5;
-        }
-        else if (time > waveTime[1])
-        {
-            Spawner.Instance.spawnDelay = 2.7f;
-        }
-        else if (time > waveTime[0])
-        {
-            Spawner.Instance.spawnEnemyTypeNum = 2;
-        }
+        print(isGameOver);
+        print(isUpgrade);
+
+
         //else Spawner.Instance.spawnEnemyTypeNum = 6;
     }// 레벨 디자인
     public void NextLevel()
@@ -165,7 +171,7 @@ public class GameManager : Singleton<GameManager>
     } //레벨 셋팅
     private void LevelProduction()
     {
-        expSlider.DOFade(0.5f,0.5f).SetLoops(-1,LoopType.Yoyo);
+        expSlider.DOFade(0.5f, 0.5f).SetLoops(-1, LoopType.Yoyo);
     }// 레벨 연출
 
     private void UpgradeWndOn()
@@ -194,6 +200,8 @@ public class GameManager : Singleton<GameManager>
         // 스텟 초기화
         player.playerSpd = 0.5f;
         player.shotArea.ResetState();
+
+        
 
         // 능력들 초기화
         isStartingAbility = true;
@@ -231,7 +239,8 @@ public class GameManager : Singleton<GameManager>
         }
         isGameOver = isTutorial == true ? true : false;
 
-        
+        // 레벨 디자인
+        StartCoroutine(LevelDesign());
     }//시작 셋팅
 
     public void PlayerSpawn()

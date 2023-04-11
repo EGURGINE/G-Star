@@ -89,6 +89,7 @@ public class UpgradeSelect : MonoBehaviour
         if (_this == choiceCheck[0]) checkNum = 1;
         else checkNum = 0;
 
+        //선택한 버튼이 스코어나 돈이면 다시 넣기
         if (_this.GetComponent<UpgradeBtn>().type == BtnType.Score ||
             _this.GetComponent<UpgradeBtn>().type == BtnType.Money)
         {
@@ -121,7 +122,7 @@ public class UpgradeSelect : MonoBehaviour
                         GameManager.Instance.expSlider.DOKill();
                         GameManager.Instance.expSlider.DOFade(1, 0.1f);
                         Spawner.Instance.enemySpawnTime = 0;
-
+                        StartCoroutine(GameManager.Instance.LevelDesign());
                         gameObject.SetActive(false);
                     }
                 }
@@ -153,7 +154,7 @@ public class UpgradeSelect : MonoBehaviour
         GameManager.Instance.expSlider.DOFade(1, 0.1f);
 
         Spawner.Instance.enemySpawnTime = 0;
-
+        StartCoroutine(GameManager.Instance.LevelDesign());
         CameraSetting.Instance.MainPost();
         this.gameObject.SetActive(false);
         
