@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GoogleMobileAds;
 using GoogleMobileAds.Api;
 using System;
 public class RewardAD : MonoBehaviour
 {
     private RewardedAd rewardAD;
 
+
     [SerializeField] private bool isReviveBtn;
 
     private void Start()
     {
-        this.RequestRewardedAd();
+        MobileAds.Initialize(initStatus => { });
+
+        RequestRewardedAd();
     }
 
     private void RequestRewardedAd()
