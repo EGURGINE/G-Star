@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
-using Sirenix.OdinInspector;
 
 [Serializable]
 public class SaveState
@@ -24,7 +23,6 @@ public class DataManager : Singleton<DataManager>
 
     [SerializeField] private SkinCheker skinCheker;
 
-    [AssetList]
     [SerializeField] private SkinData[] skinData;
 
     string filePath;
